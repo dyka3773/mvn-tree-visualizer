@@ -1,0 +1,17 @@
+[project]
+name = "mvn-tree-visualizer"
+version = "1.0.1"
+authors = [
+    { name = "Iraklis Konsoulas", email = "dyka3773@gmail.com" },
+]
+description = "A simple command line tool to visualize the dependency tree of a Maven project in a graphical format."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "jinja2>=3.1.6",
+]
+
+[dependency-groups]
+dev = [
+    "twine>=6.1.0",
+]

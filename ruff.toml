@@ -1,0 +1,35 @@
+# RUFF DEFAULTS
+# (These are all the default groups, even if you don't currently select them)
+# select = [
+#     "F",    # Pyflakes - detects syntax errors and basic mistakes
+#     "E4",   # Pycodestyle errors (part of E group)
+#     "E7",   # Pycodestyle E7xx errors (naming, etc.)
+#     "E9",   # Pycodestyle E9xx errors (syntax)
+# ]
+
+
+line-length = 150 # Default line length for all linters
+
+
+lint.ignore = [
+    "E501",     # Pycodestyle - line too long
+    "D1",       # Pydocstyle - missing docstring in public module, class, or function
+    "D203",     # Pydocstyle - one blank line required before class docstring
+    "D212",     # Pydocstyle - summary line should be immediately after the opening quotes.
+    "FA102",    # Flake8-future-annotations - Missing `from __future__ import annotations`, but uses PEP 604 union
+    "E402",     # Pycodestyle - module level import not at top of file
+    "D205",     # Pydocstyle - 1 blank line required between summary line and description
+    "D413",     # Pydocstyle - missing newline after end of function docstring
+    "G004",     # Flake8-logging-format - Logging statement uses f-string
+    # "W293",     # Pycodestyle - blank line contains whitespace
+    "S608",    # Flake8-bandit - Possible SQL injection in f-string
+    "TD003",   # Flake8-todos - Missing issue link in TODO comment
+    "FIX002",  # Flake8-fixme - Line contains TODO, consider resolving the issue
+]
+
+[format]
+skip-magic-trailing-comma = false
+
+[lint.isort]
+force-wrap-aliases = true
+combine-as-imports = true
