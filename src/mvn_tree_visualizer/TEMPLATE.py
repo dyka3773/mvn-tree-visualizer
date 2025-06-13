@@ -1,4 +1,4 @@
-<html></html>
+HTML_TEMPLATE = r"""<html></html>
 <head>
     <style type="text/css">
         #mySvgId {
@@ -58,4 +58,4 @@
         });
     </script>
   </body>
-</html>
+</html>"""

@@ -1,6 +1,8 @@
 from pathlib import Path
 
-from jinja2 import Environment, FileSystemLoader
+from jinja2 import BaseLoader, Environment
+
+from .TEMPLATE import HTML_TEMPLATE
 
 
 def _convert_to_mermaid(dependency_tree: str) -> str:
@@ -55,8 +57,7 @@ def create_diagram(keep_tree: bool = False, intermediate_filename: str = "depend
 
     mermaid_diagram = _convert_to_mermaid(dependency_tree)
 
-    env = Environment(loader=FileSystemLoader("./src/mvn_tree_visualizer"))
-    template = env.get_template("dependency_diagram_template.j2")
+    template = Environment(loader=BaseLoader).from_string(HTML_TEMPLATE)
     rendered = template.render(diagram_definition=mermaid_diagram)
 
     parent_dir = Path(output_filename).parent

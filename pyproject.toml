@@ -1,17 +1,46 @@
 [project]
 name = "mvn-tree-visualizer"
-version = "1.0.1"
+version = "1.0.3"
 authors = [
     { name = "Iraklis Konsoulas", email = "dyka3773@gmail.com" },
 ]
 description = "A simple command line tool to visualize the dependency tree of a Maven project in a graphical format."
 readme = "README.md"
 requires-python = ">=3.13"
+license = "MIT"
+keywords = [
+    "maven",
+    "dependency",
+    "visualization",
+    "tree",
+    "cli",
+    "command-line",
+    "tool",
+    "graph",
+    "mermaid",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Build Tools",
+]
 dependencies = [
     "jinja2>=3.1.6",
 ]
+
+[project.urls]
+source = "https://github.com/dyka3773/mvn-tree-visualizer"
+
+[project.scripts]
+mvn-tree-visualizer = "mvn_tree_visualizer.cli:cli"
 
 [dependency-groups]
 dev = [
     "twine>=6.1.0",
 ]
+
+[build-system]
+build-backend  = 'hatchling.build'
+requires = ['hatchling']
