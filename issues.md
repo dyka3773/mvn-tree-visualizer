@@ -9,14 +9,6 @@ This document outlines potential improvements and new features for the `mvn-tree
 
 **Status:** ✅ Done
 
-*   **Description:** Currently, the tool only outputs an HTML file with a Mermaid diagram. Adding support for other formats would greatly increase its versatility and appeal to a wider audience.
-*   **Suggestions:**
-    *   **JSON:** A structured JSON output of the dependency tree would allow for easy integration with other tools and scripts.
-    *   **GraphML/GEXF/Graphviz (DOT):** These are standard graph formats that can be used with various graph visualization and analysis tools like Gephi, Cytoscape, or Graphviz. This would allow for more advanced analysis and visualization of the dependency graph.
-    *   **Plain Text:** A simple, indented text representation of the dependency tree.
-*   **Implementation:**
-    *   Add a `--format` option to the CLI to specify the output format.
-    *   Create separate functions for generating each output format.
 
 ### 2. Dependency Highlighting and Filtering
 
@@ -31,11 +23,8 @@ This document outlines potential improvements and new features for the `mvn-tree
 
 ### 3. Display Dependency Versions
 
-*   **Description:** The current diagram only shows the artifact IDs of the dependencies. Displaying the versions would provide more context and be very useful for identifying version conflicts.
-*   **Suggestions:**
-    *   Add an option `--show-versions` to display the version of each dependency in the diagram.
-*   **Implementation:**
-    *   Modify the `_convert_to_mermaid` function to include the version number in the node labels.
+**Status:** ✅ Done
+
 
 ### 4. "Watch" Mode
 
@@ -74,13 +63,6 @@ This document outlines potential improvements and new features for the `mvn-tree
 
 **Status:** ✅ Done
 
-*   **Description:** The project currently lacks unit tests. Adding tests would improve the code's reliability and make it easier to refactor and add new features in the future.
-*   **Suggestions:**
-    *   Use the `unittest` or `pytest` framework to write tests for the core logic of the application, especially the `_convert_to_mermaid` function.
-    *   Create a `tests` directory to store the test files.
-*   **Implementation:**
-    *   Create a `tests/test_diagram.py` file with tests for the `_convert_to_mermaid` function.
-    *   Use mock objects to simulate file I/O and other external dependencies.
 
 ### 2. Code Modularity
 
@@ -93,14 +75,10 @@ This document outlines potential improvements and new features for the `mvn-tree
 
 ### 3. Type Hinting
 
-*   **Description:** Adding type hints to the code would improve its readability and allow for static analysis, which can help catch bugs before they make it into production.
-*   **Suggestions:**
-    *   Add type hints to all function signatures and variable declarations.
-*   **Implementation:**
-    *   Use the `typing` module to add type hints to the code.
+**Status:** ✅ Done
+
 
 ## 📚 Documentation & Community
 
 **Status:** ✅ Done
 
-We have enhanced the `README.md`, and created the `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, and `ROADMAP.md` files.
