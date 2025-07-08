@@ -4,11 +4,13 @@
 
 A simple command-line tool to visualize the dependency tree of a Maven project in a graphical and interactive format.
 
-This tool was born out of the frustration of not being able to easily visualize the dependency tree of a Maven project. The `mvn dependency:tree` command is great, but the output can be hard to read, especially for large projects. This tool aims to solve that problem by providing a simple way to generate an interactive diagram of the dependency tree.
+This tool was born out of the frustration of not being able to easily visualize the dependency tree of a Maven project. The `mvn dependency:tree` command is great, but the output can be hard to read, especially for large projects. This tool aims to solve that problem by providing a simple way to generate an interactive diagram or a structured JSON output of the dependency tree.
 
 ## Features
 
-*   **Interactive Diagrams:** Generates an interactive HTML diagram of your dependency tree using Mermaid.js.
+*   **Multiple Output Formats:**
+    *   **HTML:** Generates an interactive HTML diagram of your dependency tree using Mermaid.js.
+    *   **JSON:** Creates a structured JSON representation of the dependency tree, perfect for scripting or integration with other tools.
 *   **Easy to Use:** A simple command-line interface that gets the job done with minimal configuration.
 *   **File Merging:** Automatically finds and merges multiple `maven_dependency_file` files from different subdirectories.
 *   **Customizable Output:** Specify the output file name and location.
@@ -27,17 +29,25 @@ This tool was born out of the frustration of not being able to easily visualize 
 2.  **Visualize the dependency tree:**
     Use the `mvn-tree-visualizer` command to generate the diagram.
 
+    **For an HTML diagram:**
     ```bash
-    mvn_tree_visualizer --filename "maven_dependency_file" --output "diagram.html"
+    mvn_tree_visualizer --filename "maven_dependency_file" --output "diagram.html" --format html
     ```
 
-3.  **View the diagram:**
-    Open the generated `diagram.html` file in your web browser to view the interactive dependency tree.
+    **For a JSON output:**
+    ```bash
+    mvn_tree_visualizer --filename "maven_dependency_file" --output "dependencies.json" --format json
+    ```
+
+3.  **View the output:**
+    *   Open the generated `diagram.html` file in your web browser to view the interactive dependency tree.
+    *   Use the `dependencies.json` file in your scripts or other tools.
 
 ## Options
 
 *   `--filename`: The name of the file containing the Maven dependency tree. Defaults to `maven_dependency_file`.
-*   `--output`: The name of the output HTML file. Defaults to `diagram.html`.
+*   `--output`: The name of the output file. Defaults to `diagram.html`.
+*   `--format`: The output format. Can be `html` or `json`. Defaults to `html`.
 *   `--directory`: The directory to scan for the Maven dependency file(s). Defaults to the current directory.
 *   `--keep-tree`: Keep the intermediate `dependency_tree.txt` file after generating the diagram. Defaults to `False`.
 *   `--help`: Show the help message and exit.
