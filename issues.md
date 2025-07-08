@@ -23,6 +23,8 @@ This document outlines potential improvements and new features for the `mvn-tree
 
 ### 3. Display Dependency Versions
 
+**Status:** ✅ Done
+
 *   **Description:** The current diagram only shows the artifact IDs of the dependencies. Displaying the versions would provide more context and be very useful for identifying version conflicts.
 *   **Suggestions:**
     *   Add an option `--show-versions` to display the version of each dependency in the diagram.

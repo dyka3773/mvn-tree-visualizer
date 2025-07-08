@@ -51,12 +51,19 @@ def cli() -> NoReturn:
         help="Keep the dependency tree file after generating the diagram. Default is False.",
     )
 
+    parser.add_argument(
+        "--show-versions",
+        action="store_true",
+        help="Show dependency versions in the diagram. Applicable to both HTML and JSON output formats.",
+    )
+
     args = parser.parse_args()
     directory: str = args.directory
     output_file: str = args.output
     filename: str = args.filename
     keep_tree: bool = args.keep_tree
     output_format: str = args.format
+    show_versions: bool = args.show_versions
 
     dir_to_create_files = Path(output_file).parent
 
@@ -74,9 +81,9 @@ def cli() -> NoReturn:
     )
 
     if output_format == "html":
-        create_html_diagram(dependency_tree, output_file)
+        create_html_diagram(dependency_tree, output_file, show_versions)
     elif output_format == "json":
-        create_json_output(dependency_tree, output_file)
+        create_json_output(dependency_tree, output_file, show_versions)
 
     print(f"Diagram generated and saved to {output_file}")
     print("You can open it in your browser to view the dependency tree.")

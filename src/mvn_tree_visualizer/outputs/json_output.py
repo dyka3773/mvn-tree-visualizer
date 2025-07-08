@@ -2,7 +2,7 @@ import json
 from typing import Any, Dict, List, Tuple
 
 
-def create_json_output(dependency_tree: str, output_filename: str) -> None:
+def create_json_output(dependency_tree: str, output_filename: str, show_versions: bool = False) -> None:
     lines: List[str] = dependency_tree.strip().split("\n")
     tree: Dict[str, Any] = {}
     node_stack: List[Tuple[Dict[str, Any], int]] = []  # Stack to keep track of nodes and their depth
@@ -20,7 +20,11 @@ def create_json_output(dependency_tree: str, output_filename: str) -> None:
         # Root node
         if len(parts) == 4:
             group_id, artifact_id, _, version = parts
-            node: Dict[str, Any] = {"id": f"{group_id}:{artifact_id}:{version}", "children": []}
+            if show_versions:
+                node_id: str = f"{group_id}:{artifact_id}:{version}"
+            else:
+                node_id: str = f"{group_id}:{artifact_id}"
+            node: Dict[str, Any] = {"id": node_id, "children": []}
             tree = node
             node_stack = [(node, 0)]  # Reset stack with root node at depth 0
         # Child node
@@ -33,7 +37,12 @@ def create_json_output(dependency_tree: str, output_filename: str) -> None:
             else:
                 _, artifact_id, _, version, _ = parts
 
-            node: Dict[str, Any] = {"id": f"{artifact_id}:{version}", "children": []}
+            if show_versions:
+                node_id: str = f"{artifact_id}:{version}"
+            else:
+                node_id: str = artifact_id
+
+            node: Dict[str, Any] = {"id": node_id, "children": []}
 
             # Go up the stack to find the correct parent
             while node_stack and node_stack[-1][1] >= depth:
