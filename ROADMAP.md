@@ -5,9 +5,7 @@ This document outlines the future direction of the `mvn-tree-visualizer` project
 ## Near-Term Goals (1-3 Months)
 
 *   **Support for Multiple Output Formats:**
-    *   [ ] JSON
-    *   [ ] GraphML/GEXF/Graphviz (DOT)
-    *   [ ] Plain Text
+    *   [x] JSON
 *   **Dependency Highlighting and Filtering:**
     *   [ ] `--highlight <dependency>`
     *   [ ] `--filter <dependency>`

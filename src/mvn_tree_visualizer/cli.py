@@ -3,6 +3,8 @@ from pathlib import Path
 
 from .diagram import create_diagram
 from .get_dependencies_in_one_file import merge_files
+from .outputs.html_output import create_html_diagram
+from .outputs.json_output import create_json_output
 
 
 def cli():
@@ -27,6 +29,14 @@ def cli():
     )
 
     parser.add_argument(
+        "--format",
+        type=str,
+        default="html",
+        choices=["html", "json"],
+        help="The output format. Default is 'html'.",
+    )
+
+    parser.add_argument(
         "-f",
         "--filename",
         type=str,
@@ -45,6 +55,7 @@ def cli():
     output_file: str = args.output
     filename: str = args.filename
     keep_tree: bool = args.keep_tree
+    output_format: str = args.format
 
     dir_to_create_files = Path(output_file).parent
 
@@ -56,11 +67,15 @@ def cli():
         target_filename=filename,
     )
 
-    create_diagram(
+    dependency_tree = create_diagram(
         keep_tree=keep_tree,
         intermediate_filename="dependency_tree.txt",
-        output_filename=output_file,
     )
+
+    if output_format == "html":
+        create_html_diagram(dependency_tree, output_file)
+    elif output_format == "json":
+        create_json_output(dependency_tree, output_file)
 
     print(f"Diagram generated and saved to {output_file}")
     print("You can open it in your browser to view the dependency tree.")

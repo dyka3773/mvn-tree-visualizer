@@ -7,6 +7,8 @@ This document outlines potential improvements and new features for the `mvn-tree
 
 ### 1. Support for Multiple Output Formats
 
+**Status:** ✅ Done
+
 *   **Description:** Currently, the tool only outputs an HTML file with a Mermaid diagram. Adding support for other formats would greatly increase its versatility and appeal to a wider audience.
 *   **Suggestions:**
     *   **JSON:** A structured JSON output of the dependency tree would allow for easy integration with other tools and scripts.
