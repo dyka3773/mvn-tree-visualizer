@@ -25,11 +25,6 @@ This document outlines potential improvements and new features for the `mvn-tree
 
 **Status:** ✅ Done
 
-*   **Description:** The current diagram only shows the artifact IDs of the dependencies. Displaying the versions would provide more context and be very useful for identifying version conflicts.
-*   **Suggestions:**
-    *   Add an option `--show-versions` to display the version of each dependency in the diagram.
-*   **Implementation:**
-    *   Modify the `_convert_to_mermaid` function to include the version number in the node labels.
 
 ### 4. "Watch" Mode
 
@@ -82,14 +77,8 @@ This document outlines potential improvements and new features for the `mvn-tree
 
 **Status:** ✅ Done
 
-*   **Description:** Adding type hints to the code would improve its readability and allow for static analysis, which can help catch bugs before they make it into production.
-*   **Suggestions:**
-    *   Add type hints to all function signatures and variable declarations.
-*   **Implementation:**
-    *   Use the `typing` module to add type hints to the code.
 
 ## 📚 Documentation & Community
 
 **Status:** ✅ Done
 
-We have enhanced the `README.md`, and created the `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, and `ROADMAP.md` files.
