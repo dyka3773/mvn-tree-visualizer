@@ -13,8 +13,12 @@ def _convert_to_mermaid(dependency_tree: str) -> str:
     previous_dependency = []
 
     for line in lines:
-        if not line or line.startswith("[INFO]"):
+        if not line:
             continue
+
+        if line.startswith("[INFO] "):
+            line = line[7:]  # Remove the "[INFO] " prefix
+
         parts = line.split(":")
 
         if len(parts) < 3:
