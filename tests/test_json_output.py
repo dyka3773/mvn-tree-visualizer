@@ -11,10 +11,10 @@ def test_create_json_output_simple():
 [INFO] \- org.apache.commons:commons-lang3:jar:3.12.0:compile
 """
     expected_json = {
-        "id": "com.example:my-app:1.0.0",
+        "id": "com.example:my-app",
         "children": [
-            {"id": "spring-boot-starter-web:2.5.4", "children": [{"id": "spring-boot-starter:2.5.4", "children": []}]},
-            {"id": "commons-lang3:3.12.0", "children": []},
+            {"id": "spring-boot-starter-web", "children": [{"id": "spring-boot-starter", "children": []}]},
+            {"id": "commons-lang3", "children": []},
         ],
     }
 
@@ -39,19 +39,19 @@ def test_create_json_output_deeper_tree():
 [INFO] \- m:n:jar:1.0.0:compile
 """
     expected_json = {
-        "id": "com.example:my-app:1.0.0",
+        "id": "com.example:my-app",
         "children": [
             {
-                "id": "b:1.0.0",
+                "id": "b",
                 "children": [
                     {
-                        "id": "d:1.0.0",
-                        "children": [{"id": "f:1.0.0", "children": [{"id": "h:1.0.0", "children": []}]}, {"id": "j:1.0.0", "children": []}],
+                        "id": "d",
+                        "children": [{"id": "f", "children": [{"id": "h", "children": []}]}, {"id": "j", "children": []}],
                     },
-                    {"id": "l:1.0.0", "children": []},
+                    {"id": "l", "children": []},
                 ],
             },
-            {"id": "n:1.0.0", "children": []},
+            {"id": "n", "children": []},
         ],
     }
 
@@ -73,10 +73,10 @@ def test_create_json_output_duplicate_dependencies():
 [INFO]    \- c:d:jar:1.0.0:compile
 """
     expected_json = {
-        "id": "com.example:my-app:1.0.0",
+        "id": "com.example:my-app",
         "children": [
-            {"id": "b:1.0.0", "children": [{"id": "d:1.0.0", "children": []}]},
-            {"id": "f:1.0.0", "children": [{"id": "d:1.0.0", "children": []}]},
+            {"id": "b", "children": [{"id": "d", "children": []}]},
+            {"id": "f", "children": [{"id": "d", "children": []}]},
         ],
     }
 
@@ -146,11 +146,11 @@ def test_create_json_output_real_life_example():
 [INFO]       \- velocity:velocity:jar:1.4:compile
 """
     expected_json = {
-        "id": "org.apache.maven.plugins:maven-dependency-plugin:2.0-alpha-5-SNAPSHOT",
+        "id": "org.apache.maven.plugins:maven-dependency-plugin",
         "children": [
             {
-                "id": "doxia-site-renderer:1.0-alpha-8",
-                "children": [{"id": "plexus-velocity:1.1.3", "children": [{"id": "velocity:1.4", "children": []}]}],
+                "id": "doxia-site-renderer",
+                "children": [{"id": "plexus-velocity", "children": [{"id": "velocity", "children": []}]}],
             }
         ],
     }
