@@ -1,28 +1,31 @@
 from pathlib import Path
+from typing import List, Tuple, Set
 from jinja2 import BaseLoader, Environment
 from ..TEMPLATE import HTML_TEMPLATE
 
-def create_html_diagram(dependency_tree: str, output_filename: str):
-    mermaid_diagram = _convert_to_mermaid(dependency_tree)
+
+def create_html_diagram(dependency_tree: str, output_filename: str) -> None:
+    mermaid_diagram: str = _convert_to_mermaid(dependency_tree)
     template = Environment(loader=BaseLoader).from_string(HTML_TEMPLATE)
-    rendered = template.render(diagram_definition=mermaid_diagram)
-    parent_dir = Path(output_filename).parent
+    rendered: str = template.render(diagram_definition=mermaid_diagram)
+    parent_dir: Path = Path(output_filename).parent
     if not parent_dir.exists():
         parent_dir.mkdir(parents=True, exist_ok=True)
     with open(output_filename, "w") as f:
         f.write(rendered)
 
+
 def _convert_to_mermaid(dependency_tree: str) -> str:
     # generate a `graph LR` format for Mermaid
-    lines = dependency_tree.strip().split("\n")
-    mermaid_lines = set()
-    previous_dependency = []
+    lines: List[str] = dependency_tree.strip().split("\n")
+    mermaid_lines: Set[str] = set()
+    previous_dependency: List[Tuple[str, int]] = []
     for line in lines:
         if not line:
             continue
         if line.startswith("[INFO] "):
             line = line[7:]  # Remove the "[INFO] " prefix
-        parts = line.split(":")
+        parts: List[str] = line.split(":")
         if len(parts) < 3:
             continue
         if len(parts) == 4:
@@ -32,7 +35,7 @@ def _convert_to_mermaid(dependency_tree: str) -> str:
                 previous_dependency = []
             previous_dependency.append((artifact_id, 0))  # The second element is the depth
         else:
-            depth = len(parts[0].split(" ")) - 1
+            depth: int = len(parts[0].split(" ")) - 1
             if len(parts) == 6:
                 dirty_group_id, artifact_id, app, ejb_client, version, dependency = parts
             else:

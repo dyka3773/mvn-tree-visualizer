@@ -1,5 +1,6 @@
 import argparse
 from pathlib import Path
+from typing import NoReturn
 
 from .diagram import create_diagram
 from .get_dependencies_in_one_file import merge_files
@@ -7,7 +8,7 @@ from .outputs.html_output import create_html_diagram
 from .outputs.json_output import create_json_output
 
 
-def cli():
+def cli() -> NoReturn:
     parser = argparse.ArgumentParser(
         prog="mvn-tree-visualizer",
         description="Generate a dependency diagram from a file.",
