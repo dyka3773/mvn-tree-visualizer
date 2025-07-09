@@ -1,0 +1,145 @@
+<html></html>
+<head>
+    <style type="text/css">
+        #mySvgId {
+            height: 90%;
+            width: 90%;
+        }
+    </style>
+    <title>Dependency Diagram</title>
+</head>
+<body>
+    <div id="graphDiv"></div>
+    <button id="downloadButton">Download SVG</button>
+    <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.5.0/dist/svg-pan-zoom.min.js"></script>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({
+            startOnLoad:true,
+            sequence:{
+                    useMaxWidth:false
+            }
+        });
+
+        const drawDiagram = async function () {
+            const element = document.querySelector('#graphDiv');
+            const graphDefinition = `
+            graph LR
+	spring-context:5.3.21 --> spring-beans:5.3.21;
+	spring-context:5.3.21 --> spring-expression:5.3.21;
+	spring-boot-starter-test:2.7.0 --> json-path:2.7.0;
+	logback-classic:1.2.11 --> slf4j-api:1.7.36;
+	hibernate-core:5.6.9.Final --> javax.persistence-api:2.2;
+	guava:31.1-jre --> failureaccess:1.0.1;
+	spring-boot-starter-aop:2.7.0 --> aspectjweaver:1.9.7;
+	json-path:2.7.0 --> json-smart:2.4.8;
+	jackson-databind:2.13.3 --> jackson-annotations:2.13.3;
+	guava:31.1-jre --> listenablefuture:9999.0-empty-to-avoid-conflict-with-guava;
+	spring-boot-starter-web:2.7.0 --> spring-boot-starter:2.7.0;
+	spring-boot-starter-json:2.7.0 --> jackson-databind:2.13.3;
+	spring-boot-starter-tomcat:2.7.0 --> tomcat-embed-el:9.0.63;
+	spring-data-jpa:2.7.0 --> spring-context:5.3.21;
+	spring-data-jpa:2.7.0 --> spring-data-commons:2.7.0;
+	spring-boot-starter-test:2.7.0 --> mockito-junit-jupiter:4.5.1;
+	spring-boot-starter-data-jpa:2.7.0 --> jakarta.transaction-api:1.3.3;
+	complex-microservice:2.1.0;
+	guava:31.1-jre --> checker-qual:3.12.0;
+	spring-boot-starter-json:2.7.0 --> jackson-datatype-jdk8:2.13.3;
+	spring-boot-starter-tomcat:2.7.0 --> tomcat-embed-websocket:9.0.63;
+	spring-boot-starter-test:2.7.0 --> junit-jupiter:5.8.2;
+	spring-boot-starter:2.7.0 --> jakarta.annotation-api:1.3.5;
+	complex-microservice:2.1.0 --> mysql-connector-java:8.0.29;
+	spring-boot-starter-tomcat:2.7.0 --> tomcat-embed-core:9.0.63;
+	spring-boot-starter-jdbc:2.7.0 --> HikariCP:4.0.3;
+	complex-microservice:2.1.0 --> spring-boot-starter-data-jpa:2.7.0;
+	spring-boot-starter:2.7.0 --> spring-boot:2.7.0;
+	spring-core:5.3.21 --> spring-jcl:5.3.21;
+	json-smart:2.4.8 --> accessors-smart:2.4.8;
+	spring-boot-starter-data-jpa:2.7.0 --> spring-boot-starter-aop:2.7.0;
+	spring-boot-starter-data-jpa:2.7.0 --> spring-data-jpa:2.7.0;
+	hibernate-core:5.6.9.Final --> classmate:1.5.1;
+	spring-boot-starter-test:2.7.0 --> spring-test:5.3.21;
+	spring-context:5.3.21 --> spring-core:5.3.21;
+	spring-boot-starter-web:2.7.0 --> spring-boot-starter-json:2.7.0;
+	spring-data-jpa:2.7.0 --> spring-orm:5.3.21;
+	spring-boot-starter-test:2.7.0 --> jakarta.xml.bind-api:2.3.3;
+	spring-boot-starter:2.7.0 --> spring-boot-autoconfigure:2.7.0;
+	hibernate-core:5.6.9.Final --> jboss-logging:3.4.3.Final;
+	spring-context:5.3.21 --> spring-aop:5.3.21;
+	spring-boot-starter-logging:2.7.0 --> log4j-to-slf4j:2.17.2;
+	spring-boot-starter:2.7.0 --> snakeyaml:1.30;
+	spring-boot-starter-web:2.7.0 --> spring-webmvc:5.3.21;
+	complex-microservice:2.1.0 --> commons-lang3:3.12.0;
+	spring-boot-starter:2.7.0 --> spring-boot-starter-logging:2.7.0;
+	spring-boot-starter-data-jpa:2.7.0 --> jakarta.persistence-api:2.2.3;
+	spring-boot-starter-json:2.7.0 --> jackson-module-parameter-names:2.13.3;
+	hibernate-core:5.6.9.Final --> byte-buddy:1.12.10;
+	spring-boot-starter-test:2.7.0 --> hamcrest:2.2;
+	spring-boot-starter-logging:2.7.0 --> jul-to-slf4j:1.7.36;
+	spring-boot-starter-test:2.7.0 --> mockito-core:4.5.1;
+	guava:31.1-jre --> jsr305:3.0.2;
+	spring-boot-starter-test:2.7.0 --> spring-boot-test-autoconfigure:2.7.0;
+	spring-data-jpa:2.7.0 --> spring-tx:5.3.21;
+	complex-microservice:2.1.0 --> guava:31.1-jre;
+	spring-boot-starter-logging:2.7.0 --> logback-classic:1.2.11;
+	hibernate-core:5.6.9.Final --> antlr:2.7.7;
+	spring-boot-starter:2.7.0 --> spring-core:5.3.21;
+	hibernate-core:5.6.9.Final --> jandex:2.4.2.Final;
+	spring-boot:2.7.0 --> spring-context:5.3.21;
+	guava:31.1-jre --> j2objc-annotations:1.3;
+	spring-boot-starter-test:2.7.0 --> assertj-core:3.22.0;
+	spring-boot-starter-test:2.7.0 --> jsonassert:1.5.0;
+	spring-data-jpa:2.7.0 --> slf4j-api:1.7.36;
+	spring-boot-starter-test:2.7.0 --> xmlunit-core:2.9.0;
+	complex-microservice:2.1.0 --> spring-boot-starter-test:2.7.0;
+	hibernate-core:5.6.9.Final --> jaxb-runtime:2.3.6;
+	logback-classic:1.2.11 --> logback-core:1.2.11;
+	spring-boot-starter-test:2.7.0 --> spring-boot-test:2.7.0;
+	spring-boot-starter-json:2.7.0 --> jackson-datatype-jsr310:2.13.3;
+	spring-boot-starter-data-jpa:2.7.0 --> spring-aspects:5.3.21;
+	complex-microservice:2.1.0 --> spring-boot-starter-web:2.7.0;
+	spring-boot-starter-test:2.7.0 --> spring-core:5.3.21;
+	spring-boot-starter-web:2.7.0 --> spring-web:5.3.21;
+	log4j-to-slf4j:2.17.2 --> log4j-api:2.17.2;
+	spring-boot-starter-web:2.7.0 --> spring-boot-starter-tomcat:2.7.0;
+	hibernate-core:5.6.9.Final --> hibernate-commons-annotations:5.1.2.Final;
+	accessors-smart:2.4.8 --> asm:9.1;
+	jackson-databind:2.13.3 --> jackson-core:2.13.3;
+	guava:31.1-jre --> error_prone_annotations:2.11.0;
+	spring-boot-starter-data-jpa:2.7.0 --> hibernate-core:5.6.9.Final;
+	spring-boot-starter-jdbc:2.7.0 --> spring-jdbc:5.3.21;
+	spring-boot-starter-data-jpa:2.7.0 --> spring-boot-starter-jdbc:2.7.0;
+`;
+            const { svg } = await mermaid.render('mySvgId', graphDefinition);
+            element.innerHTML = svg.replace(/[ ]*max-width:[ 0-9\.]*px;/i , '');
+            var panZoomTiger = svgPanZoom('#mySvgId', {
+                zoomEnabled: true,
+                controlIconsEnabled: true,
+                fit: true,
+                center: true
+            })
+        };
+        await drawDiagram();
+
+        // Add event listener to the download button to download the SVG without the pan & zoom buttons
+        document.getElementById('downloadButton').addEventListener('click', function() {
+            const svg = document.querySelector('#mySvgId');
+            let svgData = new XMLSerializer().serializeToString(svg);
+            
+            // To remove the pan & zoom buttons of the diagram, any element whose class contains the string 'svg-pan-zoom-*' should be removed
+            svgData = svgData.replace(/<g\b[^>]*\bclass="svg-pan-zoom-.*?".*?>.*?<\/g>/g, '');
+            // The above leaves out a closing </g> tag before the final </svg> tag, so we need to remove it
+            svgData = svgData.replace(/<\/g><\/svg>/, '</svg>');
+
+            const svgBlob = new Blob([svgData], {type: 'image/svg+xml;charset=utf-8'});
+            const svgUrl = URL.createObjectURL(svgBlob);
+            const downloadLink = document.createElement('a');
+            downloadLink.href = svgUrl;
+            downloadLink.download = 'diagram.svg';
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        });
+    </script>
+  </body>
+</html>

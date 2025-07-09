@@ -1,0 +1,40 @@
+{
+    "id": "com.example:simple-app",
+    "children": [
+        {
+            "id": "spring-boot-starter-web",
+            "children": [
+                {
+                    "id": "spring-boot-starter",
+                    "children": [
+                        {
+                            "id": "spring-boot",
+                            "children": [
+                                {
+                                    "id": "spring-context",
+                                    "children": []
+                                }
+                            ]
+                        },
+                        {
+                            "id": "spring-boot-autoconfigure",
+                            "children": []
+                        }
+                    ]
+                },
+                {
+                    "id": "spring-web",
+                    "children": []
+                }
+            ]
+        },
+        {
+            "id": "commons-lang3",
+            "children": []
+        },
+        {
+            "id": "junit",
+            "children": []
+        }
+    ]
+}

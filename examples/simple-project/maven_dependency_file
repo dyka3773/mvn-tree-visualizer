@@ -1,0 +1,9 @@
+[INFO] com.example:simple-app:jar:1.0.0
+[INFO] +- org.springframework.boot:spring-boot-starter-web:jar:2.5.4:compile
+[INFO] |  +- org.springframework.boot:spring-boot-starter:jar:2.5.4:compile
+[INFO] |  |  +- org.springframework.boot:spring-boot:jar:2.5.4:compile
+[INFO] |  |  |  \- org.springframework:spring-context:jar:5.3.9:compile
+[INFO] |  |  \- org.springframework.boot:spring-boot-autoconfigure:jar:2.5.4:compile
+[INFO] |  \- org.springframework:spring-web:jar:5.3.9:compile
+[INFO] +- org.apache.commons:commons-lang3:jar:3.12.0:compile
+[INFO] \- junit:junit:jar:4.13.2:test
