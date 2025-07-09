@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Placeholder for future features
+
+## [1.3.0] - 2025-07-09
+
+### Added
 - Watch mode functionality with `--watch` flag for automatic diagram regeneration
 - File system monitoring using watchdog library for real-time updates
 - New file_watcher module for decoupled file monitoring logic
