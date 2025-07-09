@@ -21,9 +21,9 @@ def create_json_output(dependency_tree: str, output_filename: str, show_versions
         if len(parts) == 4:
             group_id, artifact_id, _, version = parts
             if show_versions:
-                node_id: str = f"{group_id}:{artifact_id}:{version}"
+                node_id: str = f"{artifact_id}:{version}"
             else:
-                node_id: str = f"{group_id}:{artifact_id}"
+                node_id: str = artifact_id
             node: Dict[str, Any] = {"id": node_id, "children": []}
             tree = node
             node_stack = [(node, 0)]  # Reset stack with root node at depth 0

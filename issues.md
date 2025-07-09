@@ -10,29 +10,18 @@ This document outlines potential improvements and new features for the `mvn-tree
 **Status:** ✅ Done
 
 
-### 2. Dependency Highlighting and Filtering
+### 2. ~~Dependency Highlighting and Filtering~~ (Removed)
 
-*   **Description:** In large projects, the dependency graph can be overwhelming. Allowing users to highlight or filter specific dependencies would make the visualization much more useful.
-*   **Suggestions:**
-    *   `--highlight <dependency>`: Highlight a specific dependency and its direct and transitive dependencies in the graph.
-    *   `--filter <dependency>`: Show only a specific dependency and its direct and transitive dependencies.
-    *   `--exclude <dependency>`: Exclude a specific dependency from the graph.
-*   **Implementation:**
-    *   Add the corresponding options to the CLI.
-    *   Modify the `_convert_to_mermaid` function to handle the highlighting and filtering logic. This might involve adding CSS classes to the Mermaid diagram and styling them in the HTML template.
+**Status:** ❌ **Removed** - This functionality is better handled at the Maven level using Maven's built-in filtering options like `-Dincludes`, `-Dexcludes`, `-DincludeScope`, etc. Keeping our tool focused on visualization rather than duplicating Maven's capabilities.
 
 ### 3. Display Dependency Versions
 
 **Status:** ✅ Done
 
-
 ### 4. "Watch" Mode
 
-*   **Description:** A "watch" mode that automatically regenerates the diagram whenever the `maven_dependency_file` changes would be a great convenience for developers.
-*   **Suggestions:**
-    *   Add a `--watch` flag to the CLI.
-*   **Implementation:**
-    *   Use a library like `watchdog` to monitor the file system for changes.
+**Status:** ✅ Done
+
 
 ## ✨ User Experience & Usability
 

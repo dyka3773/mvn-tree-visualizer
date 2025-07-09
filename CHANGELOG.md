@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Watch mode functionality with `--watch` flag for automatic diagram regeneration
+- File system monitoring using watchdog library for real-time updates
+- New file_watcher module for decoupled file monitoring logic
+
+### Changed
+- **BREAKING**: JSON output now uses simplified package names (artifact-id only) to match HTML output behavior
+  - Root packages now show as "my-app" instead of "com.example:my-app"
+  - Ensures consistency between HTML and JSON output formats
+- Refactored CLI module to separate concerns and improve maintainability
+- Improved error handling with timestamped console output
+
+### Fixed
+- Removed unused imports and improved code organization
+- Fixed intermediate file path handling in diagram generation
+
 ## [1.2.0] - 2025-07-09
 
 ### Added

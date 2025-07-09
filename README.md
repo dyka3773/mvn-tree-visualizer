@@ -35,6 +35,7 @@ pip install mvn-tree-visualizer
 - **🌐 Multiple Output Formats:**
   - **HTML:** Generates an interactive HTML diagram of your dependency tree using Mermaid.js.
   - **JSON:** Creates a structured JSON representation of the dependency tree, perfect for scripting or integration with other tools.
+- **🔄 Watch Mode:** Automatically regenerates diagrams when Maven dependency files change using the `--watch` flag.
 - **📋 Version Display:** Show or hide dependency versions in both HTML and JSON outputs using the `--show-versions` flag.
 - **⚡ Easy to Use:** A simple command-line interface that gets the job done with minimal configuration.
 - **📂 File Merging:** Automatically finds and merges multiple `maven_dependency_file` files from different subdirectories.
@@ -77,6 +78,13 @@ mvn_tree_visualizer --filename "maven_dependency_file" --output "diagram.html" -
 mvn_tree_visualizer --filename "maven_dependency_file" --output "dependencies.json" --format json --show-versions
 ```
 
+#### Watch Mode (Auto-regeneration)
+```bash
+mvn_tree_visualizer --filename "maven_dependency_file" --output "diagram.html" --watch
+```
+
+> **💡 Tip:** In watch mode, the tool will monitor for changes to your Maven dependency files and automatically regenerate the diagram. Perfect for development workflows! Press `Ctrl+C` to stop watching.
+
 ### Step 3: View the output
 
 - **HTML:** Open the generated `diagram.html` file in your web browser to view the interactive dependency tree.
@@ -102,6 +110,7 @@ Each example includes:
 | `--output` | The name of the output file | `diagram.html` |
 | `--format` | The output format (`html` or `json`) | `html` |
 | `--show-versions` | Show dependency versions in the diagram | `False` |
+| `--watch` | Watch for file changes and auto-regenerate diagram | `False` |
 | `--directory` | The directory to scan for the Maven dependency file(s) | current directory |
 | `--keep-tree` | Keep the intermediate `dependency_tree.txt` file | `False` |
 | `--help` | Show the help message and exit | - |
