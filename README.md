@@ -131,14 +131,16 @@ Each example includes:
 ### Common Issues
 
 **"No dependency files found"**
-- Ensure you've run `mvn dependency:tree -DoutputFile=maven_dependency_file` first
-- Check that the file exists in the target directory
-- Verify the filename matches what you specify with `--filename`
+- The tool now provides detailed guidance including:
+  - Exact directory searched and filename expected
+  - Maven commands to generate dependency files
+  - Instructions to ensure you're in a directory with pom.xml
 
 **"Empty or invalid output"**
-- Ensure the Maven dependency file contains valid `[INFO]` lines
-- Check that the file isn't corrupted or empty
-- Try running Maven dependency command again
+- Enhanced error messages now include:
+  - Specific error details (encoding, permissions, empty files)
+  - Validation of file content and format
+  - Suggestions for fixing common parsing issues
 
 **"Browser doesn't display the diagram"**
 - Ensure you're opening the HTML file in a modern browser
@@ -146,8 +148,10 @@ Each example includes:
 - Try a different browser (Chrome, Firefox, Safari)
 
 **"Permission denied errors"**
-- Check file permissions on the output directory
-- Ensure you have write permissions to the target location
+- Improved diagnostics for:
+  - Directory read/write permissions
+  - File access issues
+  - Output directory creation problems
 
 ### Getting Help
 

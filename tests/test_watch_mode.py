@@ -90,6 +90,7 @@ def test_generate_diagram_error_handling():
         output_file = Path(temp_dir) / "test.html"
 
         # This should not raise an exception, but should print an error
+        # and NOT create an output file (improved error handling)
         generate_diagram(
             directory=temp_dir,
             output_file=str(output_file),
@@ -99,9 +100,69 @@ def test_generate_diagram_error_handling():
             show_versions=False,
         )
 
-        # Output file should be created but with minimal content (empty diagram)
-        assert output_file.exists()
-        content = output_file.read_text()
-        # Should contain basic HTML structure but no meaningful dependency data
-        assert "<html>" in content
-        assert "graphDefinition" in content
+        # With improved error handling, no output file should be created
+        # when there are no dependency files to process
+        assert not output_file.exists()
+
+
+def test_generate_diagram_invalid_directory():
+    """Test error handling for invalid directory."""
+    with tempfile.TemporaryDirectory() as temp_dir:
+        output_file = Path(temp_dir) / "test.html"
+
+        # Test with non-existent directory
+        generate_diagram(
+            directory="non_existent_directory",
+            output_file=str(output_file),
+            filename="maven_dependency_file",
+            keep_tree=False,
+            output_format="html",
+            show_versions=False,
+        )
+
+        # Should not create output file when directory doesn't exist
+        assert not output_file.exists()
+
+
+def test_generate_diagram_empty_dependency_file():
+    """Test error handling for empty dependency files."""
+    with tempfile.TemporaryDirectory() as temp_dir:
+        # Create an empty dependency file
+        empty_file = Path(temp_dir) / "maven_dependency_file"
+        empty_file.write_text("")
+
+        output_file = Path(temp_dir) / "test.html"
+
+        generate_diagram(
+            directory=temp_dir,
+            output_file=str(output_file),
+            filename="maven_dependency_file",
+            keep_tree=False,
+            output_format="html",
+            show_versions=False,
+        )
+
+        # Should not create output file when dependency file is empty
+        assert not output_file.exists()
+
+
+def test_generate_diagram_whitespace_only_dependency_file():
+    """Test error handling for dependency files with only whitespace."""
+    with tempfile.TemporaryDirectory() as temp_dir:
+        # Create a dependency file with only whitespace
+        whitespace_file = Path(temp_dir) / "maven_dependency_file"
+        whitespace_file.write_text("   \n\t\n   ")
+
+        output_file = Path(temp_dir) / "test.html"
+
+        generate_diagram(
+            directory=temp_dir,
+            output_file=str(output_file),
+            filename="maven_dependency_file",
+            keep_tree=False,
+            output_format="html",
+            show_versions=False,
+        )
+
+        # Should not create output file when dependency file contains only whitespace
+        assert not output_file.exists()

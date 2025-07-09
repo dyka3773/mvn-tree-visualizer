@@ -15,47 +15,81 @@ This document outlines the future direction of the `mvn-tree-visualizer` project
     *   [x] CI/CD workflows
     *   [x] Documentation and examples
     *   [x] Issue templates and community guidelines
-
-## Current Release: v1.3.0 🚀
-
-*   **"Watch" Mode:** (In Progress)
-    *   [ ] `--watch` flag for automatic regeneration
-    *   [ ] File system monitoring with real-time updates
+*   **Watch Mode Feature:**
+    *   [x] `--watch` flag for automatic regeneration
+    *   [x] File system monitoring with real-time updates
+    *   [x] Graceful error handling during watch mode
 *   **Enhanced Error Handling:**
-    *   [ ] Clear error messages for missing files
-    *   [ ] Helpful parsing diagnostics
-    *   [ ] Maven command suggestions
+    *   [x] Clear error messages for missing files with helpful guidance
+    *   [x] Specific diagnostics for parsing errors and validation
+    *   [x] Maven command suggestions when files are missing
+    *   [x] Better error recovery and user guidance
+*   **Code Quality Improvements:**
+    *   [x] Modular code organization (exceptions.py, validation.py)
+    *   [x] Enhanced test coverage for error scenarios
+    *   [x] Clean separation of concerns in CLI module
+
+## v1.3.0 - User Experience Improvements ✅
+
+**Focus:** Making the tool more user-friendly and robust for daily use.
+
+*   **Remaining Tasks:**
+    *   [ ] Separate parser module for better modularity (optional enhancement)
+    *   [ ] Additional edge case testing (optional enhancement)
+
+## v1.4.0 - Visual and Theme Enhancements 🎨
+
+**Focus:** Making the output more visually appealing and customizable.
+
 *   **Visual Themes:**
-    *   [ ] `--theme` option with multiple themes
+    *   [ ] `--theme` option with multiple built-in themes
     *   [ ] Dark, light, and colorful theme options
-    *   [ ] Better default styling
+    *   [ ] Better default styling and typography
+    *   [ ] Custom CSS support for advanced users
+*   **Interactive Features:**
+    *   [ ] Tooltips with detailed dependency information
+    *   [ ] Hover effects and better visual feedback
+    *   [ ] Expandable/collapsible dependency groups
 
-## Near-Term Goals (1-3 Months)
+## v1.5.0 - Advanced Features 🚀
 
-*   **Code Quality:**
-    *   [ ] Separate parser module for better modularity
-    *   [ ] Enhanced test coverage for new features
-*   **User Experience:**
-    *   [ ] Interactive features (tooltips, hover effects)
+**Focus:** Performance and advanced functionality for power users.
+
+*   **Performance & Layout:**
     *   [ ] Better layout options for large dependency trees
     *   [ ] Performance optimizations for very large projects
+    *   [ ] Memory usage improvements for complex graphs
+*   **Export Enhancements:**
+    *   [ ] PNG, PDF export options
+    *   [ ] SVG improvements and customization
+    *   [ ] High-quality output for presentations
 
-## Mid-Term Goals (3-6 Months)
+## v1.6.0+ - Extended Capabilities 🔮
 
-*   **Advanced Features:**
+**Focus:** Advanced analysis and integration features.
+
+*   **Dependency Analysis:**
     *   [ ] Dependency conflict detection and highlighting
-    *   [ ] Export options (PNG, PDF, SVG improvements)
     *   [ ] Dependency statistics and analysis
+    *   [ ] Version mismatch warnings
 *   **Integration Capabilities:**
     *   [ ] CI/CD pipeline integration examples
     *   [ ] Docker support and containerization
     *   [ ] Maven plugin version (if demand exists)
 
-## Long-Term Goals (6-12 Months)
+## Long-Term Vision (6-12 Months+)
 
 *   **Web-Based Version:** A web-based version where users can paste their dependency tree and get a visualization without installing the CLI.
 *   **IDE Integration:** Plugins for VS Code, IntelliJ IDEA, or Eclipse for direct dependency visualization.
 *   **Multi-Language Support:** Extend beyond Maven to support Gradle, npm, pip, etc.
+
+## Release Strategy
+
+Each release follows this approach:
+- **Incremental Value:** Each version adds meaningful value without breaking existing functionality
+- **User-Driven:** Priority based on user feedback and common pain points
+- **Quality First:** New features include comprehensive tests and documentation
+- **Backward Compatibility:** CLI interface remains stable across minor versions
 
 ## Contributing
 

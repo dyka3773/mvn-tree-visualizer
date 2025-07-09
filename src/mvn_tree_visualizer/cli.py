@@ -4,10 +4,12 @@ from pathlib import Path
 from typing import NoReturn
 
 from .diagram import create_diagram
+from .exceptions import DependencyFileNotFoundError, DependencyParsingError, MvnTreeVisualizerError, OutputGenerationError
 from .file_watcher import FileWatcher
 from .get_dependencies_in_one_file import merge_files
 from .outputs.html_output import create_html_diagram
 from .outputs.json_output import create_json_output
+from .validation import find_dependency_files, print_maven_help, validate_dependency_files, validate_output_directory
 
 
 def generate_diagram(
@@ -18,34 +20,108 @@ def generate_diagram(
     output_format: str,
     show_versions: bool,
 ) -> None:
-    """Generate the dependency diagram."""
-    dir_to_create_files = Path(output_file).parent
-    dir_to_create_intermediate_files = Path(dir_to_create_files)
+    """Generate the dependency diagram with comprehensive error handling."""
+    timestamp = time.strftime("%H:%M:%S")
 
     try:
+        # Validate inputs
+        validate_dependency_files(directory, filename)
+        validate_output_directory(output_file)
+
+        # Show what files we found
+        dependency_files = find_dependency_files(directory, filename)
+        if len(dependency_files) > 1:
+            print(f"[{timestamp}] Found {len(dependency_files)} dependency files")
+
+        # Setup paths
+        dir_to_create_files = Path(output_file).parent
+        dir_to_create_intermediate_files = Path(dir_to_create_files)
         intermediate_file_path: Path = dir_to_create_intermediate_files / "dependency_tree.txt"
-        merge_files(
-            output_file=intermediate_file_path,
-            root_dir=directory,
-            target_filename=filename,
-        )
 
-        dependency_tree = create_diagram(
-            keep_tree=keep_tree,
-            intermediate_filename=str(intermediate_file_path),
-        )
+        # Merge dependency files
+        try:
+            merge_files(
+                output_file=intermediate_file_path,
+                root_dir=directory,
+                target_filename=filename,
+            )
+        except FileNotFoundError as e:
+            raise DependencyParsingError(f"Error reading dependency file: {e}\nThe file may have been moved or deleted during processing.")
+        except PermissionError as e:
+            raise DependencyParsingError(f"Permission denied while reading dependency files: {e}\nPlease check file permissions and try again.")
+        except UnicodeDecodeError as e:
+            raise DependencyParsingError(
+                f"Error decoding dependency file content: {e}\n"
+                f"The file may contain invalid characters or use an unsupported encoding.\n"
+                f"Please ensure the file is in UTF-8 format."
+            )
 
-        if output_format == "html":
-            create_html_diagram(dependency_tree, output_file, show_versions)
-        elif output_format == "json":
-            create_json_output(dependency_tree, output_file, show_versions)
+        # Validate merged content
+        if not intermediate_file_path.exists() or intermediate_file_path.stat().st_size == 0:
+            raise DependencyParsingError(
+                "Generated dependency tree file is empty.\n"
+                "This usually means the Maven dependency files contain no valid dependency information.\n"
+                "Please check that your Maven dependency files were generated correctly."
+            )
 
-        timestamp = time.strftime("%H:%M:%S")
-        print(f"[{timestamp}] Diagram generated and saved to {output_file}")
+        # Create diagram from merged content
+        try:
+            dependency_tree = create_diagram(
+                keep_tree=keep_tree,
+                intermediate_filename=str(intermediate_file_path),
+            )
+        except FileNotFoundError:
+            raise DependencyParsingError("Intermediate dependency tree file was not found.\nThis is an internal error - please report this issue.")
+        except Exception as e:
+            raise DependencyParsingError(f"Error processing dependency tree: {e}\nThe dependency file format may be invalid or corrupted.")
 
+        # Validate that we have content to work with
+        if not dependency_tree.strip():
+            raise DependencyParsingError(
+                "Dependency tree is empty after processing.\n"
+                "Please check that your Maven dependency files contain valid dependency information.\n"
+                "You can verify this by opening the files and checking their content."
+            )
+
+        # Generate output
+        try:
+            if output_format == "html":
+                create_html_diagram(dependency_tree, output_file, show_versions)
+            elif output_format == "json":
+                create_json_output(dependency_tree, output_file, show_versions)
+            else:
+                raise OutputGenerationError(f"Unsupported output format: {output_format}")
+        except PermissionError:
+            raise OutputGenerationError(
+                f"Permission denied writing to '{output_file}'.\nPlease check that you have write permissions to this location."
+            )
+        except OSError as e:
+            raise OutputGenerationError(
+                f"Error writing output file '{output_file}': {e}\nPlease check that you have enough disk space and write permissions."
+            )
+        except Exception as e:
+            raise OutputGenerationError(f"Error generating {output_format.upper()} output: {e}")
+
+        print(f"[{timestamp}] ✅ Diagram generated and saved to {output_file}")
+
+    except MvnTreeVisualizerError as e:
+        # Our custom errors already have helpful messages
+        print(f"[{timestamp}] ❌ Error: {e}")
+        if isinstance(e, DependencyFileNotFoundError):
+            print_maven_help()
+    except KeyboardInterrupt:
+        print(f"\n[{timestamp}] ⏹️  Operation cancelled by user")
     except Exception as e:
-        timestamp = time.strftime("%H:%M:%S")
-        print(f"[{timestamp}] Error generating diagram: {e}")
+        # Unexpected errors
+        print(f"[{timestamp}] ❌ Unexpected error: {e}")
+        print("This is an internal error. Please report this issue with the following details:")
+        print(f"  - Directory: {directory}")
+        print(f"  - Filename: {filename}")
+        print(f"  - Output: {output_file}")
+        print(f"  - Format: {output_format}")
+        import traceback
+
+        traceback.print_exc()
 
 
 def cli() -> NoReturn:
