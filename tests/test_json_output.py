@@ -11,7 +11,7 @@ def test_create_json_output_simple():
 [INFO] \- org.apache.commons:commons-lang3:jar:3.12.0:compile
 """
     expected_json = {
-        "id": "com.example:my-app",
+        "id": "my-app",
         "children": [
             {"id": "spring-boot-starter-web", "children": [{"id": "spring-boot-starter", "children": []}]},
             {"id": "commons-lang3", "children": []},
@@ -39,7 +39,7 @@ def test_create_json_output_deeper_tree():
 [INFO] \- m:n:jar:1.0.0:compile
 """
     expected_json = {
-        "id": "com.example:my-app",
+        "id": "my-app",
         "children": [
             {
                 "id": "b",
@@ -73,7 +73,7 @@ def test_create_json_output_duplicate_dependencies():
 [INFO]    \- c:d:jar:1.0.0:compile
 """
     expected_json = {
-        "id": "com.example:my-app",
+        "id": "my-app",
         "children": [
             {"id": "b", "children": [{"id": "d", "children": []}]},
             {"id": "f", "children": [{"id": "d", "children": []}]},
@@ -97,7 +97,7 @@ def test_create_json_output_with_show_versions_true():
 [INFO] \- org.apache.commons:commons-lang3:jar:3.12.0:compile
 """
     expected_json = {
-        "id": "com.example:my-app:1.0.0",
+        "id": "my-app:1.0.0",
         "children": [
             {"id": "spring-boot-starter-web:2.5.4", "children": [{"id": "spring-boot-starter:2.5.4", "children": []}]},
             {"id": "commons-lang3:3.12.0", "children": []},
@@ -121,7 +121,7 @@ def test_create_json_output_with_show_versions_false():
 [INFO] \- org.apache.commons:commons-lang3:jar:3.12.0:compile
 """
     expected_json = {
-        "id": "com.example:my-app",
+        "id": "my-app",
         "children": [
             {"id": "spring-boot-starter-web", "children": [{"id": "spring-boot-starter", "children": []}]},
             {"id": "commons-lang3", "children": []},
@@ -146,7 +146,7 @@ def test_create_json_output_real_life_example():
 [INFO]       \- velocity:velocity:jar:1.4:compile
 """
     expected_json = {
-        "id": "org.apache.maven.plugins:maven-dependency-plugin",
+        "id": "maven-dependency-plugin",
         "children": [
             {
                 "id": "doxia-site-renderer",
@@ -173,7 +173,7 @@ def test_create_json_output_real_life_example_show_versions():
 [INFO]       \- velocity:velocity:jar:1.4:compile
 """
     expected_json = {
-        "id": "org.apache.maven.plugins:maven-dependency-plugin:2.0-alpha-5-SNAPSHOT",
+        "id": "maven-dependency-plugin:2.0-alpha-5-SNAPSHOT",
         "children": [
             {
                 "id": "doxia-site-renderer:1.0-alpha-8",

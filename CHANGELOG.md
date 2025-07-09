@@ -7,6 +7,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Placeholder for future features
+
+## [1.3.0] - 2025-07-09
+
+### Added
+- Watch mode functionality with `--watch` flag for automatic diagram regeneration
+- File system monitoring using watchdog library for real-time updates
+- New file_watcher module for decoupled file monitoring logic
+- Enhanced error handling system with comprehensive user guidance
+  - Clear error messages for missing dependency files with helpful Maven commands
+  - Specific validation for directories, file permissions, and content
+  - Detailed diagnostics for parsing errors and empty files
+  - User-friendly error messages with emojis and actionable suggestions
+- Custom exception classes for better error categorization
+- Comprehensive test coverage for error scenarios
+
+### Changed
+- **BREAKING**: JSON output now uses simplified package names (artifact-id only) to match HTML output behavior
+  - Root packages now show as "my-app" instead of "com.example:my-app"
+  - Ensures consistency between HTML and JSON output formats
+- Refactored CLI module to separate concerns and improve maintainability
+- Improved error handling with timestamped console output and graceful failure modes
+- Enhanced file processing with better encoding handling (UTF-8) and validation
+- Updated dependency file merging logic with better error detection
+
+### Fixed
+- Removed unused imports and improved code organization
+- Fixed intermediate file path handling in diagram generation
+
 ## [1.2.0] - 2025-07-09
 
 ### Added
