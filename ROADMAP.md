@@ -33,23 +33,35 @@ This document outlines the future direction of the `mvn-tree-visualizer` project
 
 **Focus:** Making the tool more user-friendly and robust for daily use.
 
-*   **Remaining Tasks:**
-    *   [ ] Separate parser module for better modularity (optional enhancement)
-    *   [ ] Additional edge case testing (optional enhancement)
+*   **Status:** Released July 9, 2025
+*   **Completed Tasks:**
+    *   [x] Watch mode functionality with `--watch` flag
+    *   [x] Enhanced error handling system with comprehensive user guidance
+    *   [x] Custom exception classes and validation modules
+    *   [x] Comprehensive test coverage (22 tests)
+    *   [x] Modular code organization improvements
 
-## v1.4.0 - Visual and Theme Enhancements 🎨
+## v1.4.0 - Visual and Theme Enhancements 🎨 (Next Release)
 
 **Focus:** Making the output more visually appealing and customizable.
 
-*   **Visual Themes:**
-    *   [ ] `--theme` option with multiple built-in themes
-    *   [ ] Dark, light, and colorful theme options
-    *   [ ] Better default styling and typography
+**Priority:** High - Addresses user feedback about visual appearance and usability with large dependency trees.
+
+*   **Visual Themes (High Priority):**
+    *   [ ] `--theme` option with multiple built-in themes (dark, light, colorful)
+    *   [ ] CSS variable system for easy theme customization
+    *   [ ] Better default styling and typography improvements
+    *   [ ] Responsive design for different screen sizes
     *   [ ] Custom CSS support for advanced users
-*   **Interactive Features:**
-    *   [ ] Tooltips with detailed dependency information
+*   **Interactive Features (High Priority):**
+    *   [ ] Tooltips with detailed dependency information (groupId, version, scope)
     *   [ ] Hover effects and better visual feedback
-    *   [ ] Expandable/collapsible dependency groups
+    *   [ ] Expandable/collapsible dependency groups for large trees
+    *   [ ] Better visual hierarchy for nested dependencies
+*   **Template Enhancements (Medium Priority):**
+    *   [ ] Enhanced Jinja2 template system for theme support
+    *   [ ] Improved Mermaid.js configuration options
+    *   [ ] Better color coding for different dependency types/scopes
 
 ## v1.5.0 - Advanced Features 🚀
 
@@ -97,4 +109,4 @@ If you're interested in contributing to any of these features, please check out 
 
 ---
 
-*Last updated: July 9, 2025*
+*Last updated: July 16, 2025*
