@@ -56,7 +56,7 @@ pythonpath = ["src"]
 
 [tool.semantic_release]
 version_toml = ["pyproject.toml:project.version"]
-build_command = "uv run python -m build"
+build_command = "python -m build"
 dist_path = "dist/"
 upload_to_pypi = true
 upload_to_release = true

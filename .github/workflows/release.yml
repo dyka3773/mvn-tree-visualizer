@@ -34,6 +34,7 @@ jobs:
     - name: Install dependencies
       run: |
         uv sync --dev
+        pip install build twine
 
     - name: Run tests
       run: |
