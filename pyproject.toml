@@ -42,6 +42,8 @@ mvn-tree-visualizer = "mvn_tree_visualizer.cli:cli"
 dev = [
     "twine>=6.1.0",
     "pytest>=8.3.2",
+    "python-semantic-release>=10.2.0",
+    "build>=1.0.0",
 ]
 
 [build-system]
@@ -50,3 +52,30 @@ requires = ['hatchling']
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
+
+[tool.semantic_release]
+version_toml = ["pyproject.toml:project.version"]
+build_command = "python -m build"
+dist_path = "dist/"
+upload_to_pypi = true
+upload_to_release = true
+remove_dist = false
+
+[tool.semantic_release.branches.master]
+match = "master"
+prerelease = false
+
+[tool.semantic_release.changelog]
+changelog_file = "CHANGELOG.md"
+exclude_commit_patterns = [
+    "^docs:",
+    "^style:",
+    "^refactor:",
+    "^test:",
+    "^chore:",
+]
+
+[tool.semantic_release.commit_parser_options]
+allowed_tags = ["build", "chore", "ci", "docs", "feat", "fix", "perf", "style", "refactor", "test"]
+minor_tags = ["feat"]
+patch_tags = ["fix", "perf"]

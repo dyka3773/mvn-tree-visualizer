@@ -5,10 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
-
-### Added
-- Placeholder for future features
+<!--next-version-placeholder-->
 
 ## [1.3.0] - 2025-07-09
 
@@ -48,6 +45,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Enhanced CLI help text to reflect new features
+- Improved JSON output structure for better programmatic access
+- Updated documentation with version feature examples
+
+### Fixed
+- Type annotation issues and improved code clarity
+- JSON serialization for complex dependency structures
+
+## [1.1.0] - 2025-07-05
+
+### Added
+- JSON output format option for programmatic consumption
+- Multi-file support for Maven modules (searches for multiple `maven_dependency_file`)
+- File merging functionality for complex projects
+- Comprehensive error handling for file operations
+- Enhanced CLI with format selection
+
+### Changed
+- Improved project structure with organized outputs directory
+- Better separation of concerns between HTML and JSON generation
+
+### Fixed
+- File handling issues with large dependency trees
+- Output format validation and error messages
+
+## [1.0.0] - 2025-07-01
+
+### Added
+- Initial release of mvn-tree-visualizer
+- HTML diagram generation using Mermaid.js
+- CLI interface for processing Maven dependency files
+- Basic error handling and validation
+- Support for Maven dependency tree parsing
+- Interactive HTML output with visual dependency graphs
 - Improved code documentation and readability with type hints
 - Updated README.md with new feature documentation and usage examples
 

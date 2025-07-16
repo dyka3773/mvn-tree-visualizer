@@ -1,239 +1,185 @@
 # Release Procedure
 
-This document describes the step-by-step process for releasing a new version of `mvn-tree-visualizer` to PyPI.
+This document describes the automated release process for `mvn-tree-visualizer` using `python-semantic-release`.
 
 ## Overview
 
-The project follows a GitFlow-like workflow with the following branches:
+The project uses automated releases with **python-semantic-release**:
+- **Automatic versioning** based on conventional commit messages
+- **Automatic CHANGELOG.md generation** from commit history
+- **Automatic PyPI publication** when code is pushed to `master`
+- **Automatic GitHub releases** with release notes
+
+### Workflow Branches:
 - `develop` - Active development branch where features are integrated
-- `master` - Protected production branch, only updated for releases
+- `master` - Protected production branch, triggers automated releases
 - `feature/*` - Individual feature branches
 
-Releases are automatically published to PyPI when code is pushed to the `master` branch via GitHub Actions.
+## Conventional Commits
 
-## Prerequisites
+All commits must follow [Conventional Commits](https://www.conventionalcommits.org/) specification:
 
-Before starting a release, ensure you have:
-- [ ] Maintainer access to the repository
-- [ ] All planned features for the release completed and merged into `develop`
-- [ ] All tests passing on the `develop` branch
-- [ ] No outstanding critical issues
+### Commit Types and Version Impact:
+- `feat:` - New feature → **MINOR** version bump (1.3.0 → 1.4.0)
+- `fix:` - Bug fix → **PATCH** version bump (1.3.0 → 1.3.1)  
+- `perf:` - Performance improvement → **PATCH** version bump
+- `feat!:` or `BREAKING CHANGE:` → **MAJOR** version bump (1.3.0 → 2.0.0)
+- `docs:`, `style:`, `refactor:`, `test:`, `chore:` - No version bump
 
-## Release Process
-
-### 1. Prepare the Release Branch
-
+### Examples:
 ```bash
-# Ensure you're on the latest develop branch
-git checkout develop
-git pull origin develop
-
-# Create a release preparation branch
-git checkout -b release/prepare-v1.x.x
+feat: add theme support with --theme option
+fix: resolve dependency parsing error with special characters  
+feat!: change CLI interface for better usability
+docs: update README with theme examples
 ```
 
-### 2. Update Version and Documentation
+## Automated Release Process
 
-#### Update Version Number
-Edit `pyproject.toml` and update the version number:
+### 1. Development Workflow
+
+```bash
+# Create feature branch from develop
+git checkout develop
+git pull origin develop
+git checkout -b feature/add-theme-support
+
+# Make changes and commit using conventional commits
+git add .
+git commit -m "feat: add theme system with dark/light modes"
+git push origin feature/add-theme-support
+```
+
+### 2. Create Pull Request to Develop
+
+Create a pull request from your feature branch to `develop`:
+- Title: Clear description of the feature
+- Description: Details of changes and any breaking changes
+- Ensure all tests pass in CI
+
+### 3. Merge to Develop
+
+Once the PR is reviewed and approved, merge it into `develop`.
+
+### 4. Release to Master
+
+When ready for a release:
+
+```bash
+# Create release PR from develop to master
+git checkout develop
+git pull origin develop
+```
+
+Create a pull request from `develop` to `master`:
+- Title: "Release: Prepare for next version"
+- Description: Summary of changes since last release
+- List any breaking changes
+
+### 5. Automated Release (Master Branch)
+
+When the release PR is merged to `master`, the automation triggers:
+
+1. **python-semantic-release analyzes commits** since the last release
+2. **Determines version bump** based on conventional commit types
+3. **Updates version** in `pyproject.toml`
+4. **Generates CHANGELOG.md** from commit messages
+5. **Creates Git tag** with new version
+6. **Builds package** using `python -m build`
+7. **Publishes to PyPI** automatically
+8. **Creates GitHub release** with generated release notes
+
+## Manual Release (Emergency)
+
+For emergency releases or manual intervention:
+
+```bash
+# Install semantic-release locally
+uv sync --dev
+
+# Preview what will be released (dry-run)
+uv run semantic-release --dry-run
+
+# Force a specific version type
+uv run semantic-release --patch  # or --minor, --major
+
+# Generate changelog only
+uv run semantic-release changelog
+```
+
+## Monitoring Releases
+
+### Check Release Status:
+1. **GitHub Actions**: Monitor the [release workflow](https://github.com/dyka3773/mvn-tree-visualizer/actions)
+2. **PyPI**: Verify new version appears on [PyPI](https://pypi.org/project/mvn-tree-visualizer/)
+3. **GitHub Releases**: Check [GitHub releases page](https://github.com/dyka3773/mvn-tree-visualizer/releases)
+
+### Troubleshooting:
+
+**Failed Release:**
+- Check GitHub Actions logs for specific errors
+- Verify conventional commit format in recent commits
+- Ensure GITHUB_TOKEN has sufficient permissions
+- Check PyPI trusted publishing configuration
+
+**No Version Bump:**
+- Ensure commits follow conventional commit format
+- Check that commits include `feat:` or `fix:` types
+- Verify commits are not filtered out by semantic-release config
+
+## Configuration
+
+The release behavior is configured in `pyproject.toml`:
+
 ```toml
-[project]
-name = "mvn-tree-visualizer"
-version = "1.x.x"  # Update this line
+[tool.semantic_release]
+version_toml = ["pyproject.toml:project.version"]
+build_command = "python -m build"
+upload_to_pypi = true
+upload_to_release = true
+
+[tool.semantic_release.commit_parser_options]
+allowed_tags = ["build", "chore", "ci", "docs", "feat", "fix", "perf", "style", "refactor", "test"]
+minor_tags = ["feat"]
+patch_tags = ["fix", "perf"]
 ```
 
-#### Update CHANGELOG.md
-1. Move items from `[Unreleased]` section to a new version section
-2. Add the release date
-3. Ensure all changes are properly categorized (Added, Changed, Fixed, Removed)
-4. Add a new empty `[Unreleased]` section for future changes
+## Migration from Manual Process
 
-Example:
-```markdown
-## [Unreleased]
+**Previous manual steps no longer needed:**
+- ❌ Manual version updates in `pyproject.toml`
+- ❌ Manual CHANGELOG.md editing
+- ❌ Manual Git tag creation
+- ❌ Manual PyPI uploads
 
-### Added
-- Placeholder for future features
+**New automated process:**
+- ✅ Conventional commit messages
+- ✅ Automatic version management
+- ✅ Automatic changelog generation
+- ✅ Automatic PyPI publishing
+- ✅ Automatic GitHub releases
 
-## [1.x.x] - 2025-MM-DD
+## Emergency Procedures
 
-### Added
-- New feature descriptions
-
-### Changed
-- Modified functionality descriptions
-
-### Fixed
-- Bug fix descriptions
-```
-
-#### Update CONTEXT.md
-1. Move the current version from "Completed Tasks" to "Previous Releases"
-2. Update the "Current Status" section for the next version
-3. Update any relevant project information
-
-#### Update the SECURITY.md
-1. Review and update the security policy if necessary
-2. Ensure it reflects the current security practices and reporting procedures
-3. Add any new security features or changes made in this release
-
-### 3. Quality Assurance
-
-Run the complete test suite and quality checks:
-
+### Rollback a Release:
 ```bash
-# Run all tests
-uv run pytest tests/ -v
+# Revert the problematic release commit
+git revert <release-commit-hash>
 
-# Run linting
-uv run ruff check .
-
-# Test the CLI locally
-uv run mvn-tree-visualizer --help
-
-# Test with example data
-cd examples/simple-project
-uv run mvn-tree-visualizer --filename maven_dependency_file --output test-diagram.html
+# Push to master to trigger new patch release
+git push origin master
 ```
 
-Verify that:
-- [ ] All 22+ tests pass
-- [ ] No linting errors
-- [ ] CLI commands work as expected
-- [ ] Example outputs generate correctly
-
-### 4. Create Release Pull Request
-
+### Hotfix Process:
 ```bash
-# Commit the version updates
-git add pyproject.toml CHANGELOG.md CONTEXT.md SECURITY.md
-git commit -m "Prepare release v1.x.x
-
-- Update version to 1.x.x in pyproject.toml
-- Update CHANGELOG.md with release notes
-- Update CONTEXT.md with current status
-- Update SECURITY.md with current security practices"
-```
-
-# Push the release preparation branch
-```bash
-git push origin release/prepare-v1.x.x
-```
-
-Create a pull request from `release/prepare-v1.x.x` to `develop` with:
-- Title: "Prepare release v1.x.x"
-- Description summarizing the changes in this release
-- Link to any relevant issues or PRs
-
-### 5. Merge to Develop
-
-Once the release preparation PR is reviewed and approved:
-1. Merge the PR into `develop`
-2. Delete the release preparation branch
-
-### 6. Create Release PR to Master
-
-```bash
-# Create a pull request from develop to master
-git checkout develop
-git pull origin develop
-```
-
-Create a pull request from `develop` to `master` with:
-- Title: "Release v1.x.x"
-- Description: Copy the changelog entry for this version
-- Reference the milestone or project board if applicable
-
-### 7. Final Release
-
-Once the release PR is approved:
-
-1. **Merge to Master**: Merge the PR to `master` (this triggers automatic PyPI publication)
-
-2. **Create Git Tag**: After the merge, create and push a git tag:
-```bash
+# Create hotfix branch from master
 git checkout master
-git pull origin master
-git tag -a v1.x.x -m "Release version 1.x.x"
-git push origin v1.x.x
+git checkout -b hotfix/critical-bug-fix
+
+# Make minimal fix
+git commit -m "fix: resolve critical security vulnerability"
+
+# Create PR directly to master (bypass develop for emergencies)
 ```
 
-3. **Monitor Deployment**: Check the [GitHub Actions](https://github.com/dyka3773/mvn-tree-visualizer/actions) to ensure:
-   - [ ] Tests pass
-   - [ ] Package builds successfully  
-   - [ ] PyPI upload completes without errors
-
-4. **Verify PyPI Release**: Check [PyPI](https://pypi.org/project/mvn-tree-visualizer/) to confirm the new version is available
-
-5. **Create GitHub Release**: Create a release on GitHub with:
-   - Tag: `v1.x.x`
-   - Title: `v1.x.x`
-   - Description: Copy from CHANGELOG.md
-   - Mark as latest release
-
-## Post-Release Tasks
-
-### Update Documentation
-- [ ] Verify README.md installation instructions work with new version
-- [ ] Update any version-specific documentation
-- [ ] Check that examples still work with the new version
-
-### Cleanup
-```bash
-# Clean up any local release branches
-git branch -d release/prepare-v1.x.x
-
-# Switch back to develop for future work
-git checkout develop
-git pull origin develop
-```
-
-## Emergency Hotfixes
-
-For critical bugs that need immediate fixes:
-
-1. Create a hotfix branch from `master`: `git checkout -b hotfix/fix-critical-bug master`
-2. Make the minimal necessary changes
-3. Update version number (patch version increment)
-4. Update CHANGELOG.md
-5. Create PR to both `master` and `develop`
-6. Follow the same release process
-
-## Troubleshooting
-
-### Failed PyPI Upload
-- Check GitHub Actions logs for specific error messages
-- Verify PyPI API token is still valid
-- Ensure version number hasn't been used before
-- Check that all required files are included in the build
-
-### Failed Tests
-- Do not proceed with release if any tests fail
-- Fix issues on the `develop` branch first
-- Re-run the release process from step 1
-
-### Version Conflicts
-- Ensure version in `pyproject.toml` follows semantic versioning
-- Check that the version doesn't already exist on PyPI
-- Verify version is higher than the current latest version
-
-## Rollback Procedure
-
-If a release needs to be rolled back:
-
-1. **Immediate**: If possible, fix forward with a patch release
-2. **PyPI**: Contact PyPI support to remove a problematic version (rarely needed)
-3. **Documentation**: Update README and docs to recommend the previous stable version
-4. **Git**: Create a new release with the previous stable code if necessary
-
-## Version Numbering
-
-Follow [Semantic Versioning](https://semver.org/):
-- **MAJOR** (1.x.x): Breaking changes, major new features
-- **MINOR** (x.1.x): New features, backward compatible
-- **PATCH** (x.x.1): Bug fixes, backward compatible
-
-Examples:
-- `1.0.0` → `1.0.1` (bug fix)
-- `1.0.1` → `1.1.0` (new feature)
-- `1.1.0` → `2.0.0` (breaking change)
+This automated approach ensures consistent, reliable releases while reducing manual effort and human error.
