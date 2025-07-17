@@ -59,7 +59,6 @@ You can easily compare all themes by opening the different diagram files:
 ### Theme Characteristics
 - **Default**: Clean minimal design with monospace fonts and simple borders
 - **Dark**: Dark backgrounds with bright text, optimized for low-light environments  
-- **Light**: High contrast with clean borders, accessibility optimized
 
 ## Use Cases
 
