@@ -26,7 +26,7 @@ def test_generate_diagram():
             keep_tree=False,
             output_format="html",
             show_versions=False,
-            theme="default",
+            theme="minimal",
         )
 
         assert output_file.exists()
