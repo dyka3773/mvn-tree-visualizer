@@ -35,12 +35,14 @@ pip install mvn-tree-visualizer
 - **🌐 Multiple Output Formats:**
   - **HTML:** Generates an interactive HTML diagram of your dependency tree using Mermaid.js.
   - **JSON:** Creates a structured JSON representation of the dependency tree, perfect for scripting or integration with other tools.
+- **🎨 Theme System:** Choose from 2 built-in themes (minimal, dark) for clean and consistent diagram styling.
 - **🔄 Watch Mode:** Automatically regenerates diagrams when Maven dependency files change using the `--watch` flag.
 - **📋 Version Display:** Show or hide dependency versions in both HTML and JSON outputs using the `--show-versions` flag.
 - **⚡ Easy to Use:** A simple command-line interface that gets the job done with minimal configuration.
 - **📂 File Merging:** Automatically finds and merges multiple `maven_dependency_file` files from different subdirectories.
 - **🎨 Customizable Output:** Specify the output file name and location.
-- **💾 SVG Export:** Download the generated diagram as an SVG file directly from the HTML page.
+- **💾 Enhanced Downloads:** Download diagrams as SVG or high-resolution PNG directly from the HTML page.
+- **🖱️ Interactive Features:** Hover tooltips, click-to-highlight connections, pan/zoom controls, and keyboard shortcuts.
 
 ## How to Use
 
@@ -71,6 +73,15 @@ mvn_tree_visualizer --filename "maven_dependency_file" --output "dependencies.js
 #### With Version Information
 ```bash
 mvn_tree_visualizer --filename "maven_dependency_file" --output "diagram.html" --show-versions
+```
+
+#### With Custom Themes
+```bash
+# Dark theme for low-light environments  
+mvn_tree_visualizer --filename "maven_dependency_file" --output "diagram.html" --theme dark
+
+# Default minimal theme (clean monospace design)
+mvn_tree_visualizer --filename "maven_dependency_file" --output "diagram.html"
 ```
 
 #### JSON Output with Versions
@@ -109,11 +120,19 @@ Each example includes:
 | `--filename` | The name of the file containing the Maven dependency tree | `maven_dependency_file` |
 | `--output` | The name of the output file | `diagram.html` |
 | `--format` | The output format (`html` or `json`) | `html` |
+| `--theme` | Theme for HTML diagrams (`minimal`, `dark`) | `minimal` |
 | `--show-versions` | Show dependency versions in the diagram | `False` |
 | `--watch` | Watch for file changes and auto-regenerate diagram | `False` |
 | `--directory` | The directory to scan for the Maven dependency file(s) | current directory |
 | `--keep-tree` | Keep the intermediate `dependency_tree.txt` file | `False` |
 | `--help` | Show the help message and exit | - |
+
+### Theme Options
+
+- **`minimal`**: Clean monospace design with simple black borders (default)
+- **`dark`**: Same minimal styling but with white text on black background
+
+📖 **See the complete [Theme Documentation](docs/THEMES.md) for detailed information about themes and interactive features.**
 
 ## Performance
 

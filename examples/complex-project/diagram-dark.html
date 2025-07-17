@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maven Dependency Diagram - Dark Theme</title>
+    <style>
+        #mySvgId {
+            height: 100%;
+            width: 100%;
+        }
+        
+        /* Theme-specific styles */
+        
+        body {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            margin: 0;
+            padding: 20px;
+            background-color: #2d3748;
+            color: #f7fafc;
+            line-height: 1.6;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+        #graphDiv {
+            background-color: #2d3748;
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            margin-bottom: 20px;
+            height: calc(100vh - 120px);
+            overflow: hidden;
+        }
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .control-label {
+            font-size: 12px;
+            font-weight: normal;
+            color: #f7fafc;
+            text-transform: uppercase;
+        }
+        .toggle-btn {
+            background-color: #f7fafc;
+            color: #2d3748;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: opacity 0.2s;
+        }
+        .toggle-btn:hover {
+            opacity: 0.8;
+        }
+        
+        
+        /* Dark theme text visibility fixes */
+        
+        /* Force white text for all mermaid elements in dark theme */
+        .node text, .edgeLabel text, text, .label text {
+            fill: #ffffff !important;
+            color: #ffffff !important;
+        }
+        
+        /* Ensure node backgrounds are visible */
+        .node rect, .node circle, .node ellipse, .node polygon {
+            fill: #4a5568 !important;
+            stroke: #e2e8f0 !important;
+            stroke-width: 1px !important;
+        }
+        
+        /* Edge styling for dark theme */
+        .edge path, .flowchart-link {
+            stroke: #a0aec0 !important;
+            stroke-width: 2px !important;
+        }
+        
+        /* Arrow styling */
+        .arrowheadPath {
+            fill: #a0aec0 !important;
+            stroke: #a0aec0 !important;
+        }
+        
+        
+        /* Improved node styling */
+        .node {
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+        
+        .node:hover {
+            opacity: 0.8;
+        }
+        
+        /* Highlighting styles */
+        .highlighted {
+            opacity: 1 !important;
+            filter: drop-shadow(0 0 8px #3B82F6);
+        }
+        
+        .dimmed {
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <div class="control-group">
+            <button id="downloadButton" class="toggle-btn">Download SVG</button>
+            <!-- Note: PNG download feature to be implemented in future version -->
+        </div>
+    </div>
+    
+    <div id="graphDiv"></div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.5.0/dist/svg-pan-zoom.min.js"></script>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.9.0/dist/mermaid.esm.min.mjs';
+        
+        // Initialize mermaid with theme configuration
+        mermaid.initialize({"startOnLoad": true, "sequence": {"useMaxWidth": false}, "theme": "forest", "themeVariables": {"primaryColor": "#3B82F6", "primaryTextColor": "#ffffff", "primaryBorderColor": "#e2e8f0", "lineColor": "#a0aec0", "secondaryColor": "#4a5568", "tertiaryColor": "#2d3748", "background": "#2d3748", "mainBkg": "#4a5568", "nodeBkg": "#4a5568", "clusterBkg": "#2d3748", "edgeLabelBackground": "#2d3748", "nodeTextColor": "#ffffff", "textColor": "#ffffff"}});
+
+        // Global variables
+        let panZoomInstance = null;
+        
+        const drawDiagram = async function () {
+            const element = document.querySelector('#graphDiv');
+            const graphDefinition = `graph LR
+	HikariCP["HikariCP"];
+	accessors_smart["accessors-smart"];
+	antlr["antlr"];
+	asm["asm"];
+	aspectjweaver["aspectjweaver"];
+	assertj_core["assertj-core"];
+	byte_buddy["byte-buddy"];
+	checker_qual["checker-qual"];
+	classmate["classmate"];
+	commons_lang3["commons-lang3"];
+	complex_microservice["complex-microservice"];
+	error_prone_annotations["error_prone_annotations"];
+	failureaccess["failureaccess"];
+	guava["guava"];
+	hamcrest["hamcrest"];
+	hibernate_commons_annotations["hibernate-commons-annotations"];
+	hibernate_core["hibernate-core"];
+	j2objc_annotations["j2objc-annotations"];
+	jackson_annotations["jackson-annotations"];
+	jackson_core["jackson-core"];
+	jackson_databind["jackson-databind"];
+	jackson_datatype_jdk8["jackson-datatype-jdk8"];
+	jackson_datatype_jsr310["jackson-datatype-jsr310"];
+	jackson_module_parameter_names["jackson-module-parameter-names"];
+	jakarta_annotation_api["jakarta.annotation-api"];
+	jakarta_persistence_api["jakarta.persistence-api"];
+	jakarta_transaction_api["jakarta.transaction-api"];
+	jakarta_xml_bind_api["jakarta.xml.bind-api"];
+	jandex["jandex"];
+	javax_persistence_api["javax.persistence-api"];
+	jaxb_runtime["jaxb-runtime"];
+	jboss_logging["jboss-logging"];
+	json_path["json-path"];
+	json_smart["json-smart"];
+	jsonassert["jsonassert"];
+	jsr305["jsr305"];
+	jul_to_slf4j["jul-to-slf4j"];
+	junit_jupiter["junit-jupiter"];
+	listenablefuture["listenablefuture"];
+	log4j_api["log4j-api"];
+	log4j_to_slf4j["log4j-to-slf4j"];
+	logback_classic["logback-classic"];
+	logback_core["logback-core"];
+	mockito_core["mockito-core"];
+	mockito_junit_jupiter["mockito-junit-jupiter"];
+	mysql_connector_java["mysql-connector-java"];
+	slf4j_api["slf4j-api"];
+	snakeyaml["snakeyaml"];
+	spring_aop["spring-aop"];
+	spring_aspects["spring-aspects"];
+	spring_beans["spring-beans"];
+	spring_boot["spring-boot"];
+	spring_boot_autoconfigure["spring-boot-autoconfigure"];
+	spring_boot_starter["spring-boot-starter"];
+	spring_boot_starter_aop["spring-boot-starter-aop"];
+	spring_boot_starter_data_jpa["spring-boot-starter-data-jpa"];
+	spring_boot_starter_jdbc["spring-boot-starter-jdbc"];
+	spring_boot_starter_json["spring-boot-starter-json"];
+	spring_boot_starter_logging["spring-boot-starter-logging"];
+	spring_boot_starter_test["spring-boot-starter-test"];
+	spring_boot_starter_tomcat["spring-boot-starter-tomcat"];
+	spring_boot_starter_web["spring-boot-starter-web"];
+	spring_boot_test["spring-boot-test"];
+	spring_boot_test_autoconfigure["spring-boot-test-autoconfigure"];
+	spring_context["spring-context"];
+	spring_core["spring-core"];
+	spring_data_commons["spring-data-commons"];
+	spring_data_jpa["spring-data-jpa"];
+	spring_expression["spring-expression"];
+	spring_jcl["spring-jcl"];
+	spring_jdbc["spring-jdbc"];
+	spring_orm["spring-orm"];
+	spring_test["spring-test"];
+	spring_tx["spring-tx"];
+	spring_web["spring-web"];
+	spring_webmvc["spring-webmvc"];
+	tomcat_embed_core["tomcat-embed-core"];
+	tomcat_embed_el["tomcat-embed-el"];
+	tomcat_embed_websocket["tomcat-embed-websocket"];
+	xmlunit_core["xmlunit-core"];
+	accessors_smart --> asm;
+	complex_microservice --> commons_lang3;
+	complex_microservice --> guava;
+	complex_microservice --> mysql_connector_java;
+	complex_microservice --> spring_boot_starter_data_jpa;
+	complex_microservice --> spring_boot_starter_test;
+	complex_microservice --> spring_boot_starter_web;
+	guava --> checker_qual;
+	guava --> error_prone_annotations;
+	guava --> failureaccess;
+	guava --> j2objc_annotations;
+	guava --> jsr305;
+	guava --> listenablefuture;
+	hibernate_core --> antlr;
+	hibernate_core --> byte_buddy;
+	hibernate_core --> classmate;
+	hibernate_core --> hibernate_commons_annotations;
+	hibernate_core --> jandex;
+	hibernate_core --> javax_persistence_api;
+	hibernate_core --> jaxb_runtime;
+	hibernate_core --> jboss_logging;
+	jackson_databind --> jackson_annotations;
+	jackson_databind --> jackson_core;
+	json_path --> json_smart;
+	json_smart --> accessors_smart;
+	log4j_to_slf4j --> log4j_api;
+	logback_classic --> logback_core;
+	logback_classic --> slf4j_api;
+	spring_boot --> spring_context;
+	spring_boot_starter --> jakarta_annotation_api;
+	spring_boot_starter --> snakeyaml;
+	spring_boot_starter --> spring_boot;
+	spring_boot_starter --> spring_boot_autoconfigure;
+	spring_boot_starter --> spring_boot_starter_logging;
+	spring_boot_starter --> spring_core;
+	spring_boot_starter_aop --> aspectjweaver;
+	spring_boot_starter_data_jpa --> hibernate_core;
+	spring_boot_starter_data_jpa --> jakarta_persistence_api;
+	spring_boot_starter_data_jpa --> jakarta_transaction_api;
+	spring_boot_starter_data_jpa --> spring_aspects;
+	spring_boot_starter_data_jpa --> spring_boot_starter_aop;
+	spring_boot_starter_data_jpa --> spring_boot_starter_jdbc;
+	spring_boot_starter_data_jpa --> spring_data_jpa;
+	spring_boot_starter_jdbc --> HikariCP;
+	spring_boot_starter_jdbc --> spring_jdbc;
+	spring_boot_starter_json --> jackson_databind;
+	spring_boot_starter_json --> jackson_datatype_jdk8;
+	spring_boot_starter_json --> jackson_datatype_jsr310;
+	spring_boot_starter_json --> jackson_module_parameter_names;
+	spring_boot_starter_logging --> jul_to_slf4j;
+	spring_boot_starter_logging --> log4j_to_slf4j;
+	spring_boot_starter_logging --> logback_classic;
+	spring_boot_starter_test --> assertj_core;
+	spring_boot_starter_test --> hamcrest;
+	spring_boot_starter_test --> jakarta_xml_bind_api;
+	spring_boot_starter_test --> json_path;
+	spring_boot_starter_test --> jsonassert;
+	spring_boot_starter_test --> junit_jupiter;
+	spring_boot_starter_test --> mockito_core;
+	spring_boot_starter_test --> mockito_junit_jupiter;
+	spring_boot_starter_test --> spring_boot_test;
+	spring_boot_starter_test --> spring_boot_test_autoconfigure;
+	spring_boot_starter_test --> spring_core;
+	spring_boot_starter_test --> spring_test;
+	spring_boot_starter_test --> xmlunit_core;
+	spring_boot_starter_tomcat --> tomcat_embed_core;
+	spring_boot_starter_tomcat --> tomcat_embed_el;
+	spring_boot_starter_tomcat --> tomcat_embed_websocket;
+	spring_boot_starter_web --> spring_boot_starter;
+	spring_boot_starter_web --> spring_boot_starter_json;
+	spring_boot_starter_web --> spring_boot_starter_tomcat;
+	spring_boot_starter_web --> spring_web;
+	spring_boot_starter_web --> spring_webmvc;
+	spring_context --> spring_aop;
+	spring_context --> spring_beans;
+	spring_context --> spring_core;
+	spring_context --> spring_expression;
+	spring_core --> spring_jcl;
+	spring_data_jpa --> slf4j_api;
+	spring_data_jpa --> spring_context;
+	spring_data_jpa --> spring_data_commons;
+	spring_data_jpa --> spring_orm;
+	spring_data_jpa --> spring_tx;
+
+classDef rootNode fill:#3B82F620,stroke:#3B82F6,stroke-width:3px,color:#000;
+classDef leafNode fill:#10B98120,stroke:#10B981,stroke-width:2px,color:#000;
+classDef intermediateNode fill:#F59E0B20,stroke:#F59E0B,stroke-width:2px,color:#000;
+
+	class HikariCP leafNode;
+	class accessors_smart intermediateNode;
+	class antlr leafNode;
+	class asm leafNode;
+	class aspectjweaver leafNode;
+	class assertj_core leafNode;
+	class byte_buddy leafNode;
+	class checker_qual leafNode;
+	class classmate leafNode;
+	class commons_lang3 leafNode;
+	class complex_microservice rootNode;
+	class error_prone_annotations leafNode;
+	class failureaccess leafNode;
+	class guava intermediateNode;
+	class hamcrest leafNode;
+	class hibernate_commons_annotations leafNode;
+	class hibernate_core intermediateNode;
+	class j2objc_annotations leafNode;
+	class jackson_annotations leafNode;
+	class jackson_core leafNode;
+	class jackson_databind intermediateNode;
+	class jackson_datatype_jdk8 leafNode;
+	class jackson_datatype_jsr310 leafNode;
+	class jackson_module_parameter_names leafNode;
+	class jakarta_annotation_api leafNode;
+	class jakarta_persistence_api leafNode;
+	class jakarta_transaction_api leafNode;
+	class jakarta_xml_bind_api leafNode;
+	class jandex leafNode;
+	class javax_persistence_api leafNode;
+	class jaxb_runtime leafNode;
+	class jboss_logging leafNode;
+	class json_path intermediateNode;
+	class json_smart intermediateNode;
+	class jsonassert leafNode;
+	class jsr305 leafNode;
+	class jul_to_slf4j leafNode;
+	class junit_jupiter leafNode;
+	class listenablefuture leafNode;
+	class log4j_api leafNode;
+	class log4j_to_slf4j intermediateNode;
+	class logback_classic intermediateNode;
+	class logback_core leafNode;
+	class mockito_core leafNode;
+	class mockito_junit_jupiter leafNode;
+	class mysql_connector_java leafNode;
+	class slf4j_api leafNode;
+	class snakeyaml leafNode;
+	class spring_aop leafNode;
+	class spring_aspects leafNode;
+	class spring_beans leafNode;
+	class spring_boot intermediateNode;
+	class spring_boot_autoconfigure leafNode;
+	class spring_boot_starter intermediateNode;
+	class spring_boot_starter_aop intermediateNode;
+	class spring_boot_starter_data_jpa intermediateNode;
+	class spring_boot_starter_jdbc intermediateNode;
+	class spring_boot_starter_json intermediateNode;
+	class spring_boot_starter_logging intermediateNode;
+	class spring_boot_starter_test intermediateNode;
+	class spring_boot_starter_tomcat intermediateNode;
+	class spring_boot_starter_web intermediateNode;
+	class spring_boot_test leafNode;
+	class spring_boot_test_autoconfigure leafNode;
+	class spring_context intermediateNode;
+	class spring_core intermediateNode;
+	class spring_data_commons leafNode;
+	class spring_data_jpa intermediateNode;
+	class spring_expression leafNode;
+	class spring_jcl leafNode;
+	class spring_jdbc leafNode;
+	class spring_orm leafNode;
+	class spring_test leafNode;
+	class spring_tx leafNode;
+	class spring_web leafNode;
+	class spring_webmvc leafNode;
+	class tomcat_embed_core leafNode;
+	class tomcat_embed_el leafNode;
+	class tomcat_embed_websocket leafNode;
+	class xmlunit_core leafNode;`;
+            
+            try {
+                const { svg } = await mermaid.render('mySvgId', graphDefinition);
+                element.innerHTML = svg.replace(/[ ]*max-width:[ 0-9\.]*px;/i , '');
+                
+                // Initialize pan & zoom
+                panZoomInstance = svgPanZoom('#mySvgId', {
+                    zoomEnabled: true,
+                    controlIconsEnabled: true,
+                    fit: true,
+                    center: true,
+                    minZoom: 0.1,
+                    maxZoom: 10
+                });
+                
+                // Setup node interactions
+                setupNodeInteractions();
+                
+            } catch (error) {
+                console.error('Error rendering diagram:', error);
+                element.innerHTML = `<p style="color: red; padding: 20px;">Error rendering diagram: ${error.message}</p>`;
+            }
+        };
+        
+        const setupNodeInteractions = function() {
+            const nodes = document.querySelectorAll('#mySvgId .node');
+            
+            nodes.forEach(node => {
+                node.style.cursor = 'pointer';
+            });
+        };
+        
+        // Download functionality
+        document.getElementById('downloadButton').addEventListener('click', function() {
+            downloadSVG();
+        });
+        
+        const downloadSVG = function() {
+            const svg = document.querySelector('#mySvgId');
+            let svgData = new XMLSerializer().serializeToString(svg);
+            
+            // Clean up pan & zoom controls
+            svgData = svgData.replace(/<g\b[^>]*\bclass="svg-pan-zoom-.*?".*?>.*?<\/g>/g, '');
+            svgData = svgData.replace(/<\/g><\/svg>/, '</svg>');
+            
+            const svgBlob = new Blob([svgData], {type: 'image/svg+xml;charset=utf-8'});
+            const svgUrl = URL.createObjectURL(svgBlob);
+            const downloadLink = document.createElement('a');
+            downloadLink.href = svgUrl;
+            downloadLink.download = 'dependency-diagram.svg';
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+            URL.revokeObjectURL(svgUrl);
+        };
+        
+        // Initialize the diagram
+        await drawDiagram();
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case 's':
+                        e.preventDefault();
+                        downloadSVG();
+                        break;
+                    case 'r':
+                        e.preventDefault();
+                        if (panZoomInstance) {
+                            panZoomInstance.reset();
+                        }
+                        break;
+                }
+            }
+        });
+        
+    </script>
+</body>
+</html>

@@ -26,12 +26,13 @@ def test_generate_diagram():
             keep_tree=False,
             output_format="html",
             show_versions=False,
+            theme="minimal",
         )
 
         assert output_file.exists()
         content = output_file.read_text()
         assert "test" in content  # The package name without groupId in the diagram
-        assert "commons-lang3" in content
+        assert "commons_lang3" in content  # Sanitized node name
 
 
 def test_generate_diagram_json():

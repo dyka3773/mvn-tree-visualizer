@@ -19,6 +19,7 @@ def generate_diagram(
     keep_tree: bool,
     output_format: str,
     show_versions: bool,
+    theme: str = "minimal",
 ) -> None:
     """Generate the dependency diagram with comprehensive error handling."""
     timestamp = time.strftime("%H:%M:%S")
@@ -86,7 +87,7 @@ def generate_diagram(
         # Generate output
         try:
             if output_format == "html":
-                create_html_diagram(dependency_tree, output_file, show_versions)
+                create_html_diagram(dependency_tree, output_file, show_versions, theme)
             elif output_format == "json":
                 create_json_output(dependency_tree, output_file, show_versions)
             else:
@@ -179,6 +180,14 @@ def cli() -> NoReturn:
         help="Watch for changes in Maven dependency files and automatically regenerate the diagram.",
     )
 
+    parser.add_argument(
+        "--theme",
+        type=str,
+        default="minimal",
+        choices=["minimal", "dark"],
+        help="Theme for the diagram visualization. Default is 'minimal'.",
+    )
+
     args = parser.parse_args()
     directory: str = args.directory
     output_file: str = args.output
@@ -187,10 +196,11 @@ def cli() -> NoReturn:
     output_format: str = args.format
     show_versions: bool = args.show_versions
     watch_mode: bool = args.watch
+    theme: str = args.theme
 
     # Generate initial diagram
     print("Generating initial diagram...")
-    generate_diagram(directory, output_file, filename, keep_tree, output_format, show_versions)
+    generate_diagram(directory, output_file, filename, keep_tree, output_format, show_versions, theme)
 
     if not watch_mode:
         print("You can open it in your browser to view the dependency tree.")
@@ -200,7 +210,7 @@ def cli() -> NoReturn:
     # Watch mode
     def regenerate_callback():
         """Callback function for file watcher."""
-        generate_diagram(directory, output_file, filename, keep_tree, output_format, show_versions)
+        generate_diagram(directory, output_file, filename, keep_tree, output_format, show_versions, theme)
 
     watcher = FileWatcher(directory, filename, regenerate_callback)
     watcher.start()

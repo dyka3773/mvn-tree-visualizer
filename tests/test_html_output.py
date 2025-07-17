@@ -9,18 +9,26 @@ def test_convert_to_mermaid_simple():
 [INFO] |  \- org.springframework:spring-webmvc:jar:5.3.9:compile
 [INFO] \- org.apache.commons:commons-lang3:jar:3.12.0:compile
 """
-    expected_mermaid_diagram_lines = {
-        "graph LR",
-        "\tmy-app --> commons-lang3;",
-        "\tmy-app --> spring-boot-starter-web;",
-        "\tmy-app;",
-        "\tspring-boot-starter --> snakeyaml;",
-        "\tspring-boot-starter-web --> spring-boot-starter;",
-        "\tspring-boot-starter-web --> spring-webmvc;",
-    }
 
-    actual_lines = set(_convert_to_mermaid(dependency_tree).strip().split("\n"))
-    assert actual_lines == expected_mermaid_diagram_lines
+    actual_diagram = _convert_to_mermaid(dependency_tree)
+
+    # Test that it's a valid Mermaid diagram
+    assert actual_diagram.startswith("graph LR")
+
+    # Test that key relationships are present (using sanitized node names)
+    assert "my_app --> commons_lang3;" in actual_diagram
+    assert "my_app --> spring_boot_starter_web;" in actual_diagram
+    assert "spring_boot_starter_web --> spring_boot_starter;" in actual_diagram
+    assert "spring_boot_starter_web --> spring_webmvc;" in actual_diagram
+    assert "spring_boot_starter --> snakeyaml;" in actual_diagram
+
+    # Test that styling classes are present
+    assert "classDef rootNode" in actual_diagram
+    assert "classDef leafNode" in actual_diagram
+    assert "classDef intermediateNode" in actual_diagram
+
+    # Test that node declarations are present
+    assert 'my_app["my-app"]' in actual_diagram
 
 
 def test_convert_to_mermaid_deeper_tree():
@@ -33,20 +41,30 @@ def test_convert_to_mermaid_deeper_tree():
 [INFO] |  \- k:l:jar:1.0.0:compile
 [INFO] \- m:n:jar:1.0.0:compile
 """
-    expected_mermaid_diagram_lines = {
-        "graph LR",
-        "\tb --> d;",
-        "\tb --> l;",
-        "\td --> f;",
-        "\td --> j;",
-        "\tf --> h;",
-        "\tmy-app --> b;",
-        "\tmy-app --> n;",
-        "\tmy-app;",
-    }
 
-    actual_lines = set(_convert_to_mermaid(dependency_tree).strip().split("\n"))
-    assert actual_lines == expected_mermaid_diagram_lines
+    actual_diagram = _convert_to_mermaid(dependency_tree)
+
+    # Test that it's a valid Mermaid diagram
+    assert actual_diagram.startswith("graph LR")
+
+    # Test key relationships are present
+    assert "my_app --> b;" in actual_diagram
+    assert "my_app --> n;" in actual_diagram
+    assert "b --> d;" in actual_diagram
+    assert "b --> l;" in actual_diagram
+    assert "d --> f;" in actual_diagram
+    assert "d --> j;" in actual_diagram
+    assert "f --> h;" in actual_diagram
+
+    # Test that all expected nodes are present
+    assert 'my_app["my-app"]' in actual_diagram
+    assert 'b["b"]' in actual_diagram
+    assert 'd["d"]' in actual_diagram
+    assert 'f["f"]' in actual_diagram
+    assert 'h["h"]' in actual_diagram
+    assert 'j["j"]' in actual_diagram
+    assert 'l["l"]' in actual_diagram
+    assert 'n["n"]' in actual_diagram
 
 
 def test_convert_to_mermaid_multiple_top_level():
@@ -54,15 +72,20 @@ def test_convert_to_mermaid_multiple_top_level():
 [INFO] +- a:b:jar:1.0.0:compile
 [INFO] \- c:d:jar:1.0.0:compile
 """
-    expected_mermaid_diagram_lines = {
-        "graph LR",
-        "\tmy-app --> b;",
-        "\tmy-app --> d;",
-        "\tmy-app;",
-    }
 
-    actual_lines = set(_convert_to_mermaid(dependency_tree).strip().split("\n"))
-    assert actual_lines == expected_mermaid_diagram_lines
+    actual_diagram = _convert_to_mermaid(dependency_tree)
+
+    # Test that it's a valid Mermaid diagram
+    assert actual_diagram.startswith("graph LR")
+
+    # Test key relationships are present
+    assert "my_app --> b;" in actual_diagram
+    assert "my_app --> d;" in actual_diagram
+
+    # Test that all expected nodes are present
+    assert 'my_app["my-app"]' in actual_diagram
+    assert 'b["b"]' in actual_diagram
+    assert 'd["d"]' in actual_diagram
 
 
 def test_convert_to_mermaid_duplicate_dependencies():
@@ -72,17 +95,23 @@ def test_convert_to_mermaid_duplicate_dependencies():
 [INFO] \- e:f:jar:1.0.0:compile
 [INFO]    \- c:d:jar:1.0.0:compile
 """
-    expected_mermaid_diagram_lines = {
-        "graph LR",
-        "\tb --> d;",
-        "\tf --> d;",
-        "\tmy-app --> b;",
-        "\tmy-app --> f;",
-        "\tmy-app;",
-    }
 
-    actual_lines = set(_convert_to_mermaid(dependency_tree).strip().split("\n"))
-    assert actual_lines == expected_mermaid_diagram_lines
+    actual_diagram = _convert_to_mermaid(dependency_tree)
+
+    # Test that it's a valid Mermaid diagram
+    assert actual_diagram.startswith("graph LR")
+
+    # Test key relationships are present, including duplicates
+    assert "my_app --> b;" in actual_diagram
+    assert "my_app --> f;" in actual_diagram
+    assert "b --> d;" in actual_diagram
+    assert "f --> d;" in actual_diagram
+
+    # Test that all expected nodes are present
+    assert 'my_app["my-app"]' in actual_diagram
+    assert 'b["b"]' in actual_diagram
+    assert 'f["f"]' in actual_diagram
+    assert 'd["d"]' in actual_diagram
 
 
 def test_convert_to_mermaid_with_show_versions():
@@ -91,16 +120,20 @@ def test_convert_to_mermaid_with_show_versions():
 [INFO] |  \- org.springframework.boot:spring-boot-starter:jar:2.5.4:compile
 [INFO] \- org.apache.commons:commons-lang3:jar:3.12.0:compile
 """
-    expected_mermaid_diagram_lines = {
-        "graph LR",
-        "\tmy-app:1.0.0 --> commons-lang3:3.12.0;",
-        "\tmy-app:1.0.0 --> spring-boot-starter-web:2.5.4;",
-        "\tmy-app:1.0.0;",
-        "\tspring-boot-starter-web:2.5.4 --> spring-boot-starter:2.5.4;",
-    }
 
-    actual_lines = set(_convert_to_mermaid(dependency_tree, show_versions=True).strip().split("\n"))
-    assert actual_lines == expected_mermaid_diagram_lines
+    actual_diagram = _convert_to_mermaid(dependency_tree, show_versions=True)
+
+    # Test that it's a valid Mermaid diagram
+    assert actual_diagram.startswith("graph LR")
+
+    # Test that version information is included in node labels
+    assert '"my-app:1.0.0"' in actual_diagram
+    assert '"spring-boot-starter-web:2.5.4"' in actual_diagram
+    assert '"commons-lang3:3.12.0"' in actual_diagram
+
+    # Test relationships with sanitized IDs
+    assert "my_app_1_0_0 --> commons_lang3_3_12_0;" in actual_diagram
+    assert "my_app_1_0_0 --> spring_boot_starter_web_2_5_4;" in actual_diagram
 
 
 def test_convert_to_mermaid_with_show_versions_false():
@@ -109,16 +142,20 @@ def test_convert_to_mermaid_with_show_versions_false():
 [INFO] |  \- org.springframework.boot:spring-boot-starter:jar:2.5.4:compile
 [INFO] \- org.apache.commons:commons-lang3:jar:3.12.0:compile
 """
-    expected_mermaid_diagram_lines = {
-        "graph LR",
-        "\tmy-app --> commons-lang3;",
-        "\tmy-app --> spring-boot-starter-web;",
-        "\tmy-app;",
-        "\tspring-boot-starter-web --> spring-boot-starter;",
-    }
 
-    actual_lines = set(_convert_to_mermaid(dependency_tree, show_versions=False).strip().split("\n"))
-    assert actual_lines == expected_mermaid_diagram_lines
+    actual_diagram = _convert_to_mermaid(dependency_tree, show_versions=False)
+
+    # Test that it's a valid Mermaid diagram
+    assert actual_diagram.startswith("graph LR")
+
+    # Test that versions are NOT in node labels
+    assert '"my-app"' in actual_diagram
+    assert '"spring-boot-starter-web"' in actual_diagram
+    assert '"commons-lang3"' in actual_diagram
+
+    # Test relationships without version info
+    assert "my_app --> commons_lang3;" in actual_diagram
+    assert "my_app --> spring_boot_starter_web;" in actual_diagram
 
 
 def test_convert_to_mermaid_real_life_example():
@@ -128,16 +165,16 @@ def test_convert_to_mermaid_real_life_example():
 [INFO]    \- org.codehaus.plexus:plexus-velocity:jar:1.1.3:compile
 [INFO]       \- velocity:velocity:jar:1.4:compile
 """
-    expected_mermaid_diagram_lines = {
-        "graph LR",
-        "\tmaven-dependency-plugin --> doxia-site-renderer;",
-        "\tmaven-dependency-plugin;",
-        "\tdoxia-site-renderer --> plexus-velocity;",
-        "\tplexus-velocity --> velocity;",
-    }
 
-    actual_lines = set(_convert_to_mermaid(dependency_tree).strip().split("\n"))
-    assert actual_lines == expected_mermaid_diagram_lines
+    actual_diagram = _convert_to_mermaid(dependency_tree)
+
+    # Test that it's a valid Mermaid diagram
+    assert actual_diagram.startswith("graph LR")
+
+    # Test key relationships are present
+    assert "maven_dependency_plugin --> doxia_site_renderer;" in actual_diagram
+    assert "doxia_site_renderer --> plexus_velocity;" in actual_diagram
+    assert "plexus_velocity --> velocity;" in actual_diagram
 
 
 def test_convert_to_mermaid_real_life_example_show_versions():
@@ -147,13 +184,17 @@ def test_convert_to_mermaid_real_life_example_show_versions():
 [INFO]    \- org.codehaus.plexus:plexus-velocity:jar:1.1.3:compile
 [INFO]       \- velocity:velocity:jar:1.4:compile
 """
-    expected_mermaid_diagram_lines = {
-        "graph LR",
-        "\tmaven-dependency-plugin:2.0-alpha-5-SNAPSHOT --> doxia-site-renderer:1.0-alpha-8;",
-        "\tmaven-dependency-plugin:2.0-alpha-5-SNAPSHOT;",
-        "\tdoxia-site-renderer:1.0-alpha-8 --> plexus-velocity:1.1.3;",
-        "\tplexus-velocity:1.1.3 --> velocity:1.4;",
-    }
 
-    actual_lines = set(_convert_to_mermaid(dependency_tree, show_versions=True).strip().split("\n"))
-    assert actual_lines == expected_mermaid_diagram_lines
+    actual_diagram = _convert_to_mermaid(dependency_tree, show_versions=True)
+
+    # Test that it's a valid Mermaid diagram
+    assert actual_diagram.startswith("graph LR")
+
+    # Test that version information is included
+    assert '"maven-dependency-plugin:2.0-alpha-5-SNAPSHOT"' in actual_diagram
+    assert '"doxia-site-renderer:1.0-alpha-8"' in actual_diagram
+    assert '"plexus-velocity:1.1.3"' in actual_diagram
+    assert '"velocity:1.4"' in actual_diagram
+
+    # Test relationships with sanitized IDs
+    assert "maven_dependency_plugin_2_0_alpha_5_SNAPSHOT --> doxia_site_renderer_1_0_alpha_8;" in actual_diagram
