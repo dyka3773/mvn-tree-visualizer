@@ -41,42 +41,61 @@ This document outlines the future direction of the `mvn-tree-visualizer` project
     *   [x] Comprehensive test coverage (22 tests)
     *   [x] Modular code organization improvements
 
-## v1.4.0 - Visual and Theme Enhancements 🎨 (Next Release)
+## v1.4.0 - Visual and Theme Enhancements ✅ (Released)
 
 **Focus:** Making the output more visually appealing and customizable.
 
-**Priority:** High - Addresses user feedback about visual appearance and usability with large dependency trees.
+**Status:** Released July 17, 2025
 
-*   **Visual Themes (High Priority):**
-    *   [ ] `--theme` option with multiple built-in themes (dark, light, colorful)
-    *   [ ] CSS variable system for easy theme customization
-    *   [ ] Better default styling and typography improvements
-    *   [ ] Responsive design for different screen sizes
-    *   [ ] Custom CSS support for advanced users
-*   **Interactive Features (High Priority):**
+*   **Visual Themes (Completed):**
+    *   [x] `--theme` option with multiple built-in themes (default/minimal, dark, light)
+    *   [x] Standardized color scheme across all themes
+    *   [x] Clean minimal design as default theme  
+    *   [x] Enhanced dark theme with proper text visibility
+    *   [x] Consistent graphDiv styling across themes
+*   **Interactive Features (Completed):**
+    *   [x] SVG download functionality
+    *   [x] Pan and zoom controls with keyboard shortcuts
+    *   [x] Full-screen diagram experience
+    *   [x] Improved hover effects for nodes
+*   **Template Enhancements (Completed):**
+    *   [x] Enhanced template system with theme support
+    *   [x] Improved Mermaid.js configuration options
+    *   [x] Standardized color coding for node types (root=blue, intermediate=orange, leaf=green)
+    *   [x] Comprehensive examples for all themes
+
+## v1.5.0 - Interactive Features 🎯 (Next Release)
+
+**Focus:** Enhanced interactivity and user experience.
+
+**Priority:** High - Building on the solid theme foundation with interactive capabilities.
+
+*   **Node Interaction Features (High Priority):**
+    *   [ ] **Descendant Highlighting:** Click nodes to highlight only their downstream dependencies
     *   [ ] Tooltips with detailed dependency information (groupId, version, scope)
-    *   [ ] Hover effects and better visual feedback
     *   [ ] Expandable/collapsible dependency groups for large trees
-    *   [ ] Better visual hierarchy for nested dependencies
-*   **Template Enhancements (Medium Priority):**
-    *   [ ] Enhanced Jinja2 template system for theme support
-    *   [ ] Improved Mermaid.js configuration options
-    *   [ ] Better color coding for different dependency types/scopes
+    *   [ ] Search and filter functionality within diagrams
+*   **Enhanced Controls (Medium Priority):**
+    *   [ ] PNG download option alongside SVG
+    *   [ ] Zoom to fit specific dependency subtrees
+    *   [ ] Better visual hierarchy controls for nested dependencies
+*   **Performance & Layout (Medium Priority):**
+    *   [ ] Better layout options for large dependency trees
+    *   [ ] Performance optimizations for very large projects
 
-## v1.5.0 - Advanced Features 🚀
+## v1.6.0 - Advanced Features 🚀
 
 **Focus:** Performance and advanced functionality for power users.
 
-*   **Performance & Layout:**
-    *   [ ] Better layout options for large dependency trees
-    *   [ ] Performance optimizations for very large projects
-    *   [ ] Memory usage improvements for complex graphs
 *   **Export Enhancements:**
     *   [ ] PNG, PDF export options
     *   [ ] SVG improvements and customization
     *   [ ] High-quality output for presentations
+*   **Advanced Analysis:**
+    *   [ ] Memory usage improvements for complex graphs
+    *   [ ] Dependency statistics and analysis
 
-## v1.6.0+ - Extended Capabilities 🔮
+## v1.7.0+ - Extended Capabilities 🔮
 
 **Focus:** Advanced analysis and integration features.
 

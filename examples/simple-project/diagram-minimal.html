@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maven Dependency Diagram - Minimal Theme</title>
+    <style>
+        #mySvgId {
+            height: 100%;
+            width: 100%;
+        }
+        
+        /* Theme-specific styles */
+        
+        body {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            margin: 0;
+            padding: 20px;
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.6;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+        #graphDiv {
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            padding: 20px;
+            margin-bottom: 20px;
+            height: calc(100vh - 120px);
+            overflow: hidden;
+        }
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .control-label {
+            font-size: 12px;
+            font-weight: normal;
+            color: #000000;
+            text-transform: uppercase;
+        }
+        .toggle-btn {
+            background-color: #000000;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: opacity 0.2s;
+        }
+        .toggle-btn:hover {
+            opacity: 0.8;
+        }
+        
+        
+        /* Dark theme text visibility fixes */
+        
+        
+        /* Improved node styling */
+        .node {
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+        
+        .node:hover {
+            opacity: 0.8;
+        }
+        
+        /* Highlighting styles */
+        .highlighted {
+            opacity: 1 !important;
+            filter: drop-shadow(0 0 8px #3B82F6);
+        }
+        
+        .dimmed {
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <div class="control-group">
+            <button id="downloadButton" class="toggle-btn">Download SVG</button>
+            <!-- Note: PNG download feature to be implemented in future version -->
+        </div>
+    </div>
+    
+    <div id="graphDiv"></div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.5.0/dist/svg-pan-zoom.min.js"></script>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.9.0/dist/mermaid.esm.min.mjs';
+        
+        // Initialize mermaid with theme configuration
+        mermaid.initialize({"startOnLoad": true, "sequence": {"useMaxWidth": false}, "theme": "neutral", "themeVariables": {"primaryColor": "#3B82F6", "primaryTextColor": "#000000", "primaryBorderColor": "#000000", "lineColor": "#000000", "secondaryColor": "#f5f5f5", "tertiaryColor": "#ffffff"}});
+
+        // Global variables
+        let panZoomInstance = null;
+        
+        const drawDiagram = async function () {
+            const element = document.querySelector('#graphDiv');
+            const graphDefinition = `graph LR
+	commons_lang3["commons-lang3"];
+	junit["junit"];
+	simple_app["simple-app"];
+	spring_boot["spring-boot"];
+	spring_boot_autoconfigure["spring-boot-autoconfigure"];
+	spring_boot_starter["spring-boot-starter"];
+	spring_boot_starter_web["spring-boot-starter-web"];
+	spring_context["spring-context"];
+	spring_web["spring-web"];
+	simple_app --> commons_lang3;
+	simple_app --> junit;
+	simple_app --> spring_boot_starter_web;
+	spring_boot --> spring_context;
+	spring_boot_starter --> spring_boot;
+	spring_boot_starter --> spring_boot_autoconfigure;
+	spring_boot_starter_web --> spring_boot_starter;
+	spring_boot_starter_web --> spring_web;
+
+classDef rootNode fill:#3B82F620,stroke:#3B82F6,stroke-width:3px,color:#000;
+classDef leafNode fill:#10B98120,stroke:#10B981,stroke-width:2px,color:#000;
+classDef intermediateNode fill:#F59E0B20,stroke:#F59E0B,stroke-width:2px,color:#000;
+
+	class commons_lang3 leafNode;
+	class junit leafNode;
+	class simple_app rootNode;
+	class spring_boot intermediateNode;
+	class spring_boot_autoconfigure leafNode;
+	class spring_boot_starter intermediateNode;
+	class spring_boot_starter_web intermediateNode;
+	class spring_context leafNode;
+	class spring_web leafNode;`;
+            
+            try {
+                const { svg } = await mermaid.render('mySvgId', graphDefinition);
+                element.innerHTML = svg.replace(/[ ]*max-width:[ 0-9\.]*px;/i , '');
+                
+                // Initialize pan & zoom
+                panZoomInstance = svgPanZoom('#mySvgId', {
+                    zoomEnabled: true,
+                    controlIconsEnabled: true,
+                    fit: true,
+                    center: true,
+                    minZoom: 0.1,
+                    maxZoom: 10
+                });
+                
+                // Setup node interactions
+                setupNodeInteractions();
+                
+            } catch (error) {
+                console.error('Error rendering diagram:', error);
+                element.innerHTML = `<p style="color: red; padding: 20px;">Error rendering diagram: ${error.message}</p>`;
+            }
+        };
+        
+        const setupNodeInteractions = function() {
+            const nodes = document.querySelectorAll('#mySvgId .node');
+            
+            nodes.forEach(node => {
+                node.style.cursor = 'pointer';
+            });
+        };
+        
+        // Download functionality
+        document.getElementById('downloadButton').addEventListener('click', function() {
+            downloadSVG();
+        });
+        
+        const downloadSVG = function() {
+            const svg = document.querySelector('#mySvgId');
+            let svgData = new XMLSerializer().serializeToString(svg);
+            
+            // Clean up pan & zoom controls
+            svgData = svgData.replace(/<g\b[^>]*\bclass="svg-pan-zoom-.*?".*?>.*?<\/g>/g, '');
+            svgData = svgData.replace(/<\/g><\/svg>/, '</svg>');
+            
+            const svgBlob = new Blob([svgData], {type: 'image/svg+xml;charset=utf-8'});
+            const svgUrl = URL.createObjectURL(svgBlob);
+            const downloadLink = document.createElement('a');
+            downloadLink.href = svgUrl;
+            downloadLink.download = 'dependency-diagram.svg';
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+            URL.revokeObjectURL(svgUrl);
+        };
+        
+        // Initialize the diagram
+        await drawDiagram();
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case 's':
+                        e.preventDefault();
+                        downloadSVG();
+                        break;
+                    case 'r':
+                        e.preventDefault();
+                        if (panZoomInstance) {
+                            panZoomInstance.reset();
+                        }
+                        break;
+                }
+            }
+        });
+        
+    </script>
+</body>
+</html>
