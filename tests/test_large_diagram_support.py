@@ -1,7 +1,7 @@
 """Tests for large diagram support and enhanced navigation features."""
 
 from mvn_tree_visualizer.enhanced_template import get_html_template
-from mvn_tree_visualizer.themes import THEMES, get_theme
+from mvn_tree_visualizer.themes import MAX_EDGES_LARGE_PROJECTS, MAX_TEXT_SIZE_LARGE_PROJECTS, THEMES, get_theme
 
 
 class TestLargeDiagramSupport:
@@ -17,8 +17,8 @@ class TestLargeDiagramSupport:
             assert "maxEdges" in theme.mermaid_config
 
             # Check that the values are set to handle large projects
-            assert theme.mermaid_config["maxTextSize"] == 900000000
-            assert theme.mermaid_config["maxEdges"] == 20000
+            assert theme.mermaid_config["maxTextSize"] == MAX_TEXT_SIZE_LARGE_PROJECTS
+            assert theme.mermaid_config["maxEdges"] == MAX_EDGES_LARGE_PROJECTS
 
     def test_minimal_theme_large_config(self):
         """Test that minimal theme has proper large diagram configuration."""
@@ -31,8 +31,8 @@ class TestLargeDiagramSupport:
 
         # Test specific values for minimal theme
         assert theme.mermaid_config["theme"] == "neutral"
-        assert theme.mermaid_config["maxTextSize"] == 900000000
-        assert theme.mermaid_config["maxEdges"] == 20000
+        assert theme.mermaid_config["maxTextSize"] == MAX_TEXT_SIZE_LARGE_PROJECTS
+        assert theme.mermaid_config["maxEdges"] == MAX_EDGES_LARGE_PROJECTS
 
     def test_dark_theme_large_config(self):
         """Test that dark theme has proper large diagram configuration."""
@@ -45,8 +45,8 @@ class TestLargeDiagramSupport:
 
         # Test specific values for dark theme
         assert theme.mermaid_config["theme"] == "forest"
-        assert theme.mermaid_config["maxTextSize"] == 900000000
-        assert theme.mermaid_config["maxEdges"] == 20000
+        assert theme.mermaid_config["maxTextSize"] == MAX_TEXT_SIZE_LARGE_PROJECTS
+        assert theme.mermaid_config["maxEdges"] == MAX_EDGES_LARGE_PROJECTS
 
 
 class TestEnhancedNavigation:
@@ -57,7 +57,7 @@ class TestEnhancedNavigation:
         theme = get_theme("minimal")
         html = get_html_template(theme)
 
-        # Check for navigation control buttons (search button and fitButton removed)
+        # Check for navigation control buttons
         assert 'id="zoomInButton"' in html
         assert 'id="zoomOutButton"' in html
         assert 'id="resetZoomButton"' in html
@@ -87,11 +87,10 @@ class TestEnhancedNavigation:
         # Check for keyboard shortcut handling
         assert "Ctrl+R" in html  # Reset shortcut
 
-        # Check for specific shortcuts (search shortcut removed)
+        # Check for specific shortcuts
         shortcuts_to_check = [
             "case 's':",  # Download
             "case 'r':",  # Reset
-            # "case 'f':" - Removed for search functionality
             "case '=':",  # Zoom in
             "case '+':",  # Zoom in alternative
             "case '-':",  # Zoom out
@@ -105,7 +104,7 @@ class TestEnhancedNavigation:
         theme = get_theme("minimal")
         html = get_html_template(theme)
 
-        # Check for error prevention (updated to match simplified implementation)
+        # Check for error prevention
         assert "catch (error)" in html  # Generic error handling
         assert "beforeZoom: function(oldScale, newScale)" in html
         assert "return newScale >= MIN_ZOOM && newScale <= MAX_ZOOM;" in html
@@ -119,7 +118,6 @@ class TestEnhancedNavigation:
         assert 'class="control-group"' in html
         assert 'class="control-label"' in html
         assert "Navigation:" in html
-        assert "Large Diagrams:" not in html  # This section was removed
 
     def test_both_themes_have_enhanced_features(self):
         """Test that both minimal and dark themes have the enhanced features."""
@@ -127,9 +125,8 @@ class TestEnhancedNavigation:
             theme = get_theme(theme_name)
             html = get_html_template(theme)
 
-            # Essential enhanced navigation features (search removed)
+            # Essential enhanced navigation features
             assert "zoomInButton" in html
-            assert "showNodeSearchDialog" not in html  # Should be removed
             assert "minZoom: MIN_ZOOM" in html
             assert "maxZoom: MAX_ZOOM" in html
 
