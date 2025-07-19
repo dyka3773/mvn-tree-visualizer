@@ -98,6 +98,8 @@ THEMES = {
                 "secondaryColor": "#f5f5f5",
                 "tertiaryColor": "#ffffff",
             },
+            "maxTextSize": 900000000,  # Increase max text size for large dependency trees
+            "maxEdges": 20000,  # Increase max edges for large projects
         },
     ),
     "dark": Theme(
@@ -174,6 +176,8 @@ THEMES = {
                 "nodeTextColor": "#ffffff",
                 "textColor": "#ffffff",
             },
+            "maxTextSize": 900000000,  # Increase max text size for large dependency trees
+            "maxEdges": 20000,  # Increase max edges for large projects
         },
     ),
 }
