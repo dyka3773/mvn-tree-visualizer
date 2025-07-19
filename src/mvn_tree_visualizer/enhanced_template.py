@@ -127,14 +127,14 @@ def get_html_template(theme: Theme) -> str:
                     controlIconsEnabled: true,
                     fit: true,
                     center: true,
-                    minZoom: 0.01,  // Allow zooming out further for large diagrams
-                    maxZoom: 50,    // Allow much higher zoom for detailed inspection
-                    zoomScaleSensitivity: 0.2,  // Smoother zoom increments
+                    minZoom: MIN_ZOOM,  // Allow zooming out further for large diagrams
+                    maxZoom: MAX_ZOOM,  // Allow much higher zoom for detailed inspection
+                    zoomScaleSensitivity: ZOOM_SCALE_SENSITIVITY,  // Smoother zoom increments
                     mouseWheelZoomEnabled: true,
                     preventMouseEventsDefault: true,
                     beforeZoom: function(oldScale, newScale) {{
                         // Prevent zooming beyond reasonable limits
-                        return newScale >= 0.01 && newScale <= 50;
+                        return newScale >= MIN_ZOOM && newScale <= MAX_ZOOM;
                     }}
                 }});
                 
