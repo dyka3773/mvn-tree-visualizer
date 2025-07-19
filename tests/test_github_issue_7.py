@@ -1,7 +1,7 @@
 """Integration tests for the GitHub issue #7 - Maximum Text Size for diagram (mermaid error)."""
 
 from mvn_tree_visualizer.enhanced_template import _dict_to_js_object, get_html_template
-from mvn_tree_visualizer.themes import get_theme
+from mvn_tree_visualizer.themes import MAX_EDGES_LARGE_PROJECTS, MAX_TEXT_SIZE_LARGE_PROJECTS, get_theme
 
 
 class TestGitHubIssue7Fix:
@@ -14,13 +14,13 @@ class TestGitHubIssue7Fix:
             theme = get_theme(theme_name)
 
             # Verify the exact values mentioned in the issue screenshot
-            assert theme.mermaid_config["maxTextSize"] == 900000000
-            assert theme.mermaid_config["maxEdges"] == 20000
+            assert theme.mermaid_config["maxTextSize"] == MAX_TEXT_SIZE_LARGE_PROJECTS
+            assert theme.mermaid_config["maxEdges"] == MAX_EDGES_LARGE_PROJECTS
 
             # Check that the configuration is properly converted to JavaScript
             mermaid_config_js = _dict_to_js_object(theme.mermaid_config)
-            assert '"maxTextSize": 900000000' in mermaid_config_js
-            assert '"maxEdges": 20000' in mermaid_config_js
+            assert f'"maxTextSize": {MAX_TEXT_SIZE_LARGE_PROJECTS}' in mermaid_config_js
+            assert f'"maxEdges": {MAX_EDGES_LARGE_PROJECTS}' in mermaid_config_js
 
     def test_zoom_improvements_for_large_diagrams(self):
         """Test that zoom improvements address the 'can't zoom in enough' issue mentioned."""
@@ -58,10 +58,10 @@ class TestGitHubIssue7Fix:
 
             # Test that maxTextSize is large enough to prevent text overflow errors
             # The original error occurred with default limits
-            assert config["maxTextSize"] >= 900000000
+            assert config["maxTextSize"] >= MAX_TEXT_SIZE_LARGE_PROJECTS
 
             # Test that maxEdges is large enough for complex dependency trees
-            assert config["maxEdges"] >= 20000
+            assert config["maxEdges"] >= MAX_EDGES_LARGE_PROJECTS
 
             # Verify these are integers (not strings) to prevent type errors
             assert isinstance(config["maxTextSize"], int)
@@ -89,8 +89,8 @@ class TestGitHubIssue7Fix:
         js_config = _dict_to_js_object(theme.mermaid_config)
 
         # Verify the JavaScript object is valid and contains our enhancements
-        assert '"maxTextSize": 900000000' in js_config
-        assert '"maxEdges": 20000' in js_config
+        assert f'"maxTextSize": {MAX_TEXT_SIZE_LARGE_PROJECTS}' in js_config
+        assert f'"maxEdges": {MAX_EDGES_LARGE_PROJECTS}' in js_config
         assert '"theme": "neutral"' in js_config
 
         # Verify proper JavaScript object structure
@@ -107,8 +107,8 @@ class TestGitHubIssue7Fix:
 
         # Verify all the enhancements work together
         enhancements = {
-            "maxTextSize": 900000000,  # Prevents Mermaid text errors
-            "maxEdges": 20000,  # Handles large dependency count
+            "maxTextSize": MAX_TEXT_SIZE_LARGE_PROJECTS,  # Prevents Mermaid text errors
+            "maxEdges": MAX_EDGES_LARGE_PROJECTS,  # Handles large dependency count
         }
 
         text_enhancements = [
@@ -128,8 +128,8 @@ class TestGitHubIssue7Fix:
     def test_issue_specific_values_exactly_match(self):
         """Test that our fix exactly matches the values shown in the issue screenshot."""
         # The screenshot showed these exact values being manually set
-        expected_max_text_size = 900000000  # Exactly as shown in screenshot
-        expected_max_edges = 20000  # As mentioned for large projects
+        expected_max_text_size = MAX_TEXT_SIZE_LARGE_PROJECTS  # Exactly as shown in screenshot
+        expected_max_edges = MAX_EDGES_LARGE_PROJECTS  # As mentioned for large projects
 
         for theme_name in ["minimal", "dark"]:
             theme = get_theme(theme_name)

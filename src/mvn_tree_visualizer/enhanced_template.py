@@ -2,7 +2,7 @@
 
 from typing import Any, Dict
 
-from .themes import STANDARD_COLORS, Theme
+from .themes import MAX_ZOOM, MIN_ZOOM, STANDARD_COLORS, ZOOM_SCALE_SENSITIVITY, Theme
 
 
 def get_html_template(theme: Theme) -> str:
@@ -113,9 +113,9 @@ def get_html_template(theme: Theme) -> str:
         // Global variables
         let panZoomInstance = null;
         
-        const MIN_ZOOM = 0.01;
-        const MAX_ZOOM = 50;
-        const ZOOM_SCALE_SENSITIVITY = 0.2;
+        const MIN_ZOOM = {MIN_ZOOM};
+        const MAX_ZOOM = {MAX_ZOOM};
+        const ZOOM_SCALE_SENSITIVITY = {ZOOM_SCALE_SENSITIVITY};
         
         const drawDiagram = async function () {{
             const element = document.querySelector('#graphDiv');
