@@ -2,7 +2,7 @@
 
 from typing import Any, Dict
 
-from .themes import STANDARD_COLORS, Theme
+from .themes import MAX_ZOOM, MIN_ZOOM, STANDARD_COLORS, ZOOM_SCALE_SENSITIVITY, Theme
 
 
 def get_html_template(theme: Theme) -> str:
@@ -93,6 +93,12 @@ def get_html_template(theme: Theme) -> str:
             <button id="downloadButton" class="toggle-btn">Download SVG</button>
             <!-- Note: PNG download feature to be implemented in future version -->
         </div>
+        <div class="control-group">
+            <span class="control-label">Navigation:</span>
+            <button id="zoomInButton" class="toggle-btn">Zoom In (+)</button>
+            <button id="zoomOutButton" class="toggle-btn">Zoom Out (-)</button>
+            <button id="resetZoomButton" class="toggle-btn">Reset (Ctrl+R)</button>
+        </div>
     </div>
     
     <div id="graphDiv"></div>
@@ -107,6 +113,10 @@ def get_html_template(theme: Theme) -> str:
         // Global variables
         let panZoomInstance = null;
         
+        const MIN_ZOOM = {MIN_ZOOM};
+        const MAX_ZOOM = {MAX_ZOOM};
+        const ZOOM_SCALE_SENSITIVITY = {ZOOM_SCALE_SENSITIVITY};
+        
         const drawDiagram = async function () {{
             const element = document.querySelector('#graphDiv');
             const graphDefinition = `{{{{diagram_definition}}}}`;
@@ -115,14 +125,21 @@ def get_html_template(theme: Theme) -> str:
                 const {{ svg }} = await mermaid.render('mySvgId', graphDefinition);
                 element.innerHTML = svg.replace(/[ ]*max-width:[ 0-9\\.]*px;/i , '');
                 
-                // Initialize pan & zoom
+                // Initialize pan & zoom with improved settings for large diagrams
                 panZoomInstance = svgPanZoom('#mySvgId', {{
                     zoomEnabled: true,
                     controlIconsEnabled: true,
                     fit: true,
                     center: true,
-                    minZoom: 0.1,
-                    maxZoom: 10
+                    minZoom: MIN_ZOOM,  // Allow zooming out further for large diagrams
+                    maxZoom: MAX_ZOOM,  // Allow much higher zoom for detailed inspection
+                    zoomScaleSensitivity: ZOOM_SCALE_SENSITIVITY,  // Smoother zoom increments
+                    mouseWheelZoomEnabled: true,
+                    preventMouseEventsDefault: true,
+                    beforeZoom: function(oldScale, newScale) {{
+                        // Prevent zooming beyond reasonable limits
+                        return newScale >= MIN_ZOOM && newScale <= MAX_ZOOM;
+                    }}
                 }});
                 
                 // Setup node interactions
@@ -142,9 +159,27 @@ def get_html_template(theme: Theme) -> str:
             }});
         }};
         
-        // Download functionality
+        // Button event listeners
         document.getElementById('downloadButton').addEventListener('click', function() {{
             downloadSVG();
+        }});
+        
+        document.getElementById('zoomInButton').addEventListener('click', function() {{
+            if (panZoomInstance) {{
+                panZoomInstance.zoomIn();
+            }}
+        }});
+        
+        document.getElementById('zoomOutButton').addEventListener('click', function() {{
+            if (panZoomInstance) {{
+                panZoomInstance.zoomOut();
+            }}
+        }});
+        
+        document.getElementById('resetZoomButton').addEventListener('click', function() {{
+            if (panZoomInstance) {{
+                panZoomInstance.reset();
+            }}
         }});
         
         const downloadSVG = function() {{
@@ -181,6 +216,34 @@ def get_html_template(theme: Theme) -> str:
                         e.preventDefault();
                         if (panZoomInstance) {{
                             panZoomInstance.reset();
+                        }}
+                        break;
+                    case '=':
+                    case '+':
+                        e.preventDefault();
+                        if (panZoomInstance) {{
+                            panZoomInstance.zoomIn();
+                        }}
+                        break;
+                    case '-':
+                        e.preventDefault();
+                        if (panZoomInstance) {{
+                            panZoomInstance.zoomOut();
+                        }}
+                        break;
+                }}
+            }} else {{
+                // Non-Ctrl shortcuts
+                switch(e.key) {{
+                    case '+':
+                    case '=':
+                        if (panZoomInstance) {{
+                            panZoomInstance.zoomIn();
+                        }}
+                        break;
+                    case '-':
+                        if (panZoomInstance) {{
+                            panZoomInstance.zoomOut();
                         }}
                         break;
                 }}

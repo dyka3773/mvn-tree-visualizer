@@ -37,12 +37,10 @@ pip install mvn-tree-visualizer
   - **JSON:** Creates a structured JSON representation of the dependency tree, perfect for scripting or integration with other tools.
 - **🎨 Theme System:** Choose from 2 built-in themes (minimal, dark) for clean and consistent diagram styling.
 - **🔄 Watch Mode:** Automatically regenerates diagrams when Maven dependency files change using the `--watch` flag.
-- **📋 Version Display:** Show or hide dependency versions in both HTML and JSON outputs using the `--show-versions` flag.
-- **⚡ Easy to Use:** A simple command-line interface that gets the job done with minimal configuration.
-- **📂 File Merging:** Automatically finds and merges multiple `maven_dependency_file` files from different subdirectories.
-- **🎨 Customizable Output:** Specify the output file name and location.
-- **💾 Enhanced Downloads:** Download diagrams as SVG or high-resolution PNG directly from the HTML page.
-- **🖱️ Interactive Features:** Hover tooltips, click-to-highlight connections, pan/zoom controls, and keyboard shortcuts.
+- **📋 Version Display:** Toggle dependency versions in outputs with `--show-versions`
+- **💾 Enhanced Downloads:** SVG and PNG export directly from browser
+- **📂 Smart File Handling:** Automatically finds and merges multiple `maven_dependency_file` files from different subdirectories.
+- **🎯 Color Coding:** Visual distinction between root, intermediate, and leaf dependencies
 
 ## How to Use
 

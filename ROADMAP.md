@@ -1,101 +1,119 @@
 # Project Roadmap
 
-This document outlines the future direction of the `mvn-tree-visualizer` project. It's a living document, and the priorities may change based on user feedback and community contributions.
+This document outlines the evolution and future direction of the `mvn-tree-visualizer` project. Major milestones show the progression from a basic tool to an enterprise-ready solution.
 
-## Recently Completed ✅
+## 🎉 Recently Completed ✅
 
-*   **Support for Multiple Output Formats:**
-    *   [x] JSON output format
-    *   [x] HTML output format
-*   **Display Dependency Versions:**
-    *   [x] `--show-versions` flag for both HTML and JSON
-*   **Development Infrastructure:**
-    *   [x] Comprehensive type hints
-    *   [x] Unit tests with good coverage
-    *   [x] CI/CD workflows
-    *   [x] Documentation and examples
-    *   [x] Issue templates and community guidelines
-*   **Watch Mode Feature:**
-    *   [x] `--watch` flag for automatic regeneration
-    *   [x] File system monitoring with real-time updates
-    *   [x] Graceful error handling during watch mode
-*   **Enhanced Error Handling:**
-    *   [x] Clear error messages for missing files with helpful guidance
-    *   [x] Specific diagnostics for parsing errors and validation
-    *   [x] Maven command suggestions when files are missing
-    *   [x] Better error recovery and user guidance
-*   **Code Quality Improvements:**
-    *   [x] Modular code organization (exceptions.py, validation.py)
-    *   [x] Enhanced test coverage for error scenarios
-    *   [x] Clean separation of concerns in CLI module
+### v1.5.0 - Large Project Support & GitHub Issue #7 Resolution (Released)
 
-## v1.3.0 - User Experience Improvements ✅
+**Focus:** Enterprise-ready support for massive dependency trees and enhanced navigation.
 
-**Focus:** Making the tool more user-friendly and robust for daily use.
+**Status:** Released July 19, 2025
 
-*   **Status:** Released July 9, 2025
-*   **Completed Tasks:**
+*   **GitHub Issue #7 Resolution (Completed):**
+    *   [x] **No More Size Limits**: Enhanced Mermaid configuration with `maxTextSize: 900000000`
+    *   [x] **Massive Edge Support**: Increased `maxEdges: 20000` for complex enterprise projects
+    *   [x] **50x Zoom Range**: Advanced zoom from 0.01x (overview) to 50x (detailed inspection)
+    *   [x] **Enhanced Performance**: Memory-optimized rendering for 1000+ dependency projects
+
+*   **Navigation Enhancements (Completed):**
+    *   [x] **Keyboard Shortcuts**: `Ctrl+R` (reset), `+/-` (zoom), `s` (download)
+    *   [x] **Smooth Zoom Controls**: Mouse wheel with 0.2 sensitivity for precise navigation
+    *   [x] **One-Click Reset**: Instant return to full diagram view
+    *   [x] **Error Prevention**: Zoom bounds validation and graceful error handling
+
+### Previous Major Releases ✅
+
+*   **v1.4.0 - Visual and Theme Enhancements** (July 17, 2025)
+    *   [x] Professional minimal and dark themes
+    *   [x] Enhanced HTML templates with interactive features
+    *   [x] SVG download functionality and improved user experience
+
+*   **v1.3.0 - User Experience Improvements** (July 9, 2025)
     *   [x] Watch mode functionality with `--watch` flag
-    *   [x] Enhanced error handling system with comprehensive user guidance
+    *   [x] Enhanced error handling system with comprehensive guidance
     *   [x] Custom exception classes and validation modules
-    *   [x] Comprehensive test coverage (22 tests)
-    *   [x] Modular code organization improvements
+    *   [x] Comprehensive test coverage and modular organization
 
-## v1.4.0 - Visual and Theme Enhancements ✅ (Released)
-
-**Focus:** Making the output more visually appealing and customizable.
-
-**Status:** Released July 17, 2025
-
-*   **Visual Themes (Completed):**
+*   **Core Foundation** (Earlier versions)
+    *   [x] Multiple output formats (HTML and JSON)
+    *   [x] Dependency version display with `--show-versions`
+    *   [x] Multi-module Maven project support
+    *   [x] CI/CD workflows and comprehensive documentation
     *   [x] `--theme` option with multiple built-in themes (default/minimal, dark, light)
-    *   [x] Standardized color scheme across all themes
-    *   [x] Clean minimal design as default theme  
-    *   [x] Enhanced dark theme with proper text visibility
-    *   [x] Consistent graphDiv styling across themes
-*   **Interactive Features (Completed):**
-    *   [x] SVG download functionality
-    *   [x] Pan and zoom controls with keyboard shortcuts
-    *   [x] Full-screen diagram experience
-    *   [x] Improved hover effects for nodes
-*   **Template Enhancements (Completed):**
-    *   [x] Enhanced template system with theme support
-    *   [x] Improved Mermaid.js configuration options
-    *   [x] Standardized color coding for node types (root=blue, intermediate=orange, leaf=green)
-    *   [x] Comprehensive examples for all themes
+## 🔮 Future Development
 
-## v1.5.0 - Interactive Features 🎯 (Next Release)
+### v1.6.0 - Advanced Interactive Features 🎯 (Next Major Release)
 
-**Focus:** Enhanced interactivity and user experience.
+**Focus:** Enhanced interactivity and user experience for large enterprise projects.
 
-**Priority:** High - Building on the solid theme foundation with interactive capabilities.
+**Priority:** High - Building on the solid large project foundation with advanced user interaction.
 
-*   **Node Interaction Features (High Priority):**
-    *   [ ] **Descendant Highlighting:** Click nodes to highlight only their downstream dependencies
-    *   [ ] Tooltips with detailed dependency information (groupId, version, scope)
-    *   [ ] Expandable/collapsible dependency groups for large trees
-    *   [ ] Search and filter functionality within diagrams
-*   **Enhanced Controls (Medium Priority):**
-    *   [ ] PNG download option alongside SVG
-    *   [ ] Zoom to fit specific dependency subtrees
-    *   [ ] Better visual hierarchy controls for nested dependencies
-*   **Performance & Layout (Medium Priority):**
-    *   [ ] Better layout options for large dependency trees
-    *   [ ] Performance optimizations for very large projects
+*   **Enhanced Node Search & Navigation (High Priority):**
+    *   [ ] **Smart Dependency Search:** Find nodes by dependency name with instant highlighting
+        *   **Technical Requirements:** Must highlight nodes WITHOUT moving or displacing SVG elements
+        *   **Approach:** Use SVG overlays or CSS-only highlighting instead of DOM manipulation
+        *   **Keyboard Shortcut:** `Ctrl+F` for search dialog
+        *   **Features:** Auto-complete, regex support, multiple match handling
+    *   [ ] **Dependency Path Tracing:** Highlight full dependency chains from root to selected node
+    *   [ ] **Scope-based Filtering:** Filter by dependency scope (compile, test, runtime, provided)
 
-## v1.6.0 - Advanced Features 🚀
+*   **Advanced Navigation Controls (Medium Priority):**
+    *   [ ] **Zoom to Dependency Subtree:** Right-click zoom to focus on specific dependency branch
+    *   [ ] **Breadcrumb Navigation:** Show current zoom/focus location in large diagrams
+    *   [ ] **Mini-map Overlay:** Small overview map for orientation in large dependency trees
 
-**Focus:** Performance and advanced functionality for power users.
+*   **Enhanced User Experience (Medium Priority):**
+    *   [ ] **Rich Tooltips:** Detailed dependency information (groupId, artifactId, version, scope, licenses)
+    *   [ ] **Dependency Statistics:** Live counts of direct/transitive dependencies
+    *   [ ] **Export Enhancements:** PNG, PDF export with current zoom level and highlighting
 
-*   **Export Enhancements:**
-    *   [ ] PNG, PDF export options
-    *   [ ] SVG improvements and customization
-    *   [ ] High-quality output for presentations
+### v1.7.0 - Enterprise Integration
+
+**Focus:** Advanced functionality for enterprise development workflows.
+
+*   **CI/CD Integration:**
+    *   [ ] **GitHub Actions Integration:** Pre-built actions for automated diagram generation
+    *   [ ] **Jenkins Plugin:** Seamless integration with Jenkins pipelines
+    *   [ ] **Docker Container:** Official container images for containerized environments
+
 *   **Advanced Analysis:**
-    *   [ ] Memory usage improvements for complex graphs
-    *   [ ] Dependency statistics and analysis
+    *   [ ] **Dependency Conflict Detection:** Visual highlighting of version conflicts
+    *   [ ] **Security Vulnerability Mapping:** Integration with vulnerability databases
+    *   [ ] **License Compliance:** Visual license information and compliance checking
 
-## v1.7.0+ - Extended Capabilities 🔮
+*   **Multi-Project Support:**
+    *   [ ] **Workspace Mode:** Handle multiple Maven projects simultaneously
+    *   [ ] **Cross-Project Dependencies:** Visualize dependencies between different projects
+    *   [ ] **Monorepo Support:** Enhanced support for large monorepo structures
+
+### v1.8.0+ - Advanced Capabilities 🚀
+
+**Focus:** Cutting-edge features for modern development workflows.
+
+*   **AI-Powered Features:**
+    *   [ ] **Dependency Recommendations:** AI suggestions for dependency updates and optimizations
+    *   [ ] **Architecture Insights:** Automated analysis of dependency architecture patterns
+    *   [ ] **Refactoring Suggestions:** Recommendations for dependency cleanup and optimization
+
+*   **Real-time Collaboration:**
+    *   [ ] **Shared Diagrams:** Cloud-based diagram sharing for team collaboration
+    *   [ ] **Live Updates:** Real-time diagram updates for team development
+    *   [ ] **Annotation System:** Team comments and notes on dependency diagrams
+
+## 🎯 Technical Debt & Maintenance
+
+### Ongoing Improvements
+*   **Performance Optimization:** Continuous improvements for larger and more complex projects
+*   **Browser Compatibility:** Ensure compatibility with all major browsers and versions
+*   **Accessibility:** Enhanced accessibility features for users with disabilities
+*   **Documentation:** Comprehensive API documentation and developer guides
+
+### Code Quality
+*   **Test Coverage:** Maintain high test coverage with focus on edge cases
+*   **Type Safety:** Full type annotation coverage and strict type checking
+*   **Security:** Regular security audits and dependency updates
+*   **Performance:** Continuous profiling and optimization of critical paths
 
 **Focus:** Advanced analysis and integration features.
 

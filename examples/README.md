@@ -1,20 +1,20 @@
 # Examples
 
-This directory contains example Maven dependency files and their corresponding outputs to demonstrate the capabilities of mvn-tree-visualizer.
+This directory contains example Maven dependency files and their corresponding outputs to demonstrate the capabilities of mvn-tree-visualizer, including the enhanced features for large dependency trees.
 
 ## Simple Project Example
 
-The `simple-project/` directory contains a basic Maven project with common dependencies:
-- Spring Boot Starter Web
-- Apache Commons Lang3
-- JUnit (test scope)
+The `simple-project/` directory contains a modern Spring Boot 3.2 web application with:
+- **Spring Boot 3.2.0** - Latest stable version with Spring 6.1
+- **Apache Commons Lang3** - Utility library
+- **JUnit Jupiter 5.10.1** - Modern testing framework
 
-**Available Examples:**
-- `diagram-dark.html` - Dark theme optimized for low-light environments
-- `diagram-minimal.html` - Light theme with minimal styling
-- `dependencies.json` - JSON output for programmatic use
+### 📁 Available Examples:
+- `diagram-minimal.html` - Clean light theme optimized for readability
+- `diagram-dark.html` - Dark theme perfect for low-light environments  
+- `dependencies.json` - JSON output for programmatic integration
 
-**To generate outputs:**
+### 🛠️ Generation Commands:
 ```bash
 cd examples/simple-project
 
@@ -22,43 +22,116 @@ cd examples/simple-project
 mvn_tree_visualizer --filename maven_dependency_file --output diagram-minimal.html
 mvn_tree_visualizer --filename maven_dependency_file --output diagram-dark.html --theme dark
 
-# Generate JSON output
+# Generate JSON output for automation
 mvn_tree_visualizer --filename maven_dependency_file --output dependencies.json --format json
 ```
 
 ## Complex Project Example
 
-The `complex-project/` directory contains a more realistic microservice project with:
-- Spring Boot Web + Data JPA
-- MySQL Connector
-- Google Guava
-- Comprehensive test dependencies
+The `complex-project/` directory demonstrates a **real-world enterprise microservice** with extensive dependencies:
 
-**Available Examples:**
-- `diagram-minimal.html` - Clean minimal theme
-- `diagram-dark.html` - Dark theme optimized for low-light environments
+- **Spring Boot 3.2.0** with Web, Data JPA, and Actuator
+- **Database**: MySQL Connector with Hibernate ORM
+- **Monitoring**: Prometheus metrics and Micrometer
+- **Utilities**: Google Guava, Apache Commons
+- **Testing**: Comprehensive test stack with Testcontainers
+- **🎯 Over 100+ dependencies** - Perfect for testing large diagram capabilities!
 
-**To generate outputs:**
+### 📁 Available Examples:
+- `diagram-minimal.html` - Clean visualization with version numbers
+- `diagram-dark.html` - Dark theme with complete dependency details
+
+### 🛠️ Generation Commands:
 ```bash
 cd examples/complex-project
 
-# Generate with different themes and versions
+# Generate with version numbers (recommended for enterprise projects)
 mvn_tree_visualizer --filename maven_dependency_file --output diagram-minimal.html --show-versions
 mvn_tree_visualizer --filename maven_dependency_file --output diagram-dark.html --theme dark --show-versions
 ```
 
-## Theme Comparison
+## 🎨 Theme Comparison
 
-You can easily compare all themes by opening the different diagram files:
+### Minimal Theme Features:
+- **Clean white background** for presentations and documentation
+- **Black text and borders** for high contrast and printing
+- **Monospace font** (Monaco/Menlo) for technical readability
+- **Optimized spacing** for large dependency trees
 
-### Color Scheme (Consistent Across All Themes)
-- **Root nodes**: Blue - Your main project dependencies
-- **Intermediate nodes**: Orange - Transitive dependencies with children
-- **Leaf nodes**: Green - Final dependencies with no children
+### Dark Theme Features:
+- **Forest green background** with enhanced visibility fixes
+- **White text forced rendering** solves Mermaid.js dark theme issues
+- **Perfect for long coding sessions** and low-light environments
+- **Enhanced contrast** for better node distinction
 
-### Theme Characteristics
-- **Default**: Clean minimal design with monospace fonts and simple borders
-- **Dark**: Dark backgrounds with bright text, optimized for low-light environments  
+## 🔍 Enhanced Navigation Features
+
+Both examples demonstrate the powerful navigation capabilities:
+
+### Zoom Controls:
+- **Zoom In/Out Buttons**: `+` and `-` for precise control
+- **Reset Button**: `Ctrl+R` to return to full view
+- **Mouse Wheel**: Smooth zooming with 0.2 sensitivity
+- **Extreme Zoom Range**: 0.01x (full overview) to 50x (detailed inspection)
+
+### Keyboard Shortcuts:
+- `Ctrl+R` - Reset zoom and center
+- `+` / `=` - Zoom in
+- `-` - Zoom out  
+- `s` - Download SVG
+
+### Large Diagram Optimizations:
+- **No text size limits** - Handles projects with 1000+ dependencies
+- **Smooth performance** even with complex enterprise dependency trees
+- **Memory efficient** rendering with optimized edge handling
+
+## 🔧 Technical Details
+
+### Mermaid.js Configuration:
+```javascript
+maxTextSize: 900000000    // Virtually unlimited text rendering
+maxEdges: 20000          // Supports massive dependency graphs
+minZoom: 0.01           // 100x zoom out for full overview
+maxZoom: 50             // 50x zoom in for detailed inspection
+```
+
+### Color Coding:
+- **🔵 Blue nodes** - Root project dependencies
+- **🟠 Orange nodes** - Intermediate dependencies  
+- **🟢 Green nodes** - Leaf dependencies (no further deps)
+
+## 📊 Use Cases
+
+### Development Teams:
+- **Dependency analysis** and version conflict resolution
+- **Architecture reviews** and dependency health checks
+- **Documentation** for technical specifications
+
+### Enterprise Projects:
+- **Compliance audits** with complete dependency visibility
+- **Security analysis** of transitive dependencies
+- **Performance optimization** by identifying heavy dependency chains
+
+## 🎯 Getting Started
+
+1. **Generate your dependency file**:
+   ```bash
+   mvn dependency:tree -DoutputFile=maven_dependency_file -DappendOutput=true
+   ```
+
+2. **Create visualizations**:
+   ```bash
+   # Basic diagram
+   mvn_tree_visualizer --filename maven_dependency_file --output diagram.html
+   
+   # With versions for detailed analysis
+   mvn_tree_visualizer --filename maven_dependency_file --output diagram.html --show-versions
+   
+   # Dark theme for coding sessions
+   mvn_tree_visualizer --filename maven_dependency_file --output diagram.html --theme dark
+   ```
+
+3. **Open in browser** and explore with enhanced zoom and navigation controls!
 
 ## Use Cases
 
