@@ -120,6 +120,12 @@
             <button id="downloadButton" class="toggle-btn">Download SVG</button>
             <!-- Note: PNG download feature to be implemented in future version -->
         </div>
+        <div class="control-group">
+            <span class="control-label">Navigation:</span>
+            <button id="zoomInButton" class="toggle-btn">Zoom In (+)</button>
+            <button id="zoomOutButton" class="toggle-btn">Zoom Out (-)</button>
+            <button id="resetZoomButton" class="toggle-btn">Reset (Ctrl+R)</button>
+        </div>
     </div>
     
     <div id="graphDiv"></div>
@@ -129,7 +135,7 @@
         import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.9.0/dist/mermaid.esm.min.mjs';
         
         // Initialize mermaid with theme configuration
-        mermaid.initialize({"startOnLoad": true, "sequence": {"useMaxWidth": false}, "theme": "forest", "themeVariables": {"primaryColor": "#3B82F6", "primaryTextColor": "#ffffff", "primaryBorderColor": "#e2e8f0", "lineColor": "#a0aec0", "secondaryColor": "#4a5568", "tertiaryColor": "#2d3748", "background": "#2d3748", "mainBkg": "#4a5568", "nodeBkg": "#4a5568", "clusterBkg": "#2d3748", "edgeLabelBackground": "#2d3748", "nodeTextColor": "#ffffff", "textColor": "#ffffff"}});
+        mermaid.initialize({"startOnLoad": true, "sequence": {"useMaxWidth": false}, "theme": "forest", "themeVariables": {"primaryColor": "#3B82F6", "primaryTextColor": "#ffffff", "primaryBorderColor": "#e2e8f0", "lineColor": "#a0aec0", "secondaryColor": "#4a5568", "tertiaryColor": "#2d3748", "background": "#2d3748", "mainBkg": "#4a5568", "nodeBkg": "#4a5568", "clusterBkg": "#2d3748", "edgeLabelBackground": "#2d3748", "nodeTextColor": "#ffffff", "textColor": "#ffffff"}, "maxTextSize": 900000000, "maxEdges": 20000});
 
         // Global variables
         let panZoomInstance = null;
@@ -137,267 +143,397 @@
         const drawDiagram = async function () {
             const element = document.querySelector('#graphDiv');
             const graphDefinition = `graph LR
-	HikariCP["HikariCP"];
-	accessors_smart["accessors-smart"];
-	antlr["antlr"];
-	asm["asm"];
-	aspectjweaver["aspectjweaver"];
-	assertj_core["assertj-core"];
-	byte_buddy["byte-buddy"];
-	checker_qual["checker-qual"];
-	classmate["classmate"];
-	commons_lang3["commons-lang3"];
-	complex_microservice["complex-microservice"];
-	error_prone_annotations["error_prone_annotations"];
-	failureaccess["failureaccess"];
-	guava["guava"];
-	hamcrest["hamcrest"];
-	hibernate_commons_annotations["hibernate-commons-annotations"];
-	hibernate_core["hibernate-core"];
-	j2objc_annotations["j2objc-annotations"];
-	jackson_annotations["jackson-annotations"];
-	jackson_core["jackson-core"];
-	jackson_databind["jackson-databind"];
-	jackson_datatype_jdk8["jackson-datatype-jdk8"];
-	jackson_datatype_jsr310["jackson-datatype-jsr310"];
-	jackson_module_parameter_names["jackson-module-parameter-names"];
-	jakarta_annotation_api["jakarta.annotation-api"];
-	jakarta_persistence_api["jakarta.persistence-api"];
-	jakarta_transaction_api["jakarta.transaction-api"];
-	jakarta_xml_bind_api["jakarta.xml.bind-api"];
-	jandex["jandex"];
-	javax_persistence_api["javax.persistence-api"];
-	jaxb_runtime["jaxb-runtime"];
-	jboss_logging["jboss-logging"];
-	json_path["json-path"];
-	json_smart["json-smart"];
-	jsonassert["jsonassert"];
-	jsr305["jsr305"];
-	jul_to_slf4j["jul-to-slf4j"];
-	junit_jupiter["junit-jupiter"];
-	listenablefuture["listenablefuture"];
-	log4j_api["log4j-api"];
-	log4j_to_slf4j["log4j-to-slf4j"];
-	logback_classic["logback-classic"];
-	logback_core["logback-core"];
-	mockito_core["mockito-core"];
-	mockito_junit_jupiter["mockito-junit-jupiter"];
-	mysql_connector_java["mysql-connector-java"];
-	slf4j_api["slf4j-api"];
-	snakeyaml["snakeyaml"];
-	spring_aop["spring-aop"];
-	spring_aspects["spring-aspects"];
-	spring_beans["spring-beans"];
-	spring_boot["spring-boot"];
-	spring_boot_autoconfigure["spring-boot-autoconfigure"];
-	spring_boot_starter["spring-boot-starter"];
-	spring_boot_starter_aop["spring-boot-starter-aop"];
-	spring_boot_starter_data_jpa["spring-boot-starter-data-jpa"];
-	spring_boot_starter_jdbc["spring-boot-starter-jdbc"];
-	spring_boot_starter_json["spring-boot-starter-json"];
-	spring_boot_starter_logging["spring-boot-starter-logging"];
-	spring_boot_starter_test["spring-boot-starter-test"];
-	spring_boot_starter_tomcat["spring-boot-starter-tomcat"];
-	spring_boot_starter_web["spring-boot-starter-web"];
-	spring_boot_test["spring-boot-test"];
-	spring_boot_test_autoconfigure["spring-boot-test-autoconfigure"];
-	spring_context["spring-context"];
-	spring_core["spring-core"];
-	spring_data_commons["spring-data-commons"];
-	spring_data_jpa["spring-data-jpa"];
-	spring_expression["spring-expression"];
-	spring_jcl["spring-jcl"];
-	spring_jdbc["spring-jdbc"];
-	spring_orm["spring-orm"];
-	spring_test["spring-test"];
-	spring_tx["spring-tx"];
-	spring_web["spring-web"];
-	spring_webmvc["spring-webmvc"];
-	tomcat_embed_core["tomcat-embed-core"];
-	tomcat_embed_el["tomcat-embed-el"];
-	tomcat_embed_websocket["tomcat-embed-websocket"];
-	xmlunit_core["xmlunit-core"];
-	accessors_smart --> asm;
-	complex_microservice --> commons_lang3;
-	complex_microservice --> guava;
-	complex_microservice --> mysql_connector_java;
-	complex_microservice --> spring_boot_starter_data_jpa;
-	complex_microservice --> spring_boot_starter_test;
-	complex_microservice --> spring_boot_starter_web;
-	guava --> checker_qual;
-	guava --> error_prone_annotations;
-	guava --> failureaccess;
-	guava --> j2objc_annotations;
-	guava --> jsr305;
-	guava --> listenablefuture;
-	hibernate_core --> antlr;
-	hibernate_core --> byte_buddy;
-	hibernate_core --> classmate;
-	hibernate_core --> hibernate_commons_annotations;
-	hibernate_core --> jandex;
-	hibernate_core --> javax_persistence_api;
-	hibernate_core --> jaxb_runtime;
-	hibernate_core --> jboss_logging;
-	jackson_databind --> jackson_annotations;
-	jackson_databind --> jackson_core;
-	json_path --> json_smart;
-	json_smart --> accessors_smart;
-	log4j_to_slf4j --> log4j_api;
-	logback_classic --> logback_core;
-	logback_classic --> slf4j_api;
-	spring_boot --> spring_context;
-	spring_boot_starter --> jakarta_annotation_api;
-	spring_boot_starter --> snakeyaml;
-	spring_boot_starter --> spring_boot;
-	spring_boot_starter --> spring_boot_autoconfigure;
-	spring_boot_starter --> spring_boot_starter_logging;
-	spring_boot_starter --> spring_core;
-	spring_boot_starter_aop --> aspectjweaver;
-	spring_boot_starter_data_jpa --> hibernate_core;
-	spring_boot_starter_data_jpa --> jakarta_persistence_api;
-	spring_boot_starter_data_jpa --> jakarta_transaction_api;
-	spring_boot_starter_data_jpa --> spring_aspects;
-	spring_boot_starter_data_jpa --> spring_boot_starter_aop;
-	spring_boot_starter_data_jpa --> spring_boot_starter_jdbc;
-	spring_boot_starter_data_jpa --> spring_data_jpa;
-	spring_boot_starter_jdbc --> HikariCP;
-	spring_boot_starter_jdbc --> spring_jdbc;
-	spring_boot_starter_json --> jackson_databind;
-	spring_boot_starter_json --> jackson_datatype_jdk8;
-	spring_boot_starter_json --> jackson_datatype_jsr310;
-	spring_boot_starter_json --> jackson_module_parameter_names;
-	spring_boot_starter_logging --> jul_to_slf4j;
-	spring_boot_starter_logging --> log4j_to_slf4j;
-	spring_boot_starter_logging --> logback_classic;
-	spring_boot_starter_test --> assertj_core;
-	spring_boot_starter_test --> hamcrest;
-	spring_boot_starter_test --> jakarta_xml_bind_api;
-	spring_boot_starter_test --> json_path;
-	spring_boot_starter_test --> jsonassert;
-	spring_boot_starter_test --> junit_jupiter;
-	spring_boot_starter_test --> mockito_core;
-	spring_boot_starter_test --> mockito_junit_jupiter;
-	spring_boot_starter_test --> spring_boot_test;
-	spring_boot_starter_test --> spring_boot_test_autoconfigure;
-	spring_boot_starter_test --> spring_core;
-	spring_boot_starter_test --> spring_test;
-	spring_boot_starter_test --> xmlunit_core;
-	spring_boot_starter_tomcat --> tomcat_embed_core;
-	spring_boot_starter_tomcat --> tomcat_embed_el;
-	spring_boot_starter_tomcat --> tomcat_embed_websocket;
-	spring_boot_starter_web --> spring_boot_starter;
-	spring_boot_starter_web --> spring_boot_starter_json;
-	spring_boot_starter_web --> spring_boot_starter_tomcat;
-	spring_boot_starter_web --> spring_web;
-	spring_boot_starter_web --> spring_webmvc;
-	spring_context --> spring_aop;
-	spring_context --> spring_beans;
-	spring_context --> spring_core;
-	spring_context --> spring_expression;
-	spring_core --> spring_jcl;
-	spring_data_jpa --> slf4j_api;
-	spring_data_jpa --> spring_context;
-	spring_data_jpa --> spring_data_commons;
-	spring_data_jpa --> spring_orm;
-	spring_data_jpa --> spring_tx;
+	HdrHistogram_2_1_12["HdrHistogram:2.1.12"];
+	HikariCP_5_0_1["HikariCP:5.0.1"];
+	LatencyUtils_2_0_3["LatencyUtils:2.0.3"];
+	accessors_smart_2_4_11["accessors-smart:2.4.11"];
+	android_json_0_0_20131108_vaadin1["android-json:0.0.20131108.vaadin1"];
+	angus_activation_2_0_1["angus-activation:2.0.1"];
+	apiguardian_api_1_1_2["apiguardian-api:1.1.2"];
+	asm_9_3["asm:9.3"];
+	aspectjweaver_1_9_20_1["aspectjweaver:1.9.20.1"];
+	assertj_core_3_24_2["assertj-core:3.24.2"];
+	awaitility_4_2_0["awaitility:4.2.0"];
+	byte_buddy_1_14_9["byte-buddy:1.14.9"];
+	byte_buddy_agent_1_14_9["byte-buddy-agent:1.14.9"];
+	checker_qual_3_37_0["checker-qual:3.37.0"];
+	classmate_1_5_1["classmate:1.5.1"];
+	commons_collections4_4_4["commons-collections4:4.4"];
+	commons_compress_1_24_0["commons-compress:1.24.0"];
+	commons_exec_1_3["commons-exec:1.3"];
+	commons_lang3_3_14_0["commons-lang3:3.14.0"];
+	docker_java_api_3_3_4["docker-java-api:3.3.4"];
+	docker_java_transport_zerodep_3_3_4["docker-java-transport-zerodep:3.3.4"];
+	duct_tape_1_0_8["duct-tape:1.0.8"];
+	enterprise_microservice_2_5_0_SNAPSHOT["enterprise-microservice:2.5.0-SNAPSHOT"];
+	error_prone_annotations_2_21_1["error_prone_annotations:2.21.1"];
+	failureaccess_1_0_1["failureaccess:1.0.1"];
+	guava_32_1_3_jre["guava:32.1.3-jre"];
+	hamcrest_2_2["hamcrest:2.2"];
+	hibernate_commons_annotations_6_0_6_Final["hibernate-commons-annotations:6.0.6.Final"];
+	hibernate_core_6_4_1_Final["hibernate-core:6.4.1.Final"];
+	istack_commons_runtime_4_1_2["istack-commons-runtime:4.1.2"];
+	j2objc_annotations_2_8["j2objc-annotations:2.8"];
+	jackson_annotations_2_15_3["jackson-annotations:2.15.3"];
+	jackson_core_2_15_3["jackson-core:2.15.3"];
+	jackson_databind_2_15_3["jackson-databind:2.15.3"];
+	jackson_dataformat_yaml_2_15_3["jackson-dataformat-yaml:2.15.3"];
+	jackson_datatype_jdk8_2_15_3["jackson-datatype-jdk8:2.15.3"];
+	jackson_datatype_jsr310_2_15_3["jackson-datatype-jsr310:2.15.3"];
+	jackson_module_parameter_names_2_15_3["jackson-module-parameter-names:2.15.3"];
+	jakarta_activation_api_2_1_2["jakarta.activation-api:2.1.2"];
+	jakarta_annotation_api_2_1_1["jakarta.annotation-api:2.1.1"];
+	jakarta_inject_api_2_0_1["jakarta.inject-api:2.0.1"];
+	jakarta_persistence_api_3_1_0["jakarta.persistence-api:3.1.0"];
+	jakarta_transaction_api_2_0_1["jakarta.transaction-api:2.0.1"];
+	jakarta_xml_bind_api_4_0_1["jakarta.xml.bind-api:4.0.1"];
+	jandex_3_1_2["jandex:3.1.2"];
+	jaxb_core_4_0_4["jaxb-core:4.0.4"];
+	jaxb_runtime_4_0_4["jaxb-runtime:4.0.4"];
+	jboss_logging_3_5_3_Final["jboss-logging:3.5.3.Final"];
+	jna_5_13_0["jna:5.13.0"];
+	json_path_2_8_0["json-path:2.8.0"];
+	json_smart_2_4_11["json-smart:2.4.11"];
+	jsonassert_1_5_1["jsonassert:1.5.1"];
+	jsr305_3_0_2["jsr305:3.0.2"];
+	jul_to_slf4j_2_0_9["jul-to-slf4j:2.0.9"];
+	junit_jupiter_1_19_3["junit-jupiter:1.19.3"];
+	junit_jupiter_5_10_1["junit-jupiter:5.10.1"];
+	junit_jupiter_api_5_10_1["junit-jupiter-api:5.10.1"];
+	junit_jupiter_engine_5_10_1["junit-jupiter-engine:5.10.1"];
+	junit_jupiter_params_5_10_1["junit-jupiter-params:5.10.1"];
+	junit_platform_commons_1_10_1["junit-platform-commons:1.10.1"];
+	junit_platform_engine_1_10_1["junit-platform-engine:1.10.1"];
+	listenablefuture_9999_0_empty_to_avoid_conflict_with_guava["listenablefuture:9999.0-empty-to-avoid-conflict-with-guava"];
+	log4j_api_2_21_1["log4j-api:2.21.1"];
+	log4j_to_slf4j_2_21_1["log4j-to-slf4j:2.21.1"];
+	logback_classic_1_4_14["logback-classic:1.4.14"];
+	logback_core_1_4_14["logback-core:1.4.14"];
+	micrometer_commons_1_12_0["micrometer-commons:1.12.0"];
+	micrometer_core_1_12_0["micrometer-core:1.12.0"];
+	micrometer_observation_1_12_0["micrometer-observation:1.12.0"];
+	micrometer_registry_prometheus_1_12_0["micrometer-registry-prometheus:1.12.0"];
+	mockito_core_5_7_0["mockito-core:5.7.0"];
+	mockito_junit_jupiter_5_7_0["mockito-junit-jupiter:5.7.0"];
+	mysql_connector_j_8_2_0["mysql-connector-j:8.2.0"];
+	objenesis_3_3["objenesis:3.3"];
+	opentest4j_1_3_0["opentest4j:1.3.0"];
+	protobuf_java_3_21_9["protobuf-java:3.21.9"];
+	simpleclient_0_16_0["simpleclient:0.16.0"];
+	simpleclient_common_0_16_0["simpleclient_common:0.16.0"];
+	simpleclient_tracer_common_0_16_0["simpleclient_tracer_common:0.16.0"];
+	simpleclient_tracer_otel_0_16_0["simpleclient_tracer_otel:0.16.0"];
+	slf4j_api_2_0_9["slf4j-api:2.0.9"];
+	snakeyaml_2_2["snakeyaml:2.2"];
+	spring_aop_6_1_1["spring-aop:6.1.1"];
+	spring_aspects_6_1_1["spring-aspects:6.1.1"];
+	spring_beans_6_1_1["spring-beans:6.1.1"];
+	spring_boot_3_2_0["spring-boot:3.2.0"];
+	spring_boot_actuator_3_2_0["spring-boot-actuator:3.2.0"];
+	spring_boot_actuator_autoconfigure_3_2_0["spring-boot-actuator-autoconfigure:3.2.0"];
+	spring_boot_autoconfigure_3_2_0["spring-boot-autoconfigure:3.2.0"];
+	spring_boot_starter_3_2_0["spring-boot-starter:3.2.0"];
+	spring_boot_starter_actuator_3_2_0["spring-boot-starter-actuator:3.2.0"];
+	spring_boot_starter_aop_3_2_0["spring-boot-starter-aop:3.2.0"];
+	spring_boot_starter_data_jpa_3_2_0["spring-boot-starter-data-jpa:3.2.0"];
+	spring_boot_starter_jdbc_3_2_0["spring-boot-starter-jdbc:3.2.0"];
+	spring_boot_starter_json_3_2_0["spring-boot-starter-json:3.2.0"];
+	spring_boot_starter_logging_3_2_0["spring-boot-starter-logging:3.2.0"];
+	spring_boot_starter_test_3_2_0["spring-boot-starter-test:3.2.0"];
+	spring_boot_starter_tomcat_3_2_0["spring-boot-starter-tomcat:3.2.0"];
+	spring_boot_starter_web_3_2_0["spring-boot-starter-web:3.2.0"];
+	spring_boot_test_3_2_0["spring-boot-test:3.2.0"];
+	spring_boot_test_autoconfigure_3_2_0["spring-boot-test-autoconfigure:3.2.0"];
+	spring_context_6_1_1["spring-context:6.1.1"];
+	spring_core_6_1_1["spring-core:6.1.1"];
+	spring_data_commons_3_2_0["spring-data-commons:3.2.0"];
+	spring_data_jpa_3_2_0["spring-data-jpa:3.2.0"];
+	spring_expression_6_1_1["spring-expression:6.1.1"];
+	spring_jcl_6_1_1["spring-jcl:6.1.1"];
+	spring_jdbc_6_1_1["spring-jdbc:6.1.1"];
+	spring_orm_6_1_1["spring-orm:6.1.1"];
+	spring_test_6_1_1["spring-test:6.1.1"];
+	spring_tx_6_1_1["spring-tx:6.1.1"];
+	spring_web_6_1_1["spring-web:6.1.1"];
+	spring_webmvc_6_1_1["spring-webmvc:6.1.1"];
+	testcontainers_1_19_3["testcontainers:1.19.3"];
+	tomcat_embed_core_10_1_16["tomcat-embed-core:10.1.16"];
+	tomcat_embed_el_10_1_16["tomcat-embed-el:10.1.16"];
+	tomcat_embed_websocket_10_1_16["tomcat-embed-websocket:10.1.16"];
+	txw2_4_0_4["txw2:4.0.4"];
+	xmlunit_core_2_9_1["xmlunit-core:2.9.1"];
+	accessors_smart_2_4_11 --> asm_9_3;
+	assertj_core_3_24_2 --> byte_buddy_1_14_9;
+	enterprise_microservice_2_5_0_SNAPSHOT --> commons_collections4_4_4;
+	enterprise_microservice_2_5_0_SNAPSHOT --> commons_lang3_3_14_0;
+	enterprise_microservice_2_5_0_SNAPSHOT --> guava_32_1_3_jre;
+	enterprise_microservice_2_5_0_SNAPSHOT --> jackson_dataformat_yaml_2_15_3;
+	enterprise_microservice_2_5_0_SNAPSHOT --> junit_jupiter_1_19_3;
+	enterprise_microservice_2_5_0_SNAPSHOT --> micrometer_registry_prometheus_1_12_0;
+	enterprise_microservice_2_5_0_SNAPSHOT --> mysql_connector_j_8_2_0;
+	enterprise_microservice_2_5_0_SNAPSHOT --> spring_boot_starter_actuator_3_2_0;
+	enterprise_microservice_2_5_0_SNAPSHOT --> spring_boot_starter_data_jpa_3_2_0;
+	enterprise_microservice_2_5_0_SNAPSHOT --> spring_boot_starter_test_3_2_0;
+	enterprise_microservice_2_5_0_SNAPSHOT --> spring_boot_starter_web_3_2_0;
+	guava_32_1_3_jre --> checker_qual_3_37_0;
+	guava_32_1_3_jre --> error_prone_annotations_2_21_1;
+	guava_32_1_3_jre --> failureaccess_1_0_1;
+	guava_32_1_3_jre --> j2objc_annotations_2_8;
+	guava_32_1_3_jre --> jsr305_3_0_2;
+	guava_32_1_3_jre --> listenablefuture_9999_0_empty_to_avoid_conflict_with_guava;
+	hibernate_core_6_4_1_Final --> byte_buddy_1_14_9;
+	hibernate_core_6_4_1_Final --> classmate_1_5_1;
+	hibernate_core_6_4_1_Final --> hibernate_commons_annotations_6_0_6_Final;
+	hibernate_core_6_4_1_Final --> jakarta_inject_api_2_0_1;
+	hibernate_core_6_4_1_Final --> jakarta_persistence_api_3_1_0;
+	hibernate_core_6_4_1_Final --> jakarta_transaction_api_2_0_1;
+	hibernate_core_6_4_1_Final --> jandex_3_1_2;
+	hibernate_core_6_4_1_Final --> jaxb_runtime_4_0_4;
+	hibernate_core_6_4_1_Final --> jboss_logging_3_5_3_Final;
+	jackson_databind_2_15_3 --> jackson_annotations_2_15_3;
+	jackson_databind_2_15_3 --> jackson_core_2_15_3;
+	jakarta_xml_bind_api_4_0_1 --> jakarta_activation_api_2_1_2;
+	jaxb_core_4_0_4 --> angus_activation_2_0_1;
+	jaxb_core_4_0_4 --> txw2_4_0_4;
+	jaxb_runtime_4_0_4 --> istack_commons_runtime_4_1_2;
+	jaxb_runtime_4_0_4 --> jaxb_core_4_0_4;
+	json_path_2_8_0 --> json_smart_2_4_11;
+	json_smart_2_4_11 --> accessors_smart_2_4_11;
+	jsonassert_1_5_1 --> android_json_0_0_20131108_vaadin1;
+	junit_jupiter_1_19_3 --> junit_jupiter_api_5_10_1;
+	junit_jupiter_1_19_3 --> testcontainers_1_19_3;
+	junit_jupiter_5_10_1 --> junit_jupiter_api_5_10_1;
+	junit_jupiter_5_10_1 --> junit_jupiter_engine_5_10_1;
+	junit_jupiter_5_10_1 --> junit_jupiter_params_5_10_1;
+	junit_jupiter_api_5_10_1 --> apiguardian_api_1_1_2;
+	junit_jupiter_api_5_10_1 --> junit_platform_commons_1_10_1;
+	junit_jupiter_api_5_10_1 --> opentest4j_1_3_0;
+	junit_jupiter_engine_5_10_1 --> junit_jupiter_api_5_10_1;
+	junit_jupiter_engine_5_10_1 --> junit_platform_engine_1_10_1;
+	log4j_to_slf4j_2_21_1 --> log4j_api_2_21_1;
+	logback_classic_1_4_14 --> logback_core_1_4_14;
+	logback_classic_1_4_14 --> slf4j_api_2_0_9;
+	micrometer_core_1_12_0 --> HdrHistogram_2_1_12;
+	micrometer_core_1_12_0 --> LatencyUtils_2_0_3;
+	micrometer_observation_1_12_0 --> micrometer_commons_1_12_0;
+	micrometer_registry_prometheus_1_12_0 --> micrometer_core_1_12_0;
+	micrometer_registry_prometheus_1_12_0 --> simpleclient_common_0_16_0;
+	mockito_core_5_7_0 --> byte_buddy_agent_1_14_9;
+	mockito_core_5_7_0 --> objenesis_3_3;
+	mysql_connector_j_8_2_0 --> protobuf_java_3_21_9;
+	simpleclient_0_16_0 --> simpleclient_tracer_otel_0_16_0;
+	simpleclient_common_0_16_0 --> simpleclient_0_16_0;
+	simpleclient_tracer_otel_0_16_0 --> simpleclient_tracer_common_0_16_0;
+	spring_boot_actuator_autoconfigure_3_2_0 --> jackson_databind_2_15_3;
+	spring_boot_actuator_autoconfigure_3_2_0 --> spring_boot_actuator_3_2_0;
+	spring_boot_starter_3_2_0 --> jakarta_annotation_api_2_1_1;
+	spring_boot_starter_3_2_0 --> snakeyaml_2_2;
+	spring_boot_starter_3_2_0 --> spring_boot_3_2_0;
+	spring_boot_starter_3_2_0 --> spring_boot_autoconfigure_3_2_0;
+	spring_boot_starter_3_2_0 --> spring_boot_starter_logging_3_2_0;
+	spring_boot_starter_3_2_0 --> spring_core_6_1_1;
+	spring_boot_starter_actuator_3_2_0 --> micrometer_observation_1_12_0;
+	spring_boot_starter_actuator_3_2_0 --> spring_boot_actuator_autoconfigure_3_2_0;
+	spring_boot_starter_aop_3_2_0 --> aspectjweaver_1_9_20_1;
+	spring_boot_starter_data_jpa_3_2_0 --> hibernate_core_6_4_1_Final;
+	spring_boot_starter_data_jpa_3_2_0 --> spring_aspects_6_1_1;
+	spring_boot_starter_data_jpa_3_2_0 --> spring_boot_starter_aop_3_2_0;
+	spring_boot_starter_data_jpa_3_2_0 --> spring_boot_starter_jdbc_3_2_0;
+	spring_boot_starter_data_jpa_3_2_0 --> spring_data_jpa_3_2_0;
+	spring_boot_starter_jdbc_3_2_0 --> HikariCP_5_0_1;
+	spring_boot_starter_jdbc_3_2_0 --> spring_jdbc_6_1_1;
+	spring_boot_starter_json_3_2_0 --> jackson_databind_2_15_3;
+	spring_boot_starter_json_3_2_0 --> jackson_datatype_jdk8_2_15_3;
+	spring_boot_starter_json_3_2_0 --> jackson_datatype_jsr310_2_15_3;
+	spring_boot_starter_json_3_2_0 --> jackson_module_parameter_names_2_15_3;
+	spring_boot_starter_logging_3_2_0 --> jul_to_slf4j_2_0_9;
+	spring_boot_starter_logging_3_2_0 --> log4j_to_slf4j_2_21_1;
+	spring_boot_starter_logging_3_2_0 --> logback_classic_1_4_14;
+	spring_boot_starter_test_3_2_0 --> assertj_core_3_24_2;
+	spring_boot_starter_test_3_2_0 --> awaitility_4_2_0;
+	spring_boot_starter_test_3_2_0 --> hamcrest_2_2;
+	spring_boot_starter_test_3_2_0 --> jakarta_xml_bind_api_4_0_1;
+	spring_boot_starter_test_3_2_0 --> json_path_2_8_0;
+	spring_boot_starter_test_3_2_0 --> jsonassert_1_5_1;
+	spring_boot_starter_test_3_2_0 --> junit_jupiter_5_10_1;
+	spring_boot_starter_test_3_2_0 --> mockito_core_5_7_0;
+	spring_boot_starter_test_3_2_0 --> mockito_junit_jupiter_5_7_0;
+	spring_boot_starter_test_3_2_0 --> spring_boot_test_3_2_0;
+	spring_boot_starter_test_3_2_0 --> spring_boot_test_autoconfigure_3_2_0;
+	spring_boot_starter_test_3_2_0 --> spring_core_6_1_1;
+	spring_boot_starter_test_3_2_0 --> spring_test_6_1_1;
+	spring_boot_starter_test_3_2_0 --> xmlunit_core_2_9_1;
+	spring_boot_starter_tomcat_3_2_0 --> tomcat_embed_core_10_1_16;
+	spring_boot_starter_tomcat_3_2_0 --> tomcat_embed_el_10_1_16;
+	spring_boot_starter_tomcat_3_2_0 --> tomcat_embed_websocket_10_1_16;
+	spring_boot_starter_web_3_2_0 --> spring_boot_starter_3_2_0;
+	spring_boot_starter_web_3_2_0 --> spring_boot_starter_json_3_2_0;
+	spring_boot_starter_web_3_2_0 --> spring_boot_starter_tomcat_3_2_0;
+	spring_boot_starter_web_3_2_0 --> spring_web_6_1_1;
+	spring_boot_starter_web_3_2_0 --> spring_webmvc_6_1_1;
+	spring_context_6_1_1 --> spring_expression_6_1_1;
+	spring_core_6_1_1 --> spring_jcl_6_1_1;
+	spring_data_jpa_3_2_0 --> spring_context_6_1_1;
+	spring_data_jpa_3_2_0 --> spring_data_commons_3_2_0;
+	spring_data_jpa_3_2_0 --> spring_orm_6_1_1;
+	spring_jdbc_6_1_1 --> spring_tx_6_1_1;
+	spring_web_6_1_1 --> spring_beans_6_1_1;
+	spring_webmvc_6_1_1 --> spring_aop_6_1_1;
+	spring_webmvc_6_1_1 --> spring_context_6_1_1;
+	spring_webmvc_6_1_1 --> spring_web_6_1_1;
+	testcontainers_1_19_3 --> commons_compress_1_24_0;
+	testcontainers_1_19_3 --> commons_exec_1_3;
+	testcontainers_1_19_3 --> commons_lang3_3_14_0;
+	testcontainers_1_19_3 --> docker_java_api_3_3_4;
+	testcontainers_1_19_3 --> docker_java_transport_zerodep_3_3_4;
+	testcontainers_1_19_3 --> duct_tape_1_0_8;
+	testcontainers_1_19_3 --> jackson_annotations_2_15_3;
+	testcontainers_1_19_3 --> jna_5_13_0;
+	testcontainers_1_19_3 --> slf4j_api_2_0_9;
 
 classDef rootNode fill:#3B82F620,stroke:#3B82F6,stroke-width:3px,color:#000;
 classDef leafNode fill:#10B98120,stroke:#10B981,stroke-width:2px,color:#000;
 classDef intermediateNode fill:#F59E0B20,stroke:#F59E0B,stroke-width:2px,color:#000;
 
-	class HikariCP leafNode;
-	class accessors_smart intermediateNode;
-	class antlr leafNode;
-	class asm leafNode;
-	class aspectjweaver leafNode;
-	class assertj_core leafNode;
-	class byte_buddy leafNode;
-	class checker_qual leafNode;
-	class classmate leafNode;
-	class commons_lang3 leafNode;
-	class complex_microservice rootNode;
-	class error_prone_annotations leafNode;
-	class failureaccess leafNode;
-	class guava intermediateNode;
-	class hamcrest leafNode;
-	class hibernate_commons_annotations leafNode;
-	class hibernate_core intermediateNode;
-	class j2objc_annotations leafNode;
-	class jackson_annotations leafNode;
-	class jackson_core leafNode;
-	class jackson_databind intermediateNode;
-	class jackson_datatype_jdk8 leafNode;
-	class jackson_datatype_jsr310 leafNode;
-	class jackson_module_parameter_names leafNode;
-	class jakarta_annotation_api leafNode;
-	class jakarta_persistence_api leafNode;
-	class jakarta_transaction_api leafNode;
-	class jakarta_xml_bind_api leafNode;
-	class jandex leafNode;
-	class javax_persistence_api leafNode;
-	class jaxb_runtime leafNode;
-	class jboss_logging leafNode;
-	class json_path intermediateNode;
-	class json_smart intermediateNode;
-	class jsonassert leafNode;
-	class jsr305 leafNode;
-	class jul_to_slf4j leafNode;
-	class junit_jupiter leafNode;
-	class listenablefuture leafNode;
-	class log4j_api leafNode;
-	class log4j_to_slf4j intermediateNode;
-	class logback_classic intermediateNode;
-	class logback_core leafNode;
-	class mockito_core leafNode;
-	class mockito_junit_jupiter leafNode;
-	class mysql_connector_java leafNode;
-	class slf4j_api leafNode;
-	class snakeyaml leafNode;
-	class spring_aop leafNode;
-	class spring_aspects leafNode;
-	class spring_beans leafNode;
-	class spring_boot intermediateNode;
-	class spring_boot_autoconfigure leafNode;
-	class spring_boot_starter intermediateNode;
-	class spring_boot_starter_aop intermediateNode;
-	class spring_boot_starter_data_jpa intermediateNode;
-	class spring_boot_starter_jdbc intermediateNode;
-	class spring_boot_starter_json intermediateNode;
-	class spring_boot_starter_logging intermediateNode;
-	class spring_boot_starter_test intermediateNode;
-	class spring_boot_starter_tomcat intermediateNode;
-	class spring_boot_starter_web intermediateNode;
-	class spring_boot_test leafNode;
-	class spring_boot_test_autoconfigure leafNode;
-	class spring_context intermediateNode;
-	class spring_core intermediateNode;
-	class spring_data_commons leafNode;
-	class spring_data_jpa intermediateNode;
-	class spring_expression leafNode;
-	class spring_jcl leafNode;
-	class spring_jdbc leafNode;
-	class spring_orm leafNode;
-	class spring_test leafNode;
-	class spring_tx leafNode;
-	class spring_web leafNode;
-	class spring_webmvc leafNode;
-	class tomcat_embed_core leafNode;
-	class tomcat_embed_el leafNode;
-	class tomcat_embed_websocket leafNode;
-	class xmlunit_core leafNode;`;
+	class HdrHistogram_2_1_12 leafNode;
+	class HikariCP_5_0_1 leafNode;
+	class LatencyUtils_2_0_3 leafNode;
+	class accessors_smart_2_4_11 intermediateNode;
+	class android_json_0_0_20131108_vaadin1 leafNode;
+	class angus_activation_2_0_1 leafNode;
+	class apiguardian_api_1_1_2 leafNode;
+	class asm_9_3 leafNode;
+	class aspectjweaver_1_9_20_1 leafNode;
+	class assertj_core_3_24_2 intermediateNode;
+	class awaitility_4_2_0 leafNode;
+	class byte_buddy_1_14_9 leafNode;
+	class byte_buddy_agent_1_14_9 leafNode;
+	class checker_qual_3_37_0 leafNode;
+	class classmate_1_5_1 leafNode;
+	class commons_collections4_4_4 leafNode;
+	class commons_compress_1_24_0 leafNode;
+	class commons_exec_1_3 leafNode;
+	class commons_lang3_3_14_0 leafNode;
+	class docker_java_api_3_3_4 leafNode;
+	class docker_java_transport_zerodep_3_3_4 leafNode;
+	class duct_tape_1_0_8 leafNode;
+	class enterprise_microservice_2_5_0_SNAPSHOT rootNode;
+	class error_prone_annotations_2_21_1 leafNode;
+	class failureaccess_1_0_1 leafNode;
+	class guava_32_1_3_jre intermediateNode;
+	class hamcrest_2_2 leafNode;
+	class hibernate_commons_annotations_6_0_6_Final leafNode;
+	class hibernate_core_6_4_1_Final intermediateNode;
+	class istack_commons_runtime_4_1_2 leafNode;
+	class j2objc_annotations_2_8 leafNode;
+	class jackson_annotations_2_15_3 leafNode;
+	class jackson_core_2_15_3 leafNode;
+	class jackson_databind_2_15_3 intermediateNode;
+	class jackson_dataformat_yaml_2_15_3 leafNode;
+	class jackson_datatype_jdk8_2_15_3 leafNode;
+	class jackson_datatype_jsr310_2_15_3 leafNode;
+	class jackson_module_parameter_names_2_15_3 leafNode;
+	class jakarta_activation_api_2_1_2 leafNode;
+	class jakarta_annotation_api_2_1_1 leafNode;
+	class jakarta_inject_api_2_0_1 leafNode;
+	class jakarta_persistence_api_3_1_0 leafNode;
+	class jakarta_transaction_api_2_0_1 leafNode;
+	class jakarta_xml_bind_api_4_0_1 intermediateNode;
+	class jandex_3_1_2 leafNode;
+	class jaxb_core_4_0_4 intermediateNode;
+	class jaxb_runtime_4_0_4 intermediateNode;
+	class jboss_logging_3_5_3_Final leafNode;
+	class jna_5_13_0 leafNode;
+	class json_path_2_8_0 intermediateNode;
+	class json_smart_2_4_11 intermediateNode;
+	class jsonassert_1_5_1 intermediateNode;
+	class jsr305_3_0_2 leafNode;
+	class jul_to_slf4j_2_0_9 leafNode;
+	class junit_jupiter_1_19_3 intermediateNode;
+	class junit_jupiter_5_10_1 intermediateNode;
+	class junit_jupiter_api_5_10_1 intermediateNode;
+	class junit_jupiter_engine_5_10_1 intermediateNode;
+	class junit_jupiter_params_5_10_1 leafNode;
+	class junit_platform_commons_1_10_1 leafNode;
+	class junit_platform_engine_1_10_1 leafNode;
+	class listenablefuture_9999_0_empty_to_avoid_conflict_with_guava leafNode;
+	class log4j_api_2_21_1 leafNode;
+	class log4j_to_slf4j_2_21_1 intermediateNode;
+	class logback_classic_1_4_14 intermediateNode;
+	class logback_core_1_4_14 leafNode;
+	class micrometer_commons_1_12_0 leafNode;
+	class micrometer_core_1_12_0 intermediateNode;
+	class micrometer_observation_1_12_0 intermediateNode;
+	class micrometer_registry_prometheus_1_12_0 intermediateNode;
+	class mockito_core_5_7_0 intermediateNode;
+	class mockito_junit_jupiter_5_7_0 leafNode;
+	class mysql_connector_j_8_2_0 intermediateNode;
+	class objenesis_3_3 leafNode;
+	class opentest4j_1_3_0 leafNode;
+	class protobuf_java_3_21_9 leafNode;
+	class simpleclient_0_16_0 intermediateNode;
+	class simpleclient_common_0_16_0 intermediateNode;
+	class simpleclient_tracer_common_0_16_0 leafNode;
+	class simpleclient_tracer_otel_0_16_0 intermediateNode;
+	class slf4j_api_2_0_9 leafNode;
+	class snakeyaml_2_2 leafNode;
+	class spring_aop_6_1_1 leafNode;
+	class spring_aspects_6_1_1 leafNode;
+	class spring_beans_6_1_1 leafNode;
+	class spring_boot_3_2_0 leafNode;
+	class spring_boot_actuator_3_2_0 leafNode;
+	class spring_boot_actuator_autoconfigure_3_2_0 intermediateNode;
+	class spring_boot_autoconfigure_3_2_0 leafNode;
+	class spring_boot_starter_3_2_0 intermediateNode;
+	class spring_boot_starter_actuator_3_2_0 intermediateNode;
+	class spring_boot_starter_aop_3_2_0 intermediateNode;
+	class spring_boot_starter_data_jpa_3_2_0 intermediateNode;
+	class spring_boot_starter_jdbc_3_2_0 intermediateNode;
+	class spring_boot_starter_json_3_2_0 intermediateNode;
+	class spring_boot_starter_logging_3_2_0 intermediateNode;
+	class spring_boot_starter_test_3_2_0 intermediateNode;
+	class spring_boot_starter_tomcat_3_2_0 intermediateNode;
+	class spring_boot_starter_web_3_2_0 intermediateNode;
+	class spring_boot_test_3_2_0 leafNode;
+	class spring_boot_test_autoconfigure_3_2_0 leafNode;
+	class spring_context_6_1_1 intermediateNode;
+	class spring_core_6_1_1 intermediateNode;
+	class spring_data_commons_3_2_0 leafNode;
+	class spring_data_jpa_3_2_0 intermediateNode;
+	class spring_expression_6_1_1 leafNode;
+	class spring_jcl_6_1_1 leafNode;
+	class spring_jdbc_6_1_1 intermediateNode;
+	class spring_orm_6_1_1 leafNode;
+	class spring_test_6_1_1 leafNode;
+	class spring_tx_6_1_1 leafNode;
+	class spring_web_6_1_1 intermediateNode;
+	class spring_webmvc_6_1_1 intermediateNode;
+	class testcontainers_1_19_3 intermediateNode;
+	class tomcat_embed_core_10_1_16 leafNode;
+	class tomcat_embed_el_10_1_16 leafNode;
+	class tomcat_embed_websocket_10_1_16 leafNode;
+	class txw2_4_0_4 leafNode;
+	class xmlunit_core_2_9_1 leafNode;`;
             
             try {
                 const { svg } = await mermaid.render('mySvgId', graphDefinition);
                 element.innerHTML = svg.replace(/[ ]*max-width:[ 0-9\.]*px;/i , '');
                 
-                // Initialize pan & zoom
+                // Initialize pan & zoom with improved settings for large diagrams
                 panZoomInstance = svgPanZoom('#mySvgId', {
                     zoomEnabled: true,
                     controlIconsEnabled: true,
                     fit: true,
                     center: true,
-                    minZoom: 0.1,
-                    maxZoom: 10
+                    minZoom: 0.01,  // Allow zooming out further for large diagrams
+                    maxZoom: 50,    // Allow much higher zoom for detailed inspection
+                    zoomScaleSensitivity: 0.2,  // Smoother zoom increments
+                    mouseWheelZoomEnabled: true,
+                    preventMouseEventsDefault: true,
+                    beforeZoom: function(oldScale, newScale) {
+                        // Prevent zooming beyond reasonable limits
+                        return newScale >= 0.01 && newScale <= 50;
+                    }
                 });
                 
                 // Setup node interactions
@@ -417,9 +553,27 @@ classDef intermediateNode fill:#F59E0B20,stroke:#F59E0B,stroke-width:2px,color:#
             });
         };
         
-        // Download functionality
+        // Button event listeners
         document.getElementById('downloadButton').addEventListener('click', function() {
             downloadSVG();
+        });
+        
+        document.getElementById('zoomInButton').addEventListener('click', function() {
+            if (panZoomInstance) {
+                panZoomInstance.zoomIn();
+            }
+        });
+        
+        document.getElementById('zoomOutButton').addEventListener('click', function() {
+            if (panZoomInstance) {
+                panZoomInstance.zoomOut();
+            }
+        });
+        
+        document.getElementById('resetZoomButton').addEventListener('click', function() {
+            if (panZoomInstance) {
+                panZoomInstance.reset();
+            }
         });
         
         const downloadSVG = function() {
@@ -456,6 +610,34 @@ classDef intermediateNode fill:#F59E0B20,stroke:#F59E0B,stroke-width:2px,color:#
                         e.preventDefault();
                         if (panZoomInstance) {
                             panZoomInstance.reset();
+                        }
+                        break;
+                    case '=':
+                    case '+':
+                        e.preventDefault();
+                        if (panZoomInstance) {
+                            panZoomInstance.zoomIn();
+                        }
+                        break;
+                    case '-':
+                        e.preventDefault();
+                        if (panZoomInstance) {
+                            panZoomInstance.zoomOut();
+                        }
+                        break;
+                }
+            } else {
+                // Non-Ctrl shortcuts
+                switch(e.key) {
+                    case '+':
+                    case '=':
+                        if (panZoomInstance) {
+                            panZoomInstance.zoomIn();
+                        }
+                        break;
+                    case '-':
+                        if (panZoomInstance) {
+                            panZoomInstance.zoomOut();
                         }
                         break;
                 }

@@ -1,5 +1,5 @@
 {
-    "id": "com.example:simple-app",
+    "id": "simple-webapp",
     "children": [
         {
             "id": "spring-boot-starter-web",
@@ -9,22 +9,139 @@
                     "children": [
                         {
                             "id": "spring-boot",
+                            "children": []
+                        },
+                        {
+                            "id": "spring-boot-autoconfigure",
+                            "children": []
+                        },
+                        {
+                            "id": "spring-boot-starter-logging",
                             "children": [
                                 {
-                                    "id": "spring-context",
+                                    "id": "logback-classic",
+                                    "children": [
+                                        {
+                                            "id": "logback-core",
+                                            "children": []
+                                        },
+                                        {
+                                            "id": "slf4j-api",
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "log4j-to-slf4j",
+                                    "children": [
+                                        {
+                                            "id": "log4j-api",
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "jul-to-slf4j",
                                     "children": []
                                 }
                             ]
                         },
                         {
-                            "id": "spring-boot-autoconfigure",
+                            "id": "jakarta.annotation-api",
+                            "children": []
+                        },
+                        {
+                            "id": "spring-core",
+                            "children": [
+                                {
+                                    "id": "spring-jcl",
+                                    "children": []
+                                }
+                            ]
+                        },
+                        {
+                            "id": "snakeyaml",
+                            "children": []
+                        }
+                    ]
+                },
+                {
+                    "id": "spring-boot-starter-json",
+                    "children": [
+                        {
+                            "id": "jackson-databind",
+                            "children": [
+                                {
+                                    "id": "jackson-annotations",
+                                    "children": []
+                                },
+                                {
+                                    "id": "jackson-core",
+                                    "children": []
+                                }
+                            ]
+                        },
+                        {
+                            "id": "jackson-datatype-jdk8",
+                            "children": []
+                        },
+                        {
+                            "id": "jackson-datatype-jsr310",
+                            "children": []
+                        },
+                        {
+                            "id": "jackson-module-parameter-names",
+                            "children": []
+                        }
+                    ]
+                },
+                {
+                    "id": "spring-boot-starter-tomcat",
+                    "children": [
+                        {
+                            "id": "tomcat-embed-core",
+                            "children": []
+                        },
+                        {
+                            "id": "tomcat-embed-el",
+                            "children": []
+                        },
+                        {
+                            "id": "tomcat-embed-websocket",
                             "children": []
                         }
                     ]
                 },
                 {
                     "id": "spring-web",
-                    "children": []
+                    "children": [
+                        {
+                            "id": "spring-beans",
+                            "children": []
+                        }
+                    ]
+                },
+                {
+                    "id": "spring-webmvc",
+                    "children": [
+                        {
+                            "id": "spring-aop",
+                            "children": []
+                        },
+                        {
+                            "id": "spring-context",
+                            "children": [
+                                {
+                                    "id": "spring-expression",
+                                    "children": []
+                                }
+                            ]
+                        },
+                        {
+                            "id": "spring-web",
+                            "children": []
+                        }
+                    ]
                 }
             ]
         },
@@ -33,8 +150,43 @@
             "children": []
         },
         {
-            "id": "junit",
-            "children": []
+            "id": "junit-jupiter",
+            "children": [
+                {
+                    "id": "junit-jupiter-api",
+                    "children": [
+                        {
+                            "id": "opentest4j",
+                            "children": []
+                        },
+                        {
+                            "id": "junit-platform-commons",
+                            "children": []
+                        },
+                        {
+                            "id": "apiguardian-api",
+                            "children": []
+                        }
+                    ]
+                },
+                {
+                    "id": "junit-jupiter-params",
+                    "children": []
+                },
+                {
+                    "id": "junit-jupiter-engine",
+                    "children": [
+                        {
+                            "id": "junit-platform-engine",
+                            "children": []
+                        },
+                        {
+                            "id": "junit-jupiter-api",
+                            "children": []
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }

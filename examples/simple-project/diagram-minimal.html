@@ -95,6 +95,12 @@
             <button id="downloadButton" class="toggle-btn">Download SVG</button>
             <!-- Note: PNG download feature to be implemented in future version -->
         </div>
+        <div class="control-group">
+            <span class="control-label">Navigation:</span>
+            <button id="zoomInButton" class="toggle-btn">Zoom In (+)</button>
+            <button id="zoomOutButton" class="toggle-btn">Zoom Out (-)</button>
+            <button id="resetZoomButton" class="toggle-btn">Reset (Ctrl+R)</button>
+        </div>
     </div>
     
     <div id="graphDiv"></div>
@@ -104,7 +110,7 @@
         import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.9.0/dist/mermaid.esm.min.mjs';
         
         // Initialize mermaid with theme configuration
-        mermaid.initialize({"startOnLoad": true, "sequence": {"useMaxWidth": false}, "theme": "neutral", "themeVariables": {"primaryColor": "#3B82F6", "primaryTextColor": "#000000", "primaryBorderColor": "#000000", "lineColor": "#000000", "secondaryColor": "#f5f5f5", "tertiaryColor": "#ffffff"}});
+        mermaid.initialize({"startOnLoad": true, "sequence": {"useMaxWidth": false}, "theme": "neutral", "themeVariables": {"primaryColor": "#3B82F6", "primaryTextColor": "#000000", "primaryBorderColor": "#000000", "lineColor": "#000000", "secondaryColor": "#f5f5f5", "tertiaryColor": "#ffffff"}, "maxTextSize": 900000000, "maxEdges": 20000});
 
         // Global variables
         let panZoomInstance = null;
@@ -112,50 +118,158 @@
         const drawDiagram = async function () {
             const element = document.querySelector('#graphDiv');
             const graphDefinition = `graph LR
+	apiguardian_api["apiguardian-api"];
 	commons_lang3["commons-lang3"];
-	junit["junit"];
-	simple_app["simple-app"];
+	jackson_annotations["jackson-annotations"];
+	jackson_core["jackson-core"];
+	jackson_databind["jackson-databind"];
+	jackson_datatype_jdk8["jackson-datatype-jdk8"];
+	jackson_datatype_jsr310["jackson-datatype-jsr310"];
+	jackson_module_parameter_names["jackson-module-parameter-names"];
+	jakarta_annotation_api["jakarta.annotation-api"];
+	jul_to_slf4j["jul-to-slf4j"];
+	junit_jupiter["junit-jupiter"];
+	junit_jupiter_api["junit-jupiter-api"];
+	junit_jupiter_engine["junit-jupiter-engine"];
+	junit_jupiter_params["junit-jupiter-params"];
+	junit_platform_commons["junit-platform-commons"];
+	junit_platform_engine["junit-platform-engine"];
+	log4j_api["log4j-api"];
+	log4j_to_slf4j["log4j-to-slf4j"];
+	logback_classic["logback-classic"];
+	logback_core["logback-core"];
+	opentest4j["opentest4j"];
+	simple_webapp["simple-webapp"];
+	slf4j_api["slf4j-api"];
+	snakeyaml["snakeyaml"];
+	spring_aop["spring-aop"];
+	spring_beans["spring-beans"];
 	spring_boot["spring-boot"];
 	spring_boot_autoconfigure["spring-boot-autoconfigure"];
 	spring_boot_starter["spring-boot-starter"];
+	spring_boot_starter_json["spring-boot-starter-json"];
+	spring_boot_starter_logging["spring-boot-starter-logging"];
+	spring_boot_starter_tomcat["spring-boot-starter-tomcat"];
 	spring_boot_starter_web["spring-boot-starter-web"];
 	spring_context["spring-context"];
+	spring_core["spring-core"];
+	spring_expression["spring-expression"];
+	spring_jcl["spring-jcl"];
 	spring_web["spring-web"];
-	simple_app --> commons_lang3;
-	simple_app --> junit;
-	simple_app --> spring_boot_starter_web;
-	spring_boot --> spring_context;
+	spring_webmvc["spring-webmvc"];
+	tomcat_embed_core["tomcat-embed-core"];
+	tomcat_embed_el["tomcat-embed-el"];
+	tomcat_embed_websocket["tomcat-embed-websocket"];
+	jackson_databind --> jackson_annotations;
+	jackson_databind --> jackson_core;
+	junit_jupiter --> junit_jupiter_api;
+	junit_jupiter --> junit_jupiter_engine;
+	junit_jupiter --> junit_jupiter_params;
+	junit_jupiter_api --> apiguardian_api;
+	junit_jupiter_api --> junit_platform_commons;
+	junit_jupiter_api --> opentest4j;
+	junit_jupiter_engine --> junit_jupiter_api;
+	junit_jupiter_engine --> junit_platform_engine;
+	log4j_to_slf4j --> log4j_api;
+	logback_classic --> logback_core;
+	logback_classic --> slf4j_api;
+	simple_webapp --> commons_lang3;
+	simple_webapp --> junit_jupiter;
+	simple_webapp --> spring_boot_starter_web;
+	spring_boot_starter --> jakarta_annotation_api;
+	spring_boot_starter --> snakeyaml;
 	spring_boot_starter --> spring_boot;
 	spring_boot_starter --> spring_boot_autoconfigure;
+	spring_boot_starter --> spring_boot_starter_logging;
+	spring_boot_starter --> spring_core;
+	spring_boot_starter_json --> jackson_databind;
+	spring_boot_starter_json --> jackson_datatype_jdk8;
+	spring_boot_starter_json --> jackson_datatype_jsr310;
+	spring_boot_starter_json --> jackson_module_parameter_names;
+	spring_boot_starter_logging --> jul_to_slf4j;
+	spring_boot_starter_logging --> log4j_to_slf4j;
+	spring_boot_starter_logging --> logback_classic;
+	spring_boot_starter_tomcat --> tomcat_embed_core;
+	spring_boot_starter_tomcat --> tomcat_embed_el;
+	spring_boot_starter_tomcat --> tomcat_embed_websocket;
 	spring_boot_starter_web --> spring_boot_starter;
+	spring_boot_starter_web --> spring_boot_starter_json;
+	spring_boot_starter_web --> spring_boot_starter_tomcat;
 	spring_boot_starter_web --> spring_web;
+	spring_boot_starter_web --> spring_webmvc;
+	spring_context --> spring_expression;
+	spring_core --> spring_jcl;
+	spring_web --> spring_beans;
+	spring_webmvc --> spring_aop;
+	spring_webmvc --> spring_context;
+	spring_webmvc --> spring_web;
 
 classDef rootNode fill:#3B82F620,stroke:#3B82F6,stroke-width:3px,color:#000;
 classDef leafNode fill:#10B98120,stroke:#10B981,stroke-width:2px,color:#000;
 classDef intermediateNode fill:#F59E0B20,stroke:#F59E0B,stroke-width:2px,color:#000;
 
+	class apiguardian_api leafNode;
 	class commons_lang3 leafNode;
-	class junit leafNode;
-	class simple_app rootNode;
-	class spring_boot intermediateNode;
+	class jackson_annotations leafNode;
+	class jackson_core leafNode;
+	class jackson_databind intermediateNode;
+	class jackson_datatype_jdk8 leafNode;
+	class jackson_datatype_jsr310 leafNode;
+	class jackson_module_parameter_names leafNode;
+	class jakarta_annotation_api leafNode;
+	class jul_to_slf4j leafNode;
+	class junit_jupiter intermediateNode;
+	class junit_jupiter_api intermediateNode;
+	class junit_jupiter_engine intermediateNode;
+	class junit_jupiter_params leafNode;
+	class junit_platform_commons leafNode;
+	class junit_platform_engine leafNode;
+	class log4j_api leafNode;
+	class log4j_to_slf4j intermediateNode;
+	class logback_classic intermediateNode;
+	class logback_core leafNode;
+	class opentest4j leafNode;
+	class simple_webapp rootNode;
+	class slf4j_api leafNode;
+	class snakeyaml leafNode;
+	class spring_aop leafNode;
+	class spring_beans leafNode;
+	class spring_boot leafNode;
 	class spring_boot_autoconfigure leafNode;
 	class spring_boot_starter intermediateNode;
+	class spring_boot_starter_json intermediateNode;
+	class spring_boot_starter_logging intermediateNode;
+	class spring_boot_starter_tomcat intermediateNode;
 	class spring_boot_starter_web intermediateNode;
-	class spring_context leafNode;
-	class spring_web leafNode;`;
+	class spring_context intermediateNode;
+	class spring_core intermediateNode;
+	class spring_expression leafNode;
+	class spring_jcl leafNode;
+	class spring_web intermediateNode;
+	class spring_webmvc intermediateNode;
+	class tomcat_embed_core leafNode;
+	class tomcat_embed_el leafNode;
+	class tomcat_embed_websocket leafNode;`;
             
             try {
                 const { svg } = await mermaid.render('mySvgId', graphDefinition);
                 element.innerHTML = svg.replace(/[ ]*max-width:[ 0-9\.]*px;/i , '');
                 
-                // Initialize pan & zoom
+                // Initialize pan & zoom with improved settings for large diagrams
                 panZoomInstance = svgPanZoom('#mySvgId', {
                     zoomEnabled: true,
                     controlIconsEnabled: true,
                     fit: true,
                     center: true,
-                    minZoom: 0.1,
-                    maxZoom: 10
+                    minZoom: 0.01,  // Allow zooming out further for large diagrams
+                    maxZoom: 50,    // Allow much higher zoom for detailed inspection
+                    zoomScaleSensitivity: 0.2,  // Smoother zoom increments
+                    mouseWheelZoomEnabled: true,
+                    preventMouseEventsDefault: true,
+                    beforeZoom: function(oldScale, newScale) {
+                        // Prevent zooming beyond reasonable limits
+                        return newScale >= 0.01 && newScale <= 50;
+                    }
                 });
                 
                 // Setup node interactions
@@ -175,9 +289,27 @@ classDef intermediateNode fill:#F59E0B20,stroke:#F59E0B,stroke-width:2px,color:#
             });
         };
         
-        // Download functionality
+        // Button event listeners
         document.getElementById('downloadButton').addEventListener('click', function() {
             downloadSVG();
+        });
+        
+        document.getElementById('zoomInButton').addEventListener('click', function() {
+            if (panZoomInstance) {
+                panZoomInstance.zoomIn();
+            }
+        });
+        
+        document.getElementById('zoomOutButton').addEventListener('click', function() {
+            if (panZoomInstance) {
+                panZoomInstance.zoomOut();
+            }
+        });
+        
+        document.getElementById('resetZoomButton').addEventListener('click', function() {
+            if (panZoomInstance) {
+                panZoomInstance.reset();
+            }
         });
         
         const downloadSVG = function() {
@@ -214,6 +346,34 @@ classDef intermediateNode fill:#F59E0B20,stroke:#F59E0B,stroke-width:2px,color:#
                         e.preventDefault();
                         if (panZoomInstance) {
                             panZoomInstance.reset();
+                        }
+                        break;
+                    case '=':
+                    case '+':
+                        e.preventDefault();
+                        if (panZoomInstance) {
+                            panZoomInstance.zoomIn();
+                        }
+                        break;
+                    case '-':
+                        e.preventDefault();
+                        if (panZoomInstance) {
+                            panZoomInstance.zoomOut();
+                        }
+                        break;
+                }
+            } else {
+                // Non-Ctrl shortcuts
+                switch(e.key) {
+                    case '+':
+                    case '=':
+                        if (panZoomInstance) {
+                            panZoomInstance.zoomIn();
+                        }
+                        break;
+                    case '-':
+                        if (panZoomInstance) {
+                            panZoomInstance.zoomOut();
                         }
                         break;
                 }

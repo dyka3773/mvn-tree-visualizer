@@ -93,6 +93,12 @@ def get_html_template(theme: Theme) -> str:
             <button id="downloadButton" class="toggle-btn">Download SVG</button>
             <!-- Note: PNG download feature to be implemented in future version -->
         </div>
+        <div class="control-group">
+            <span class="control-label">Navigation:</span>
+            <button id="zoomInButton" class="toggle-btn">Zoom In (+)</button>
+            <button id="zoomOutButton" class="toggle-btn">Zoom Out (-)</button>
+            <button id="resetZoomButton" class="toggle-btn">Reset (Ctrl+R)</button>
+        </div>
     </div>
     
     <div id="graphDiv"></div>
@@ -115,14 +121,21 @@ def get_html_template(theme: Theme) -> str:
                 const {{ svg }} = await mermaid.render('mySvgId', graphDefinition);
                 element.innerHTML = svg.replace(/[ ]*max-width:[ 0-9\\.]*px;/i , '');
                 
-                // Initialize pan & zoom
+                // Initialize pan & zoom with improved settings for large diagrams
                 panZoomInstance = svgPanZoom('#mySvgId', {{
                     zoomEnabled: true,
                     controlIconsEnabled: true,
                     fit: true,
                     center: true,
-                    minZoom: 0.1,
-                    maxZoom: 10
+                    minZoom: 0.01,  // Allow zooming out further for large diagrams
+                    maxZoom: 50,    // Allow much higher zoom for detailed inspection
+                    zoomScaleSensitivity: 0.2,  // Smoother zoom increments
+                    mouseWheelZoomEnabled: true,
+                    preventMouseEventsDefault: true,
+                    beforeZoom: function(oldScale, newScale) {{
+                        // Prevent zooming beyond reasonable limits
+                        return newScale >= 0.01 && newScale <= 50;
+                    }}
                 }});
                 
                 // Setup node interactions
@@ -142,9 +155,27 @@ def get_html_template(theme: Theme) -> str:
             }});
         }};
         
-        // Download functionality
+        // Button event listeners
         document.getElementById('downloadButton').addEventListener('click', function() {{
             downloadSVG();
+        }});
+        
+        document.getElementById('zoomInButton').addEventListener('click', function() {{
+            if (panZoomInstance) {{
+                panZoomInstance.zoomIn();
+            }}
+        }});
+        
+        document.getElementById('zoomOutButton').addEventListener('click', function() {{
+            if (panZoomInstance) {{
+                panZoomInstance.zoomOut();
+            }}
+        }});
+        
+        document.getElementById('resetZoomButton').addEventListener('click', function() {{
+            if (panZoomInstance) {{
+                panZoomInstance.reset();
+            }}
         }});
         
         const downloadSVG = function() {{
@@ -181,6 +212,34 @@ def get_html_template(theme: Theme) -> str:
                         e.preventDefault();
                         if (panZoomInstance) {{
                             panZoomInstance.reset();
+                        }}
+                        break;
+                    case '=':
+                    case '+':
+                        e.preventDefault();
+                        if (panZoomInstance) {{
+                            panZoomInstance.zoomIn();
+                        }}
+                        break;
+                    case '-':
+                        e.preventDefault();
+                        if (panZoomInstance) {{
+                            panZoomInstance.zoomOut();
+                        }}
+                        break;
+                }}
+            }} else {{
+                // Non-Ctrl shortcuts
+                switch(e.key) {{
+                    case '+':
+                    case '=':
+                        if (panZoomInstance) {{
+                            panZoomInstance.zoomIn();
+                        }}
+                        break;
+                    case '-':
+                        if (panZoomInstance) {{
+                            panZoomInstance.zoomOut();
                         }}
                         break;
                 }}
