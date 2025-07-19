@@ -2,6 +2,10 @@
 
 from typing import Any, Dict
 
+# Mermaid configuration constants for large project support
+MAX_TEXT_SIZE_LARGE_PROJECTS = 900000000  # Increase max text size for large dependency trees
+MAX_EDGES_LARGE_PROJECTS = 20000  # Increase max edges for large projects
+
 
 class Theme:
     """Base theme configuration class."""
@@ -98,8 +102,8 @@ THEMES = {
                 "secondaryColor": "#f5f5f5",
                 "tertiaryColor": "#ffffff",
             },
-            "maxTextSize": 900000000,  # Increase max text size for large dependency trees
-            "maxEdges": 20000,  # Increase max edges for large projects
+            "maxTextSize": MAX_TEXT_SIZE_LARGE_PROJECTS,  # Increase max text size for large dependency trees
+            "maxEdges": MAX_EDGES_LARGE_PROJECTS,  # Increase max edges for large projects
         },
     ),
     "dark": Theme(
@@ -176,8 +180,8 @@ THEMES = {
                 "nodeTextColor": "#ffffff",
                 "textColor": "#ffffff",
             },
-            "maxTextSize": 900000000,  # Increase max text size for large dependency trees
-            "maxEdges": 20000,  # Increase max edges for large projects
+            "maxTextSize": MAX_TEXT_SIZE_LARGE_PROJECTS,  # Increase max text size for large dependency trees
+            "maxEdges": MAX_EDGES_LARGE_PROJECTS,  # Increase max edges for large projects
         },
     ),
 }

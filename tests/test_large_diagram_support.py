@@ -73,9 +73,9 @@ class TestEnhancedNavigation:
         html = get_html_template(theme)
 
         # Check for improved zoom limits
-        assert "minZoom: 0.01" in html  # Much lower min zoom for large diagrams
-        assert "maxZoom: 50" in html  # Much higher max zoom for detail inspection
-        assert "zoomScaleSensitivity: 0.2" in html  # Smoother zoom increments
+        assert "minZoom: MIN_ZOOM" in html  # Much lower min zoom for large diagrams
+        assert "maxZoom: MAX_ZOOM" in html  # Much higher max zoom for detail inspection
+        assert "zoomScaleSensitivity: ZOOM_SCALE_SENSITIVITY" in html  # Smoother zoom increments
         assert "mouseWheelZoomEnabled: true" in html
         assert "preventMouseEventsDefault: true" in html
 
@@ -108,7 +108,7 @@ class TestEnhancedNavigation:
         # Check for error prevention (updated to match simplified implementation)
         assert "catch (error)" in html  # Generic error handling
         assert "beforeZoom: function(oldScale, newScale)" in html
-        assert "return newScale >= 0.01 && newScale <= 50;" in html
+        assert "return newScale >= MIN_ZOOM && newScale <= MAX_ZOOM;" in html
 
     def test_control_group_organization(self):
         """Test that controls are properly organized in groups."""
@@ -130,8 +130,8 @@ class TestEnhancedNavigation:
             # Essential enhanced navigation features (search removed)
             assert "zoomInButton" in html
             assert "showNodeSearchDialog" not in html  # Should be removed
-            assert "minZoom: 0.01" in html
-            assert "maxZoom: 50" in html
+            assert "minZoom: MIN_ZOOM" in html
+            assert "maxZoom: MAX_ZOOM" in html
 
 
 class TestBackwardCompatibility:

@@ -28,13 +28,13 @@ class TestGitHubIssue7Fix:
         html = get_html_template(theme)
 
         # Verify much higher max zoom for detailed inspection
-        assert "maxZoom: 50" in html  # 5x improvement from original maxZoom: 10
+        assert "maxZoom: MAX_ZOOM" in html  # Using constant instead of hardcoded value
 
         # Verify much lower min zoom for overview of large diagrams
-        assert "minZoom: 0.01" in html  # 10x improvement from original minZoom: 0.1
+        assert "minZoom: MIN_ZOOM" in html  # Using constant instead of hardcoded value
 
         # Verify smoother zoom increments for better navigation
-        assert "zoomScaleSensitivity: 0.2" in html
+        assert "zoomScaleSensitivity: ZOOM_SCALE_SENSITIVITY" in html
 
     def test_navigation_controls_for_large_diagrams(self):
         """Test that navigation controls help with large diagrams (search functionality removed)."""
@@ -112,8 +112,8 @@ class TestGitHubIssue7Fix:
         }
 
         text_enhancements = [
-            "maxZoom: 50",  # Allows detailed inspection
-            "minZoom: 0.01",  # Allows full overview
+            "maxZoom: MAX_ZOOM",  # Allows detailed inspection
+            "minZoom: MIN_ZOOM",  # Allows full overview
         ]
 
         # Check config values
@@ -144,4 +144,4 @@ class TestGitHubIssue7Fix:
 
         # Verify that zoom controls have reasonable bounds to prevent performance issues
         assert "beforeZoom: function(oldScale, newScale)" in html
-        assert "return newScale >= 0.01 && newScale <= 50;" in html
+        assert "return newScale >= MIN_ZOOM && newScale <= MAX_ZOOM;" in html
