@@ -113,6 +113,10 @@ def get_html_template(theme: Theme) -> str:
         // Global variables
         let panZoomInstance = null;
         
+        const MIN_ZOOM = 0.01;
+        const MAX_ZOOM = 50;
+        const ZOOM_SCALE_SENSITIVITY = 0.2;
+        
         const drawDiagram = async function () {{
             const element = document.querySelector('#graphDiv');
             const graphDefinition = `{{{{diagram_definition}}}}`;
