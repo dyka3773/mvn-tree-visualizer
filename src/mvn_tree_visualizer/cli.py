@@ -108,8 +108,6 @@ def generate_diagram(
     except MvnTreeVisualizerError as e:
         # Our custom errors already have helpful messages
         print(f"[{timestamp}] ❌ Error: {e}")
-        if isinstance(e, DependencyFileNotFoundError):
-            print_maven_help()
     except KeyboardInterrupt:
         print(f"\n[{timestamp}] ⏹️  Operation cancelled by user")
     except Exception as e:
