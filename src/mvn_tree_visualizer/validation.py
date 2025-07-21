@@ -15,15 +15,6 @@ def find_dependency_files(directory: str, filename: str) -> list[str]:
     return found_files
 
 
-def print_maven_help() -> None:
-    """Print helpful Maven commands for generating dependency files."""
-    print("\n💡 To generate a Maven dependency file, try one of these commands:")
-    print("   mvn dependency:tree -DoutputFile=maven_dependency_file")
-    print("   mvn dependency:tree > maven_dependency_file")
-    print("   mvn dependency:tree -DoutputFile=maven_dependency_file -DoutputType=text")
-    print("\n📍 Make sure you're in a directory with a pom.xml file.")
-
-
 def validate_directory(directory: str) -> None:
     """Validate that the directory exists and is accessible."""
     if not os.path.exists(directory):

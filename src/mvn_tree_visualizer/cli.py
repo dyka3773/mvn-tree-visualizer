@@ -4,12 +4,12 @@ from pathlib import Path
 from typing import NoReturn
 
 from .diagram import create_diagram
-from .exceptions import DependencyFileNotFoundError, DependencyParsingError, MvnTreeVisualizerError, OutputGenerationError
+from .exceptions import DependencyParsingError, MvnTreeVisualizerError, OutputGenerationError
 from .file_watcher import FileWatcher
 from .get_dependencies_in_one_file import merge_files
 from .outputs.html_output import create_html_diagram
 from .outputs.json_output import create_json_output
-from .validation import find_dependency_files, print_maven_help, validate_dependency_files, validate_output_directory
+from .validation import find_dependency_files, validate_dependency_files, validate_output_directory
 
 
 def generate_diagram(
@@ -108,8 +108,6 @@ def generate_diagram(
     except MvnTreeVisualizerError as e:
         # Our custom errors already have helpful messages
         print(f"[{timestamp}] ❌ Error: {e}")
-        if isinstance(e, DependencyFileNotFoundError):
-            print_maven_help()
     except KeyboardInterrupt:
         print(f"\n[{timestamp}] ⏹️  Operation cancelled by user")
     except Exception as e:

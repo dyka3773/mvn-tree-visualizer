@@ -6,7 +6,7 @@ This directory contains a simple test to demonstrate the watch mode functionalit
 
 1. **Start watch mode:**
    ```bash
-   mvn_tree_visualizer --filename test_maven_file --output watch-test.html --watch
+   mvn-tree-visualizer --filename test_maven_file --output watch-test.html --watch
    ```
 
 2. **Modify the test file** while the watch is running to see automatic regeneration.
