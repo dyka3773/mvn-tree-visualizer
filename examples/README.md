@@ -19,11 +19,11 @@ The `simple-project/` directory contains a modern Spring Boot 3.2 web applicatio
 cd examples/simple-project
 
 # Generate with different themes
-mvn_tree_visualizer --filename maven_dependency_file --output diagram-minimal.html
-mvn_tree_visualizer --filename maven_dependency_file --output diagram-dark.html --theme dark
+mvn-tree-visualizer --filename maven_dependency_file --output diagram-minimal.html
+mvn-tree-visualizer --filename maven_dependency_file --output diagram-dark.html --theme dark
 
 # Generate JSON output for automation
-mvn_tree_visualizer --filename maven_dependency_file --output dependencies.json --format json
+mvn-tree-visualizer --filename maven_dependency_file --output dependencies.json --format json
 ```
 
 ## Complex Project Example
@@ -46,8 +46,8 @@ The `complex-project/` directory demonstrates a **real-world enterprise microser
 cd examples/complex-project
 
 # Generate with version numbers (recommended for enterprise projects)
-mvn_tree_visualizer --filename maven_dependency_file --output diagram-minimal.html --show-versions
-mvn_tree_visualizer --filename maven_dependency_file --output diagram-dark.html --theme dark --show-versions
+mvn-tree-visualizer --filename maven_dependency_file --output diagram-minimal.html --show-versions
+mvn-tree-visualizer --filename maven_dependency_file --output diagram-dark.html --theme dark --show-versions
 ```
 
 ## 🎨 Theme Comparison
@@ -122,13 +122,13 @@ maxZoom: 50             // 50x zoom in for detailed inspection
 2. **Create visualizations**:
    ```bash
    # Basic diagram
-   mvn_tree_visualizer --filename maven_dependency_file --output diagram.html
+   mvn-tree-visualizer --filename maven_dependency_file --output diagram.html
    
    # With versions for detailed analysis
-   mvn_tree_visualizer --filename maven_dependency_file --output diagram.html --show-versions
+   mvn-tree-visualizer --filename maven_dependency_file --output diagram.html --show-versions
    
    # Dark theme for coding sessions
-   mvn_tree_visualizer --filename maven_dependency_file --output diagram.html --theme dark
+   mvn-tree-visualizer --filename maven_dependency_file --output diagram.html --theme dark
    ```
 
 3. **Open in browser** and explore with enhanced zoom and navigation controls!
@@ -137,28 +137,28 @@ maxZoom: 50             // 50x zoom in for detailed inspection
 
 ### 1. Quick Dependency Overview
 ```bash
-mvn_tree_visualizer --filename maven_dependency_file --output overview.html
+mvn-tree-visualizer --filename maven_dependency_file --output overview.html
 ```
 - Clean view without version numbers
 - Easy to identify dependency relationships
 
 ### 2. Detailed Analysis with Versions
 ```bash
-mvn_tree_visualizer --filename maven_dependency_file --output detailed.html --show-versions
+mvn-tree-visualizer --filename maven_dependency_file --output detailed.html --show-versions
 ```
 - Shows all version information
 - Useful for debugging version conflicts
 
 ### 3. Scripting and Automation
 ```bash
-mvn_tree_visualizer --filename maven_dependency_file --output deps.json --format json
+mvn-tree-visualizer --filename maven_dependency_file --output deps.json --format json
 ```
 - Machine-readable JSON format
 - Perfect for CI/CD pipelines and automated analysis
 
 ### 4. Multi-module Projects
 ```bash
-mvn_tree_visualizer --directory ./my-project --output multi-module.html
+mvn-tree-visualizer --directory ./my-project --output multi-module.html
 ```
 - Automatically finds and merges dependency files from subdirectories
 - Comprehensive view of entire project structure

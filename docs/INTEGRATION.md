@@ -35,8 +35,8 @@ jobs:
     
     - name: Create dependency visualization
       run: |
-        mvn_tree_visualizer --filename maven_dependency_file --output dependencies.json --format json
-        mvn_tree_visualizer --filename maven_dependency_file --output dependencies.html
+        mvn-tree-visualizer --filename maven_dependency_file --output dependencies.json --format json
+        mvn-tree-visualizer --filename maven_dependency_file --output dependencies.html
     
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
@@ -58,7 +58,7 @@ pipeline {
             steps {
                 sh 'mvn dependency:tree -DoutputFile=maven_dependency_file'
                 sh 'pip install mvn-tree-visualizer'
-                sh 'mvn_tree_visualizer --filename maven_dependency_file --output dependencies.json --format json'
+                sh 'mvn-tree-visualizer --filename maven_dependency_file --output dependencies.json --format json'
             }
         }
         
@@ -91,7 +91,7 @@ def analyze_dependencies(project_path):
     
     # Generate JSON output
     subprocess.run([
-        'mvn_tree_visualizer', 
+        'mvn-tree-visualizer', 
         '--filename', 'maven_dependency_file',
         '--output', 'dependencies.json',
         '--format', 'json'
@@ -127,9 +127,9 @@ cd "$PROJECT_DIR"
 mvn dependency:tree -DoutputFile=maven_dependency_file
 
 # Generate visualizations
-mvn_tree_visualizer --filename maven_dependency_file --output "$OUTPUT_DIR/dependencies.html"
-mvn_tree_visualizer --filename maven_dependency_file --output "$OUTPUT_DIR/dependencies.json" --format json
-mvn_tree_visualizer --filename maven_dependency_file --output "$OUTPUT_DIR/dependencies-with-versions.json" --format json --show-versions
+mvn-tree-visualizer --filename maven_dependency_file --output "$OUTPUT_DIR/dependencies.html"
+mvn-tree-visualizer --filename maven_dependency_file --output "$OUTPUT_DIR/dependencies.json" --format json
+mvn-tree-visualizer --filename maven_dependency_file --output "$OUTPUT_DIR/dependencies-with-versions.json" --format json --show-versions
 
 echo "Analysis complete! Check $OUTPUT_DIR for results."
 ```
@@ -220,7 +220,7 @@ RUN mvn dependency:tree -DoutputFile=maven_dependency_file
 FROM python:3.13-slim AS visualizer
 RUN pip install mvn-tree-visualizer
 COPY --from=maven-deps /app/maven_dependency_file .
-RUN mvn_tree_visualizer --filename maven_dependency_file --output dependencies.json --format json
+RUN mvn-tree-visualizer --filename maven_dependency_file --output dependencies.json --format json
 
 FROM nginx:alpine
 COPY --from=visualizer /dependencies.json /usr/share/nginx/html/
@@ -253,7 +253,7 @@ find . -name "pom.xml" -exec dirname {} \; | while read project; do
     echo "Processing $project"
     cd "$project"
     mvn dependency:tree -DoutputFile=maven_dependency_file
-    mvn_tree_visualizer --filename maven_dependency_file --output "../analysis/$(basename $project).json" --format json
+    mvn-tree-visualizer --filename maven_dependency_file --output "../analysis/$(basename $project).json" --format json
     cd - > /dev/null
 done
 ```

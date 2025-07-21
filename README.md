@@ -60,36 +60,36 @@ Use the `mvn-tree-visualizer` command to generate the diagram.
 
 #### HTML Output (Interactive Diagram)
 ```bash
-mvn_tree_visualizer --filename "maven_dependency_file" --output "diagram.html" --format html
+mvn-tree-visualizer --filename "maven_dependency_file" --output "diagram.html" --format html
 ```
 
 #### JSON Output (Structured Data)
 ```bash
-mvn_tree_visualizer --filename "maven_dependency_file" --output "dependencies.json" --format json
+mvn-tree-visualizer --filename "maven_dependency_file" --output "dependencies.json" --format json
 ```
 
 #### With Version Information
 ```bash
-mvn_tree_visualizer --filename "maven_dependency_file" --output "diagram.html" --show-versions
+mvn-tree-visualizer --filename "maven_dependency_file" --output "diagram.html" --show-versions
 ```
 
 #### With Custom Themes
 ```bash
 # Dark theme for low-light environments  
-mvn_tree_visualizer --filename "maven_dependency_file" --output "diagram.html" --theme dark
+mvn-tree-visualizer --filename "maven_dependency_file" --output "diagram.html" --theme dark
 
 # Default minimal theme (clean monospace design)
-mvn_tree_visualizer --filename "maven_dependency_file" --output "diagram.html"
+mvn-tree-visualizer --filename "maven_dependency_file" --output "diagram.html"
 ```
 
 #### JSON Output with Versions
 ```bash
-mvn_tree_visualizer --filename "maven_dependency_file" --output "dependencies.json" --format json --show-versions
+mvn-tree-visualizer --filename "maven_dependency_file" --output "dependencies.json" --format json --show-versions
 ```
 
 #### Watch Mode (Auto-regeneration)
 ```bash
-mvn_tree_visualizer --filename "maven_dependency_file" --output "diagram.html" --watch
+mvn-tree-visualizer --filename "maven_dependency_file" --output "diagram.html" --watch
 ```
 
 > **💡 Tip:** In watch mode, the tool will monitor for changes to your Maven dependency files and automatically regenerate the diagram. Perfect for development workflows! Press `Ctrl+C` to stop watching.
