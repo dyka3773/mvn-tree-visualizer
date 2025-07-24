@@ -2,108 +2,109 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
+and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-<!--next-version-placeholder-->
+<!-- insertion marker -->
+## [v1.6.0-beta.1](https://github.com/dyka3773/mvn-tree-visualizer/releases/tag/v1.6.0-beta.1) - 2025-07-24
 
-## [1.3.0] - 2025-07-09
+<small>[Compare with v1.5.2](https://github.com/dyka3773/mvn-tree-visualizer/compare/v1.5.2...v1.6.0-beta.1)</small>
 
-### Added
-- Watch mode functionality with `--watch` flag for automatic diagram regeneration
-- File system monitoring using watchdog library for real-time updates
-- New file_watcher module for decoupled file monitoring logic
-- Enhanced error handling system with comprehensive user guidance
-  - Clear error messages for missing dependency files with helpful Maven commands
-  - Specific validation for directories, file permissions, and content
-  - Detailed diagnostics for parsing errors and empty files
-  - User-friendly error messages with emojis and actionable suggestions
-- Custom exception classes for better error categorization
-- Comprehensive test coverage for error scenarios
+### Features
 
-### Changed
-- **BREAKING**: JSON output now uses simplified package names (artifact-id only) to match HTML output behavior
-  - Root packages now show as "my-app" instead of "com.example:my-app"
-  - Ensures consistency between HTML and JSON output formats
-- Refactored CLI module to separate concerns and improve maintainability
-- Improved error handling with timestamped console output and graceful failure modes
-- Enhanced file processing with better encoding handling (UTF-8) and validation
-- Updated dependency file merging logic with better error detection
+- add beta release support for develop branch ([e578499](https://github.com/dyka3773/mvn-tree-visualizer/commit/e5784991ae136242fd4c8ddb929704f2b6f77616) by Hercules Konsoulas).
 
-### Fixed
-- Removed unused imports and improved code organization
-- Fixed intermediate file path handling in diagram generation
+### Bug Fixes
 
-## [1.2.0] - 2025-07-09
+- implement comprehensive changelog generation with git-changelog ([17e0c89](https://github.com/dyka3773/mvn-tree-visualizer/commit/17e0c894dfaff23ab464be52c9e1df8ac4bf71bc) by Hercules Konsoulas).
 
-### Added
-- Comprehensive type hints throughout the entire codebase
-- `--show-versions` flag to display dependency versions in both HTML and JSON outputs
-- Support for complex dependency trees with real-world examples
-- "Typing :: Typed" classifier in pyproject.toml to indicate type hint support
-- CHANGELOG.md to track project changes
+## [v1.5.2](https://github.com/dyka3773/mvn-tree-visualizer/releases/tag/v1.5.2) - 2025-07-24
 
-### Changed
-- Enhanced CLI help text to reflect new features
-- Improved JSON output structure for better programmatic access
-- Updated documentation with version feature examples
+<small>[Compare with v1.5.1](https://github.com/dyka3773/mvn-tree-visualizer/compare/v1.5.1...v1.5.2)</small>
 
-### Fixed
-- Type annotation issues and improved code clarity
-- JSON serialization for complex dependency structures
+### Bug Fixes
 
-## [1.1.0] - 2025-07-05
+- enable automatic changelog generation in semantic release ([c10460e](https://github.com/dyka3773/mvn-tree-visualizer/commit/c10460e09e96510ae95e795dafae53ac28230c50) by Hercules Konsoulas).
 
-### Added
-- JSON output format option for programmatic consumption
-- Multi-file support for Maven modules (searches for multiple `maven_dependency_file`)
-- File merging functionality for complex projects
-- Comprehensive error handling for file operations
-- Enhanced CLI with format selection
+## [v1.5.1](https://github.com/dyka3773/mvn-tree-visualizer/releases/tag/v1.5.1) - 2025-07-21
 
-### Changed
-- Improved project structure with organized outputs directory
-- Better separation of concerns between HTML and JSON generation
+<small>[Compare with v1.5.0](https://github.com/dyka3773/mvn-tree-visualizer/compare/v1.5.0...v1.5.1)</small>
 
-### Fixed
-- File handling issues with large dependency trees
-- Output format validation and error messages
+### Bug Fixes
 
-## [1.0.0] - 2025-07-01
+- resolve an issue causing similar duplicate logs ([e861008](https://github.com/dyka3773/mvn-tree-visualizer/commit/e86100867de380ea37ff49a8b4d4659486bd7046) by Hercules Konsoulas).
 
-### Added
-- Initial release of mvn-tree-visualizer
-- HTML diagram generation using Mermaid.js
-- CLI interface for processing Maven dependency files
-- Basic error handling and validation
-- Support for Maven dependency tree parsing
-- Interactive HTML output with visual dependency graphs
-- Improved code documentation and readability with type hints
-- Updated README.md with new feature documentation and usage examples
+### Code Refactoring
 
-### Fixed
-- Better static type checking support for development tools
+- remove unused and wrong imports ([3051ea2](https://github.com/dyka3773/mvn-tree-visualizer/commit/3051ea20b9f40f40c97a5b3aed5a67c167b75a99) by Hercules Konsoulas).
 
-## [1.1.0] - 2025-07-08
+## [v1.5.0](https://github.com/dyka3773/mvn-tree-visualizer/releases/tag/v1.5.0) - 2025-07-19
 
-### Added
-- JSON output format support alongside existing HTML format
-- `--format` CLI argument to choose between HTML and JSON outputs
-- Comprehensive test suite for both output formats
-- GitHub Actions workflow for automated PyPI publishing
+<small>[Compare with v1.4.0](https://github.com/dyka3773/mvn-tree-visualizer/compare/v1.4.0...v1.5.0)</small>
 
-### Changed
-- Decoupled output generation logic from core diagram creation
-- Improved code modularity with separate output modules
+### Features
 
-### Fixed
-- Enhanced project structure and maintainability
+- resolve GitHub issue #7 with enhanced large project support ([3b3b14e](https://github.com/dyka3773/mvn-tree-visualizer/commit/3b3b14e88608c4b1c64295bbf786a898e3b600be) by Hercules Konsoulas).
 
-## [1.0.0] - Initial Release
+### Code Refactoring
 
-### Added
-- HTML diagram generation using Mermaid.js
-- Interactive SVG export functionality
-- File merging from multiple Maven dependency files
-- Basic CLI interface with essential options
-- Project documentation and contribution guidelines
+- updated another test to stay consistent with the previous commits ([01a100f](https://github.com/dyka3773/mvn-tree-visualizer/commit/01a100f01587a3f2b43eaa9b6859d7c77e849202) by Hercules Konsoulas).
+- centralize all magic numbers into shared constants module ([e3ee53c](https://github.com/dyka3773/mvn-tree-visualizer/commit/e3ee53cd99f146ca56265ea54c1ea3389ee1e1d8) by Hercules Konsoulas).
+- extract hardcoded magic numbers to named constants ([f1f6734](https://github.com/dyka3773/mvn-tree-visualizer/commit/f1f67347b401959d1700e2da36632e1eb87e6a34) by Hercules Konsoulas).
+- fix to previous commit ([2652892](https://github.com/dyka3773/mvn-tree-visualizer/commit/265289286eafe94f3aeef649ed6856c587061941) by Hercules Konsoulas).
+- extract zoom configuration values to constants ([b2d506e](https://github.com/dyka3773/mvn-tree-visualizer/commit/b2d506e7446e79e998be3bc6bd000930a7cab78c) by Hercules Konsoulas).
+
+## [v1.4.0](https://github.com/dyka3773/mvn-tree-visualizer/releases/tag/v1.4.0) - 2025-07-17
+
+<small>[Compare with v1.3.0](https://github.com/dyka3773/mvn-tree-visualizer/compare/v1.3.0...v1.4.0)</small>
+
+### Features
+
+- add theme system with minimal and dark themes ([649e317](https://github.com/dyka3773/mvn-tree-visualizer/commit/649e317dac9531cc16b03cba3602994188468bf9) by Hercules Konsoulas).
+
+## [v1.3.0](https://github.com/dyka3773/mvn-tree-visualizer/releases/tag/v1.3.0) - 2025-07-16
+
+<small>[Compare with v1.2.0](https://github.com/dyka3773/mvn-tree-visualizer/compare/v1.2.0...v1.3.0)</small>
+
+### Features
+
+- implement automated release system ([e8fc847](https://github.com/dyka3773/mvn-tree-visualizer/commit/e8fc8472ecbc3ebc7376b07f43aae63a27f299bc) by Hercules Konsoulas).
+- implement v1.3.0 user experience improvements ([2b87699](https://github.com/dyka3773/mvn-tree-visualizer/commit/2b8769903c34527542ee491ea9ac58f46e439e23) by Hercules Konsoulas).
+- enhance error handling and refactor code organization ([c4a183c](https://github.com/dyka3773/mvn-tree-visualizer/commit/c4a183c59380c30d6fe74e8609fc5eb706e88c85) by Hercules Konsoulas).
+- transform repository into professional open-source project ([4ceebdc](https://github.com/dyka3773/mvn-tree-visualizer/commit/4ceebdc886c87eb0d9852259a3aa06d0bc610ab2) by Hercules Konsoulas).
+
+### Bug Fixes
+
+- install build module within semantic-release build command ([cd5718d](https://github.com/dyka3773/mvn-tree-visualizer/commit/cd5718d56cd91934b55285c46713bb6cd738b4fa) by Hercules Konsoulas).
+- ensure build tools available for semantic-release action ([e2db367](https://github.com/dyka3773/mvn-tree-visualizer/commit/e2db367f3ebd14768eee5efc5d7515fab0f48c1c) by Hercules Konsoulas).
+- use uv run for build command in semantic-release ([bc5857b](https://github.com/dyka3773/mvn-tree-visualizer/commit/bc5857b080224b2489542470bff9beabf84b59fa) by Hercules Konsoulas).
+- add missing ruff dependency for CI linting ([675d892](https://github.com/dyka3773/mvn-tree-visualizer/commit/675d89209db91d0bbf234b7872a5a1893d81b729) by Hercules Konsoulas).
+- corrected funding link ([13c76c4](https://github.com/dyka3773/mvn-tree-visualizer/commit/13c76c4ad99ead6ecb5d7471c07b5ea5a22ffc8f) by Hercules Konsoulas).
+- install pytest separately in CI to resolve command not found error ([1a99192](https://github.com/dyka3773/mvn-tree-visualizer/commit/1a991927a9d94a405170d93660b62f89513e0056) by Hercules Konsoulas).
+- update JSON tests to match show_versions=False default ([88bcf95](https://github.com/dyka3773/mvn-tree-visualizer/commit/88bcf951f08243c97ddf8d3f3fa4c26e3f7de41d) by Hercules Konsoulas).
+
+### Code Refactoring
+
+- add watch mode and standardize JSON output format ([c1a6e14](https://github.com/dyka3773/mvn-tree-visualizer/commit/c1a6e143120031b4f9cf2417cb5db32a35899ddb) by Hercules Konsoulas).
+
+## [v1.2.0](https://github.com/dyka3773/mvn-tree-visualizer/releases/tag/v1.2.0) - 2025-07-08
+
+<small>[Compare with v1.1.0](https://github.com/dyka3773/mvn-tree-visualizer/compare/v1.1.0...v1.2.0)</small>
+
+### Features
+
+- add --show-versions flag for both HTML and JSON outputs ([80c7d10](https://github.com/dyka3773/mvn-tree-visualizer/commit/80c7d1089e21c3a345bdc9a61242ed1233605a0e) by Hercules Konsoulas).
+- add comprehensive type hints to improve code quality ([b9b9da5](https://github.com/dyka3773/mvn-tree-visualizer/commit/b9b9da5a48b3c40feeca40de0c69eef3316afc7f) by Hercules Konsoulas).
+
+### Bug Fixes
+
+- Correct dependency installation in workflow ([3e500fc](https://github.com/dyka3773/mvn-tree-visualizer/commit/3e500fc76927b736a0f529ad8b2261b6735b949d) by Hercules Konsoulas).
+
+## [v1.1.0](https://github.com/dyka3773/mvn-tree-visualizer/releases/tag/v1.1.0) - 2025-07-08
+
+<small>[Compare with first commit](https://github.com/dyka3773/mvn-tree-visualizer/compare/58ba414323de8d69f0f80a514cf9bb14f40fa22c...v1.1.0)</small>
+
+### Features
+
+- Add JSON output and decouple output logic ([e6cd138](https://github.com/dyka3773/mvn-tree-visualizer/commit/e6cd13836f93221f2dbd334574ca614d7dbe0e4a) by Hercules Konsoulas).
+
