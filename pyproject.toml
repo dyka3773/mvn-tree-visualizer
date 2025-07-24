@@ -67,11 +67,6 @@ remove_dist = false
 match = "master"
 prerelease = false
 
-[tool.semantic_release.branches.develop]
-match = "develop"
-prerelease = true
-prerelease_token = "beta"
-
 [tool.semantic_release.commit_parser_options]
 allowed_tags = ["build", "chore", "ci", "docs", "feat", "fix", "perf", "style", "refactor", "test"]
 minor_tags = ["feat"]
