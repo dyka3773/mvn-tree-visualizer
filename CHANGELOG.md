@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 <!-- insertion marker -->
+## [v1.6.0](https://github.com/dyka3773/mvn-tree-visualizer/releases/tag/v1.6.0) - 2025-07-24
+
+<small>[Compare with v1.6.0-beta.1](https://github.com/dyka3773/mvn-tree-visualizer/compare/v1.6.0-beta.1...v1.6.0)</small>
+
 ## [v1.6.0-beta.1](https://github.com/dyka3773/mvn-tree-visualizer/releases/tag/v1.6.0-beta.1) - 2025-07-24
 
 <small>[Compare with v1.5.2](https://github.com/dyka3773/mvn-tree-visualizer/compare/v1.5.2...v1.6.0-beta.1)</small>
@@ -107,3 +111,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Features
 
 - Add JSON output and decouple output logic ([e6cd138](https://github.com/dyka3773/mvn-tree-visualizer/commit/e6cd13836f93221f2dbd334574ca614d7dbe0e4a) by Hercules Konsoulas).
+
