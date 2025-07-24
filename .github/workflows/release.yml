@@ -2,7 +2,7 @@ name: Semantic Release
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, develop ]
   workflow_dispatch:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
