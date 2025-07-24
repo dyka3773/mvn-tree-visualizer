@@ -45,6 +45,7 @@ dev = [
     "pytest>=8.3.2",
     "python-semantic-release>=10.2.0",
     "build>=1.0.0",
+    "git-changelog>=2.5.3",
 ]
 
 [build-system]
@@ -75,3 +76,19 @@ prerelease_token = "beta"
 allowed_tags = ["build", "chore", "ci", "docs", "feat", "fix", "perf", "style", "refactor", "test"]
 minor_tags = ["feat"]
 patch_tags = ["fix", "perf"]
+
+[tool.git-changelog]
+convention = "conventional"
+template = "keepachangelog"
+sections = [
+    {type = "feat", section = "Features", scopes = []},
+    {type = "fix", section = "Bug Fixes", scopes = []},
+    {type = "refactor", section = "Code Refactoring", scopes = []},
+    {type = "perf", section = "Performance Improvements", scopes = []},
+    {type = "docs", section = "Documentation", scopes = []},
+    {type = "chore", section = "Miscellaneous Chores", scopes = []},
+    {type = "ci", section = "Continuous Integration", scopes = []},
+    {type = "build", section = "Build System", scopes = []},
+    {type = "test", section = "Tests", scopes = []},
+    {type = "style", section = "Style", scopes = []},
+]
