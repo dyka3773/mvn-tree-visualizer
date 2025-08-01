@@ -2,6 +2,8 @@
 
 import subprocess
 import sys
+import tempfile
+from pathlib import Path
 from unittest.mock import patch
 
 import pytest
@@ -61,7 +63,7 @@ class TestVersionFlag:
                 ],
                 capture_output=True,
                 text=True,
-                timeout=10,
+                timeout=8,
                 cwd=".",
             )
 
@@ -91,7 +93,7 @@ class TestVersionFlag:
                 ],
                 capture_output=True,
                 text=True,
-                timeout=10,
+                timeout=8,
                 cwd=".",
             )
 
@@ -122,7 +124,7 @@ class TestVersionFlag:
                 ],
                 capture_output=True,
                 text=True,
-                timeout=10,
+                timeout=8,
                 cwd=".",
             )
 
@@ -147,7 +149,7 @@ class TestVersionFlag:
                 ],
                 capture_output=True,
                 text=True,
-                timeout=10,
+                timeout=8,
                 cwd=".",
             )
 
@@ -172,97 +174,121 @@ class TestQuietFlag:
 
     def test_quiet_flag_long_form(self):
         """Test --quiet flag suppresses output."""
-        try:
-            result = subprocess.run(
-                [
-                    sys.executable,
-                    "-m",
-                    "mvn_tree_visualizer",
-                    "examples/simple-project",
-                    "--quiet",
-                ],
-                capture_output=True,
-                text=True,
-                timeout=30,
-                cwd=".",
-            )
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_output = Path(temp_dir) / "test_diagram.html"
 
-            # Should exit with code 0 (success)
-            assert result.returncode == 0
+            try:
+                result = subprocess.run(
+                    [
+                        sys.executable,
+                        "-m",
+                        "mvn_tree_visualizer",
+                        "examples/simple-project",
+                        "--quiet",
+                        "--output",
+                        str(temp_output),
+                    ],
+                    capture_output=True,
+                    text=True,
+                    timeout=8,
+                    cwd=".",
+                )
 
-            # Should have no stdout output when quiet
-            assert result.stdout.strip() == ""
+                # Should exit with code 0 (success)
+                assert result.returncode == 0
 
-            # Should not have stderr output for normal operation
-            assert result.stderr == ""
+                # Should have no stdout output when quiet
+                assert result.stdout.strip() == ""
 
-        except subprocess.TimeoutExpired:
-            pytest.fail("--quiet command timed out")
-        except FileNotFoundError:
-            pytest.skip("mvn_tree_visualizer module not available for subprocess testing")
+                # Should not have stderr output for normal operation
+                assert result.stderr == ""
+
+                # Should have created the output file
+                assert temp_output.exists()
+
+            except subprocess.TimeoutExpired:
+                pytest.fail("--quiet command timed out")
+            except FileNotFoundError:
+                pytest.skip("mvn_tree_visualizer module not available for subprocess testing")
 
     def test_quiet_flag_short_form(self):
         """Test -q flag suppresses output."""
-        try:
-            result = subprocess.run(
-                [
-                    sys.executable,
-                    "-m",
-                    "mvn_tree_visualizer",
-                    "examples/simple-project",
-                    "-q",
-                ],
-                capture_output=True,
-                text=True,
-                timeout=30,
-                cwd=".",
-            )
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_output = Path(temp_dir) / "test_diagram.html"
 
-            # Should exit with code 0 (success)
-            assert result.returncode == 0
+            try:
+                result = subprocess.run(
+                    [
+                        sys.executable,
+                        "-m",
+                        "mvn_tree_visualizer",
+                        "examples/simple-project",
+                        "-q",
+                        "--output",
+                        str(temp_output),
+                    ],
+                    capture_output=True,
+                    text=True,
+                    timeout=8,
+                    cwd=".",
+                )
 
-            # Should have no stdout output when quiet
-            assert result.stdout.strip() == ""
+                # Should exit with code 0 (success)
+                assert result.returncode == 0
 
-            # Should not have stderr output for normal operation
-            assert result.stderr == ""
+                # Should have no stdout output when quiet
+                assert result.stdout.strip() == ""
 
-        except subprocess.TimeoutExpired:
-            pytest.fail("-q command timed out")
-        except FileNotFoundError:
-            pytest.skip("mvn_tree_visualizer module not available for subprocess testing")
+                # Should not have stderr output for normal operation
+                assert result.stderr == ""
+
+                # Should have created the output file
+                assert temp_output.exists()
+
+            except subprocess.TimeoutExpired:
+                pytest.fail("-q command timed out")
+            except FileNotFoundError:
+                pytest.skip("mvn_tree_visualizer module not available for subprocess testing")
 
     def test_normal_output_without_quiet(self):
         """Test that normal output works when --quiet is not used."""
-        try:
-            result = subprocess.run(
-                [
-                    sys.executable,
-                    "-m",
-                    "mvn_tree_visualizer",
-                    "examples/simple-project",
-                ],
-                capture_output=True,
-                text=True,
-                timeout=30,
-                cwd=".",
-            )
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_output = Path(temp_dir) / "test_diagram.html"
 
-            # Should exit with code 0 (success)
-            assert result.returncode == 0
+            try:
+                result = subprocess.run(
+                    [
+                        sys.executable,
+                        "-m",
+                        "mvn_tree_visualizer",
+                        "examples/simple-project",
+                        "--output",
+                        str(temp_output),
+                    ],
+                    capture_output=True,
+                    text=True,
+                    timeout=8,
+                    cwd=".",
+                )
 
-            # Should have stdout output when not quiet
-            assert len(result.stdout.strip()) > 0
-            assert "Generating initial diagram..." in result.stdout
-            assert "Diagram generated and saved" in result.stdout
+                # Should exit with code 0 (success)
+                assert result.returncode == 0
 
-            # Should not have stderr output for normal operation
-            assert result.stderr == ""
+                # Should have stdout output when not quiet
+                assert len(result.stdout.strip()) > 0
+                assert "Generating initial diagram..." in result.stdout
+                assert "Diagram generated and saved" in result.stdout
 
-        except subprocess.TimeoutExpired:
-            pytest.fail("normal output command timed out")
-        except FileNotFoundError:
-            pytest.skip("mvn_tree_visualizer module not available for subprocess testing")
+                # Should not have stderr output for normal operation
+                assert result.stderr == ""
+
+                # Should have created the output file
+                assert temp_output.exists()
+
+            except subprocess.TimeoutExpired:
+                pytest.fail("normal output command timed out")
+            except FileNotFoundError:
+                pytest.skip("mvn_tree_visualizer module not available for subprocess testing")
 
     def test_quiet_flag_still_shows_errors(self):
         """Test that --quiet still shows errors on stderr."""
@@ -277,7 +303,7 @@ class TestQuietFlag:
                 ],
                 capture_output=True,
                 text=True,
-                timeout=30,
+                timeout=8,
                 cwd=".",
             )
 

@@ -240,9 +240,10 @@ def cli() -> NoReturn:
     except Exception:
         sys.exit(1)
 
-    if not watch_mode and not quiet:
-        print("You can open it in your browser to view the dependency tree.")
-        print("Thank you for using mvn-tree-visualizer!")
+    if not watch_mode:
+        if not quiet:
+            print("You can open it in your browser to view the dependency tree.")
+            print("Thank you for using mvn-tree-visualizer!")
         return
 
     # Watch mode
