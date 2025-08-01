@@ -48,6 +48,7 @@ dev = [
     "build>=1.0.0",
     "git-changelog>=2.5.3",
     "tox>=4.28.4",
+    "pytest>=8.4.1",
 ]
 
 [build-system]

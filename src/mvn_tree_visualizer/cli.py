@@ -1,5 +1,6 @@
 import argparse
 import time
+from importlib import metadata
 from pathlib import Path
 from typing import NoReturn
 
@@ -10,6 +11,14 @@ from .get_dependencies_in_one_file import merge_files
 from .outputs.html_output import create_html_diagram
 from .outputs.json_output import create_json_output
 from .validation import find_dependency_files, validate_dependency_files, validate_output_directory
+
+
+def get_version() -> str:
+    """Get the current version of the package."""
+    try:
+        return metadata.version("mvn-tree-visualizer")
+    except metadata.PackageNotFoundError:
+        return "unknown"
 
 
 def generate_diagram(
@@ -128,6 +137,14 @@ def cli() -> NoReturn:
         prog="mvn-tree-visualizer",
         description="Generate a dependency diagram from a file.",
     )
+
+    parser.add_argument(
+        "-v",
+        "--version",
+        action="version",
+        version=f"mvn-tree-visualizer {get_version()}",
+    )
+
     parser.add_argument(
         "directory",
         type=str,

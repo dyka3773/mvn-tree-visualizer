@@ -123,6 +123,7 @@ Each example includes:
 | `--watch` | Watch for file changes and auto-regenerate diagram | `False` |
 | `--directory` | The directory to scan for the Maven dependency file(s) | current directory |
 | `--keep-tree` | Keep the intermediate `dependency_tree.txt` file | `False` |
+| `--version`, `-v` | Show the current version and exit | - |
 | `--help` | Show the help message and exit | - |
 
 ### Theme Options
