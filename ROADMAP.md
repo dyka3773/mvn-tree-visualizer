@@ -36,63 +36,38 @@ This document outlines the evolution and future direction of the `mvn-tree-visua
     *   [x] `--theme` option with multiple built-in themes (default/minimal, dark, light)
 ## 🔮 Future Development
 
-### v1.6.0 - Advanced Interactive Features 🎯 (Next Major Release)
+### Candidate Features for Upcoming Releases
 
-**Focus:** Enhanced interactivity and user experience for large enterprise projects.
+**Philosophy:** Small, practical improvements that provide immediate value to users. Features will be selected based on user feedback, development bandwidth, and priority.
 
-**Priority:** High - Building on the solid large project foundation with advanced user interaction.
+#### Essential CLI Features
+*   [ ] **`--quiet` / `-q` flag:** Suppress all console output except errors
+    *   **Use Case:** Perfect for CI/CD pipelines and scripted usage
+*   [ ] **`--version` / `-v` flag:** Display the current version of the tool
+    *   **Use Case:** Essential for any CLI tool, currently missing
 
-*   **Enhanced Node Search & Navigation (High Priority):**
-    *   [ ] **Smart Dependency Search:** Find nodes by dependency name with instant highlighting
-        *   **Technical Requirements:** Must highlight nodes WITHOUT moving or displacing SVG elements
-        *   **Approach:** Use SVG overlays or CSS-only highlighting instead of DOM manipulation
-        *   **Keyboard Shortcut:** `Ctrl+F` for search dialog
-        *   **Features:** Auto-complete, regex support, multiple match handling
-    *   [ ] **Dependency Path Tracing:** Highlight full dependency chains from root to selected node
-    *   [ ] **Scope-based Filtering:** Filter by dependency scope (compile, test, runtime, provided)
+#### User Experience Enhancements
+*   [ ] **Alternative output filename patterns:** `--timestamp-output` flag to auto-append timestamp
+    *   **Use Case:** Useful for version tracking (e.g., `diagram-2025-08-01-143022.html`)
+*   [ ] **`--open` flag:** Automatically open generated diagram in default browser
+    *   **Implementation:** Platform-agnostic using Python's `webbrowser` module
+*   [ ] **Custom title support:** `--title "My Project Dependencies"`
+    *   **Use Case:** Personalize diagrams with meaningful project names
+*   [ ] **Progress indicators:** Simple feedback during long operations
+    *   **Implementation:** "Parsing dependencies..." → "Generating diagram..." → "Done!"
 
-*   **Advanced Navigation Controls (Medium Priority):**
-    *   [ ] **Zoom to Dependency Subtree:** Right-click zoom to focus on specific dependency branch
-    *   [ ] **Breadcrumb Navigation:** Show current zoom/focus location in large diagrams
-    *   [ ] **Mini-map Overlay:** Small overview map for orientation in large dependency trees
+#### Configuration & Customization
+*   [ ] **Configuration file support:** `.mvnviz.conf` file for default options
+    *   **Use Case:** Avoid typing same flags repeatedly, team consistency
+*   [ ] **`--exclude-scopes` option:** Filter out test, provided, or other scopes
+*   [ ] **`--max-depth` option:** Limit dependency tree depth for overview mode
 
-*   **Enhanced User Experience (Medium Priority):**
-    *   [ ] **Rich Tooltips:** Detailed dependency information (groupId, artifactId, version, scope, licenses)
-    *   [ ] **Dependency Statistics:** Live counts of direct/transitive dependencies
-    *   [ ] **Export Enhancements:** PNG, PDF export with current zoom level and highlighting
+#### Output & Analysis Improvements
+*   [ ] **Basic dependency statistics:** Show total counts in CLI output and HTML comments
 
-### v1.7.0 - Enterprise Integration
-
-**Focus:** Advanced functionality for enterprise development workflows.
-
-*   **CI/CD Integration:**
-    *   [ ] **GitHub Actions Integration:** Pre-built actions for automated diagram generation
-    *   [ ] **Jenkins Plugin:** Seamless integration with Jenkins pipelines
-    *   [ ] **Docker Container:** Official container images for containerized environments
-
-*   **Advanced Analysis:**
-    *   [ ] **Dependency Conflict Detection:** Visual highlighting of version conflicts
-    *   [ ] **Security Vulnerability Mapping:** Integration with vulnerability databases
-    *   [ ] **License Compliance:** Visual license information and compliance checking
-
-*   **Multi-Project Support:**
-    *   [ ] **Workspace Mode:** Handle multiple Maven projects simultaneously
-    *   [ ] **Cross-Project Dependencies:** Visualize dependencies between different projects
-    *   [ ] **Monorepo Support:** Enhanced support for large monorepo structures
-
-### v1.8.0+ - Advanced Capabilities 🚀
-
-**Focus:** Cutting-edge features for modern development workflows.
-
-*   **AI-Powered Features:**
-    *   [ ] **Dependency Recommendations:** AI suggestions for dependency updates and optimizations
-    *   [ ] **Architecture Insights:** Automated analysis of dependency architecture patterns
-    *   [ ] **Refactoring Suggestions:** Recommendations for dependency cleanup and optimization
-
-*   **Real-time Collaboration:**
-    *   [ ] **Shared Diagrams:** Cloud-based diagram sharing for team collaboration
-    *   [ ] **Live Updates:** Real-time diagram updates for team development
-    *   [ ] **Annotation System:** Team comments and notes on dependency diagrams
+#### Enterprise & Integration Features
+*   [ ] **Docker container:** Official container images for CI/CD
+*   [ ] **GitHub Actions integration:** Pre-built actions for automated diagram generation
 
 ## 🎯 Technical Debt & Maintenance
 
@@ -132,6 +107,8 @@ Each release follows this approach:
 - **User-Driven:** Priority based on user feedback and common pain points
 - **Quality First:** New features include comprehensive tests and documentation
 - **Backward Compatibility:** CLI interface remains stable across minor versions
+- **Small & Focused:** Features are kept small and manageable for faster delivery
+- **Feature Selection:** Features are chosen from the candidate list based on current priorities and available development time
 
 ## Contributing
 
@@ -139,4 +116,4 @@ If you're interested in contributing to any of these features, please check out 
 
 ---
 
-*Last updated: July 16, 2025*
+*Last updated: August 1, 2025*
