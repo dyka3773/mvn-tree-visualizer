@@ -44,8 +44,6 @@ mvn-tree-visualizer = "mvn_tree_visualizer.cli:cli"
 [dependency-groups]
 dev = [
     "twine>=6.1.0",
-    "ruff>=0.12.3",
-    "pytest>=8.3.2",
     "python-semantic-release>=10.2.0",
     "build>=1.0.0",
     "git-changelog>=2.5.3",
@@ -104,6 +102,8 @@ commands = [[ "pytest", "-v" ]]
 
 [tool.tox.env.lint]
 description = "Lint the codebase with ruff"
+deps = [
+    "ruff>=0.12.3",
+]
 skip_install = true
-allowlist_externals = ["ruff"]
 commands = [[ "ruff", "check", "src/", "tests/" ]]
