@@ -250,9 +250,10 @@ def cli() -> NoReturn:
         """Callback function for file watcher."""
         try:
             generate_diagram(directory, output_file, filename, keep_tree, output_format, show_versions, theme, quiet)
-        except Exception:
+        except Exception as e:
             # In watch mode, we don't want to exit on errors, just log them
-            pass
+            print("Error during diagram regeneration:", file=sys.stderr)
+            traceback.print_exc()
 
     watcher = FileWatcher(directory, filename, regenerate_callback)
     watcher.start()
