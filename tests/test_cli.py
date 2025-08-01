@@ -165,3 +165,133 @@ class TestVersionFlag:
             pytest.fail("--version format test command timed out")
         except FileNotFoundError:
             pytest.skip("mvn_tree_visualizer module not available for subprocess testing")
+
+
+class TestQuietFlag:
+    """Test the --quiet/-q flag functionality."""
+
+    def test_quiet_flag_long_form(self):
+        """Test --quiet flag suppresses output."""
+        try:
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "mvn_tree_visualizer",
+                    "examples/simple-project",
+                    "--quiet",
+                ],
+                capture_output=True,
+                text=True,
+                timeout=30,
+                cwd=".",
+            )
+
+            # Should exit with code 0 (success)
+            assert result.returncode == 0
+
+            # Should have no stdout output when quiet
+            assert result.stdout.strip() == ""
+
+            # Should not have stderr output for normal operation
+            assert result.stderr == ""
+
+        except subprocess.TimeoutExpired:
+            pytest.fail("--quiet command timed out")
+        except FileNotFoundError:
+            pytest.skip("mvn_tree_visualizer module not available for subprocess testing")
+
+    def test_quiet_flag_short_form(self):
+        """Test -q flag suppresses output."""
+        try:
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "mvn_tree_visualizer",
+                    "examples/simple-project",
+                    "-q",
+                ],
+                capture_output=True,
+                text=True,
+                timeout=30,
+                cwd=".",
+            )
+
+            # Should exit with code 0 (success)
+            assert result.returncode == 0
+
+            # Should have no stdout output when quiet
+            assert result.stdout.strip() == ""
+
+            # Should not have stderr output for normal operation
+            assert result.stderr == ""
+
+        except subprocess.TimeoutExpired:
+            pytest.fail("-q command timed out")
+        except FileNotFoundError:
+            pytest.skip("mvn_tree_visualizer module not available for subprocess testing")
+
+    def test_normal_output_without_quiet(self):
+        """Test that normal output works when --quiet is not used."""
+        try:
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "mvn_tree_visualizer",
+                    "examples/simple-project",
+                ],
+                capture_output=True,
+                text=True,
+                timeout=30,
+                cwd=".",
+            )
+
+            # Should exit with code 0 (success)
+            assert result.returncode == 0
+
+            # Should have stdout output when not quiet
+            assert len(result.stdout.strip()) > 0
+            assert "Generating initial diagram..." in result.stdout
+            assert "Diagram generated and saved" in result.stdout
+
+            # Should not have stderr output for normal operation
+            assert result.stderr == ""
+
+        except subprocess.TimeoutExpired:
+            pytest.fail("normal output command timed out")
+        except FileNotFoundError:
+            pytest.skip("mvn_tree_visualizer module not available for subprocess testing")
+
+    def test_quiet_flag_still_shows_errors(self):
+        """Test that --quiet still shows errors on stderr."""
+        try:
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "mvn_tree_visualizer",
+                    "nonexistent_directory",
+                    "--quiet",
+                ],
+                capture_output=True,
+                text=True,
+                timeout=30,
+                cwd=".",
+            )
+
+            # Should exit with non-zero code (error)
+            assert result.returncode != 0
+
+            # Should have no stdout output when quiet (even with errors)
+            assert result.stdout.strip() == ""
+
+            # Should have stderr output for errors even when quiet
+            assert len(result.stderr.strip()) > 0
+            assert "ERROR:" in result.stderr
+
+        except subprocess.TimeoutExpired:
+            pytest.fail("--quiet error test command timed out")
+        except FileNotFoundError:
+            pytest.skip("mvn_tree_visualizer module not available for subprocess testing")

@@ -1,4 +1,5 @@
 import argparse
+import sys
 import time
 from importlib import metadata
 from pathlib import Path
@@ -29,6 +30,7 @@ def generate_diagram(
     output_format: str,
     show_versions: bool,
     theme: str = "minimal",
+    quiet: bool = False,
 ) -> None:
     """Generate the dependency diagram with comprehensive error handling."""
     timestamp = time.strftime("%H:%M:%S")
@@ -40,7 +42,7 @@ def generate_diagram(
 
         # Show what files we found
         dependency_files = find_dependency_files(directory, filename)
-        if len(dependency_files) > 1:
+        if len(dependency_files) > 1 and not quiet:
             print(f"[{timestamp}] Found {len(dependency_files)} dependency files")
 
         # Setup paths
@@ -112,24 +114,28 @@ def generate_diagram(
         except Exception as e:
             raise OutputGenerationError(f"Error generating {output_format.upper()} output: {e}")
 
-        print(f"[{timestamp}] ✅ Diagram generated and saved to {output_file}")
+        if not quiet:
+            print(f"[{timestamp}] SUCCESS: Diagram generated and saved to {output_file}")
 
     except MvnTreeVisualizerError as e:
         # Our custom errors already have helpful messages
-        print(f"[{timestamp}] ❌ Error: {e}")
+        print(f"[{timestamp}] ERROR: {e}", file=sys.stderr)
+        raise  # Re-raise the exception for the caller to handle
     except KeyboardInterrupt:
-        print(f"\n[{timestamp}] ⏹️  Operation cancelled by user")
+        print(f"\n[{timestamp}] Operation cancelled by user", file=sys.stderr)
+        raise  # Re-raise for the caller to handle
     except Exception as e:
         # Unexpected errors
-        print(f"[{timestamp}] ❌ Unexpected error: {e}")
-        print("This is an internal error. Please report this issue with the following details:")
-        print(f"  - Directory: {directory}")
-        print(f"  - Filename: {filename}")
-        print(f"  - Output: {output_file}")
-        print(f"  - Format: {output_format}")
+        print(f"[{timestamp}] UNEXPECTED ERROR: {e}", file=sys.stderr)
+        print("This is an internal error. Please report this issue with the following details:", file=sys.stderr)
+        print(f"  - Directory: {directory}", file=sys.stderr)
+        print(f"  - Filename: {filename}", file=sys.stderr)
+        print(f"  - Output: {output_file}", file=sys.stderr)
+        print(f"  - Format: {output_format}", file=sys.stderr)
         import traceback
 
         traceback.print_exc()
+        raise  # Re-raise for the caller to handle
 
 
 def cli() -> NoReturn:
@@ -203,6 +209,13 @@ def cli() -> NoReturn:
         help="Theme for the diagram visualization. Default is 'minimal'.",
     )
 
+    parser.add_argument(
+        "-q",
+        "--quiet",
+        action="store_true",
+        help="Suppress all console output except errors. Perfect for CI/CD pipelines and scripted usage.",
+    )
+
     args = parser.parse_args()
     directory: str = args.directory
     output_file: str = args.output
@@ -212,12 +225,22 @@ def cli() -> NoReturn:
     show_versions: bool = args.show_versions
     watch_mode: bool = args.watch
     theme: str = args.theme
+    quiet: bool = args.quiet
 
     # Generate initial diagram
-    print("Generating initial diagram...")
-    generate_diagram(directory, output_file, filename, keep_tree, output_format, show_versions, theme)
+    if not quiet:
+        print("Generating initial diagram...")
 
-    if not watch_mode:
+    try:
+        generate_diagram(directory, output_file, filename, keep_tree, output_format, show_versions, theme, quiet)
+    except MvnTreeVisualizerError:
+        sys.exit(1)
+    except KeyboardInterrupt:
+        sys.exit(130)  # Standard exit code for SIGINT
+    except Exception:
+        sys.exit(1)
+
+    if not watch_mode and not quiet:
         print("You can open it in your browser to view the dependency tree.")
         print("Thank you for using mvn-tree-visualizer!")
         return
@@ -225,7 +248,11 @@ def cli() -> NoReturn:
     # Watch mode
     def regenerate_callback():
         """Callback function for file watcher."""
-        generate_diagram(directory, output_file, filename, keep_tree, output_format, show_versions, theme)
+        try:
+            generate_diagram(directory, output_file, filename, keep_tree, output_format, show_versions, theme, quiet)
+        except Exception:
+            # In watch mode, we don't want to exit on errors, just log them
+            pass
 
     watcher = FileWatcher(directory, filename, regenerate_callback)
     watcher.start()
@@ -233,7 +260,8 @@ def cli() -> NoReturn:
     try:
         watcher.wait()
     finally:
-        print("Thank you for using mvn-tree-visualizer!")
+        if not quiet:
+            print("Thank you for using mvn-tree-visualizer!")
 
 
 if __name__ == "__main__":
