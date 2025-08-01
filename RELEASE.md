@@ -89,24 +89,6 @@ When the release PR is merged to `master`, the automation triggers:
 7. **Publishes to PyPI** automatically
 8. **Creates GitHub release** with generated release notes
 
-## Manual Release (Emergency)
-
-For emergency releases or manual intervention:
-
-```bash
-# Install semantic-release locally
-uv sync --dev
-
-# Preview what will be released (dry-run)
-uv run semantic-release --dry-run
-
-# Force a specific version type
-uv run semantic-release --patch  # or --minor, --major
-
-# Generate changelog only
-uv run semantic-release changelog
-```
-
 ## Monitoring Releases
 
 ### Check Release Status:
@@ -143,21 +125,6 @@ allowed_tags = ["build", "chore", "ci", "docs", "feat", "fix", "perf", "style", 
 minor_tags = ["feat"]
 patch_tags = ["fix", "perf"]
 ```
-
-## Migration from Manual Process
-
-**Previous manual steps no longer needed:**
-- ❌ Manual version updates in `pyproject.toml`
-- ❌ Manual CHANGELOG.md editing
-- ❌ Manual Git tag creation
-- ❌ Manual PyPI uploads
-
-**New automated process:**
-- ✅ Conventional commit messages
-- ✅ Automatic version management
-- ✅ Automatic changelog generation
-- ✅ Automatic PyPI publishing
-- ✅ Automatic GitHub releases
 
 ## Emergency Procedures
 

@@ -1,7 +1,7 @@
 # Maven Dependency Tree Visualizer
 
 [![PyPI version](https://badge.fury.io/py/mvn-tree-visualizer.svg)](https://badge.fury.io/py/mvn-tree-visualizer)
-![Python](https://img.shields.io/badge/python-3.13+-blue.svg)
+![Python](https://img.shields.io/badge/python-3.10%20|%203.11%20|%203.12%20|%203.13-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 [![Downloads](https://pepy.tech/badge/mvn-tree-visualizer)](https://pepy.tech/project/mvn-tree-visualizer)
 [![CI](https://github.com/dyka3773/mvn-tree-visualizer/workflows/CI/badge.svg)](https://github.com/dyka3773/mvn-tree-visualizer/actions)

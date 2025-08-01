@@ -4,32 +4,25 @@ This document outlines the evolution and future direction of the `mvn-tree-visua
 
 ## 🎉 Recently Completed ✅
 
-### v1.5.0 - Large Project Support & GitHub Issue #7 Resolution (Released)
+### v1.6.0 - Mistake Release (Released)
 
-**Focus:** Enterprise-ready support for massive dependency trees and enhanced navigation.
+**Focus:** Enhance automatic documentation generation and prerelease configs
 
-**Status:** Released July 19, 2025
-
-*   **GitHub Issue #7 Resolution (Completed):**
-    *   [x] **No More Size Limits**: Enhanced Mermaid configuration with `maxTextSize: 900000000`
-    *   [x] **Massive Edge Support**: Increased `maxEdges: 20000` for complex enterprise projects
-    *   [x] **50x Zoom Range**: Advanced zoom from 0.01x (overview) to 50x (detailed inspection)
-    *   [x] **Enhanced Performance**: Memory-optimized rendering for 1000+ dependency projects
-
-*   **Navigation Enhancements (Completed):**
-    *   [x] **Keyboard Shortcuts**: `Ctrl+R` (reset), `+/-` (zoom), `s` (download)
-    *   [x] **Smooth Zoom Controls**: Mouse wheel with 0.2 sensitivity for precise navigation
-    *   [x] **One-Click Reset**: Instant return to full diagram view
-    *   [x] **Error Prevention**: Zoom bounds validation and graceful error handling
+**Status:** Released July 24, 2025
 
 ### Previous Major Releases ✅
 
-*   **v1.4.0 - Visual and Theme Enhancements** (July 17, 2025)
+*   **v1.5 - VGitHub Issue #7 Resolution and Navigation Enhancements** (July 19, 2025)
+    *   [x] **Support for Massive Dependency Trees**: Enhanced Mermaid configuration with `maxTextSize: 900000000` and `maxEdges: 20000`
+    *   [x] **Advanced Zoom Controls**: 50x zoom range with smooth mouse wheel support
+    *   [x] **Keyboard Shortcuts**: `Ctrl+R` for reset, `+/-` for zoom, `Ctrl+S` for download
+
+*   **v1.4 - Visual and Theme Enhancements** (July 17, 2025)
     *   [x] Professional minimal and dark themes
     *   [x] Enhanced HTML templates with interactive features
     *   [x] SVG download functionality and improved user experience
 
-*   **v1.3.0 - User Experience Improvements** (July 9, 2025)
+*   **v1.3 - User Experience Improvements** (July 9, 2025)
     *   [x] Watch mode functionality with `--watch` flag
     *   [x] Enhanced error handling system with comprehensive guidance
     *   [x] Custom exception classes and validation modules
