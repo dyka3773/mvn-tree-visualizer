@@ -6,7 +6,7 @@ authors = [
 ]
 description = "A simple command line tool to visualize the dependency tree of a Maven project in a graphical format."
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.10"
 license = "MIT"
 keywords = [
     "maven",
@@ -23,6 +23,9 @@ classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Topic :: Software Development :: Build Tools",
     "Typing :: Typed",
@@ -41,11 +44,10 @@ mvn-tree-visualizer = "mvn_tree_visualizer.cli:cli"
 [dependency-groups]
 dev = [
     "twine>=6.1.0",
-    "ruff>=0.12.3",
-    "pytest>=8.3.2",
     "python-semantic-release>=10.2.0",
     "build>=1.0.0",
     "git-changelog>=2.5.3",
+    "tox>=4.28.4",
 ]
 
 [build-system]
@@ -87,3 +89,21 @@ sections = [
     {type = "test", section = "Tests", scopes = []},
     {type = "style", section = "Style", scopes = []},
 ]
+
+[tool.tox]
+env_list = ["lint", "3.10", "3.11", "3.12", "3.13"]
+
+[tool.tox.env_run_base]
+description = "Run tests with the current Python version"
+deps = [
+    "pytest>=8.3.2",
+]
+commands = [[ "pytest", "-v" ]]
+
+[tool.tox.env.lint]
+description = "Lint the codebase with ruff"
+deps = [
+    "ruff>=0.12.3",
+]
+skip_install = true
+commands = [[ "ruff", "check", "src/", "tests/" ]]
