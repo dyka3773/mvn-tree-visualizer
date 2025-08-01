@@ -1,6 +1,7 @@
 import argparse
 import sys
 import time
+import traceback
 from importlib import metadata
 from pathlib import Path
 from typing import NoReturn
@@ -132,7 +133,6 @@ def generate_diagram(
         print(f"  - Filename: {filename}", file=sys.stderr)
         print(f"  - Output: {output_file}", file=sys.stderr)
         print(f"  - Format: {output_format}", file=sys.stderr)
-        import traceback
 
         traceback.print_exc()
         raise  # Re-raise for the caller to handle
@@ -250,7 +250,7 @@ def cli() -> NoReturn:
         """Callback function for file watcher."""
         try:
             generate_diagram(directory, output_file, filename, keep_tree, output_format, show_versions, theme, quiet)
-        except Exception as e:
+        except Exception:
             # In watch mode, we don't want to exit on errors, just log them
             print("Error during diagram regeneration:", file=sys.stderr)
             traceback.print_exc()
