@@ -12,7 +12,7 @@ This document outlines the evolution and future direction of the `mvn-tree-visua
 
 ### Previous Major Releases ✅
 
-*   **v1.5 - VGitHub Issue #7 Resolution and Navigation Enhancements** (July 19, 2025)
+*   **v1.5 - GitHub Issue #7 Resolution and Navigation Enhancements** (July 19, 2025)
     *   [x] **Support for Massive Dependency Trees**: Enhanced Mermaid configuration with `maxTextSize: 900000000` and `maxEdges: 20000`
     *   [x] **Advanced Zoom Controls**: 50x zoom range with smooth mouse wheel support
     *   [x] **Keyboard Shortcuts**: `Ctrl+R` for reset, `+/-` for zoom, `Ctrl+S` for download
