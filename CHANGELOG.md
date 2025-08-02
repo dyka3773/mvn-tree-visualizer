@@ -6,13 +6,26 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 <!-- insertion marker -->
+## [v1.7.0](https://github.com/dyka3773/mvn-tree-visualizer/releases/tag/v1.7.0) - 2025-08-02
+
+<small>[Compare with v1.6.0](https://github.com/dyka3773/mvn-tree-visualizer/compare/v1.6.0...v1.7.0)</small>
+
+### Features
+
+- add --quiet/-q flag for silent operation ([5dfc82c](https://github.com/dyka3773/mvn-tree-visualizer/commit/5dfc82c57987870ab6200a7ec6682bda3aaf06c7) by Hercules Konsoulas).
+- add --version/-v flag to display current tool version ([6ee3e56](https://github.com/dyka3773/mvn-tree-visualizer/commit/6ee3e56302893aecb5ad87c115ea801acf03b4bc) by Hercules Konsoulas).
+
+### Bug Fixes
+
+- CLI test timeouts and file cleanup issues ([3d236d9](https://github.com/dyka3773/mvn-tree-visualizer/commit/3d236d93406e4bcc0a0ee6ea4c6f096ba5c0f861) by Hercules Konsoulas).
+
+### Code Refactoring
+
+- correct copilot's mistake for traceback ([d33b5a8](https://github.com/dyka3773/mvn-tree-visualizer/commit/d33b5a847399b34cb101f5650ff98af29e133db1) by Hercules Konsoulas).
+
 ## [v1.6.0](https://github.com/dyka3773/mvn-tree-visualizer/releases/tag/v1.6.0) - 2025-07-24
 
-<small>[Compare with v1.6.0-beta.1](https://github.com/dyka3773/mvn-tree-visualizer/compare/v1.6.0-beta.1...v1.6.0)</small>
-
-## [v1.6.0-beta.1](https://github.com/dyka3773/mvn-tree-visualizer/releases/tag/v1.6.0-beta.1) - 2025-07-24
-
-<small>[Compare with v1.5.2](https://github.com/dyka3773/mvn-tree-visualizer/compare/v1.5.2...v1.6.0-beta.1)</small>
+<small>[Compare with v1.5.2](https://github.com/dyka3773/mvn-tree-visualizer/compare/v1.5.2...v1.6.0)</small>
 
 ### Features
 
@@ -111,3 +124,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Features
 
 - Add JSON output and decouple output logic ([e6cd138](https://github.com/dyka3773/mvn-tree-visualizer/commit/e6cd13836f93221f2dbd334574ca614d7dbe0e4a) by Hercules Konsoulas).
+
