@@ -40,12 +40,6 @@ This document outlines the evolution and future direction of the `mvn-tree-visua
 
 **Philosophy:** Small, practical improvements that provide immediate value to users. Features will be selected based on user feedback, development bandwidth, and priority.
 
-#### Essential CLI Features
-*   [ ] **`--quiet` / `-q` flag:** Suppress all console output except errors
-    *   **Use Case:** Perfect for CI/CD pipelines and scripted usage
-*   [ ] **`--version` / `-v` flag:** Display the current version of the tool
-    *   **Use Case:** Essential for any CLI tool, currently missing
-
 #### User Experience Enhancements
 *   [ ] **Alternative output filename patterns:** `--timestamp-output` flag to auto-append timestamp
     *   **Use Case:** Useful for version tracking (e.g., `diagram-2025-08-01-143022.html`)
