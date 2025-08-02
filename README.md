@@ -92,6 +92,15 @@ mvn-tree-visualizer --filename "maven_dependency_file" --output "dependencies.js
 mvn-tree-visualizer --filename "maven_dependency_file" --output "diagram.html" --watch
 ```
 
+#### Quiet Mode (For Automation/Scripts)
+```bash
+# Only show errors, suppress success messages
+mvn-tree-visualizer --filename "maven_dependency_file" --output "diagram.html" --quiet
+
+# Short form also available
+mvn-tree-visualizer --filename "maven_dependency_file" --output "diagram.html" -q
+```
+
 > **💡 Tip:** In watch mode, the tool will monitor for changes to your Maven dependency files and automatically regenerate the diagram. Perfect for development workflows! Press `Ctrl+C` to stop watching.
 
 ### Step 3: View the output
@@ -123,6 +132,8 @@ Each example includes:
 | `--watch` | Watch for file changes and auto-regenerate diagram | `False` |
 | `--directory` | The directory to scan for the Maven dependency file(s) | current directory |
 | `--keep-tree` | Keep the intermediate `dependency_tree.txt` file | `False` |
+| `--quiet`, `-q` | Suppress all console output except errors | `False` |
+| `--version`, `-v` | Show the current version and exit | - |
 | `--help` | Show the help message and exit | - |
 
 ### Theme Options

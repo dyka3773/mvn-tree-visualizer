@@ -1,7 +1,10 @@
 import tempfile
 from pathlib import Path
 
+import pytest
+
 from mvn_tree_visualizer.cli import generate_diagram
+from mvn_tree_visualizer.exceptions import DependencyFileNotFoundError, DependencyParsingError
 from mvn_tree_visualizer.file_watcher import DependencyFileHandler
 
 
@@ -90,19 +93,18 @@ def test_generate_diagram_error_handling():
         # Try to generate diagram with non-existent file
         output_file = Path(temp_dir) / "test.html"
 
-        # This should not raise an exception, but should print an error
-        # and NOT create an output file (improved error handling)
-        generate_diagram(
-            directory=temp_dir,
-            output_file=str(output_file),
-            filename="non_existent_file",
-            keep_tree=False,
-            output_format="html",
-            show_versions=False,
-        )
+        # This should raise a DependencyFileNotFoundError
+        with pytest.raises(DependencyFileNotFoundError, match="No 'non_existent_file' files found"):
+            generate_diagram(
+                directory=temp_dir,
+                output_file=str(output_file),
+                filename="non_existent_file",
+                keep_tree=False,
+                output_format="html",
+                show_versions=False,
+            )
 
-        # With improved error handling, no output file should be created
-        # when there are no dependency files to process
+        # No output file should be created when there are errors
         assert not output_file.exists()
 
 
@@ -112,14 +114,15 @@ def test_generate_diagram_invalid_directory():
         output_file = Path(temp_dir) / "test.html"
 
         # Test with non-existent directory
-        generate_diagram(
-            directory="non_existent_directory",
-            output_file=str(output_file),
-            filename="maven_dependency_file",
-            keep_tree=False,
-            output_format="html",
-            show_versions=False,
-        )
+        with pytest.raises(DependencyFileNotFoundError, match="Directory 'non_existent_directory' does not exist"):
+            generate_diagram(
+                directory="non_existent_directory",
+                output_file=str(output_file),
+                filename="maven_dependency_file",
+                keep_tree=False,
+                output_format="html",
+                show_versions=False,
+            )
 
         # Should not create output file when directory doesn't exist
         assert not output_file.exists()
@@ -134,14 +137,17 @@ def test_generate_diagram_empty_dependency_file():
 
         output_file = Path(temp_dir) / "test.html"
 
-        generate_diagram(
-            directory=temp_dir,
-            output_file=str(output_file),
-            filename="maven_dependency_file",
-            keep_tree=False,
-            output_format="html",
-            show_versions=False,
-        )
+        # Empty files are treated as files with no content, so merge_files will skip them
+        # and find no files with actual content
+        with pytest.raises(DependencyParsingError, match="Error reading dependency file"):
+            generate_diagram(
+                directory=temp_dir,
+                output_file=str(output_file),
+                filename="maven_dependency_file",
+                keep_tree=False,
+                output_format="html",
+                show_versions=False,
+            )
 
         # Should not create output file when dependency file is empty
         assert not output_file.exists()
@@ -156,14 +162,16 @@ def test_generate_diagram_whitespace_only_dependency_file():
 
         output_file = Path(temp_dir) / "test.html"
 
-        generate_diagram(
-            directory=temp_dir,
-            output_file=str(output_file),
-            filename="maven_dependency_file",
-            keep_tree=False,
-            output_format="html",
-            show_versions=False,
-        )
+        # Whitespace-only files are treated as empty files with no content
+        with pytest.raises(DependencyParsingError, match="Error reading dependency file"):
+            generate_diagram(
+                directory=temp_dir,
+                output_file=str(output_file),
+                filename="maven_dependency_file",
+                keep_tree=False,
+                output_format="html",
+                show_versions=False,
+            )
 
         # Should not create output file when dependency file contains only whitespace
         assert not output_file.exists()
