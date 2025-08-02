@@ -11,6 +11,14 @@ import pytest
 from mvn_tree_visualizer.cli import get_version
 
 
+def is_valid_version_string(version: str) -> bool:
+    """Check if the version string is valid."""
+    return (
+        version == "unknown"
+        or version.replace(".", "").replace("-", "").replace("+", "").replace("dev", "").replace("rc", "").replace("a", "").replace("b", "").isalnum()
+    )
+
+
 class TestVersionFlag:
     """Test the --version/-v flag functionality."""
 
@@ -20,17 +28,8 @@ class TestVersionFlag:
         assert isinstance(version, str)
         assert len(version) > 0
         # Should either be a proper version (like "1.6.0") or "unknown"
-        assert (
-            version == "unknown"
-            or version.replace(".", "")
-            .replace("-", "")
-            .replace("+", "")
-            .replace("dev", "")
-            .replace("rc", "")
-            .replace("a", "")
-            .replace("b", "")
-            .isalnum()
-        )
+
+        assert is_valid_version_string(version)
 
     @patch("mvn_tree_visualizer.cli.metadata.version")
     def test_get_version_handles_package_not_found(self, mock_version):

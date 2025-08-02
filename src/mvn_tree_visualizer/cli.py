@@ -229,7 +229,8 @@ def cli() -> NoReturn:
 
     # Generate initial diagram
     if not quiet:
-        print("Generating initial diagram...")
+        timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
+        print(f"[{timestamp}] Generating initial diagram...")
 
     try:
         generate_diagram(directory, output_file, filename, keep_tree, output_format, show_versions, theme, quiet)
