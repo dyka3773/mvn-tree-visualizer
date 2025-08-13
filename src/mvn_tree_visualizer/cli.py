@@ -2,6 +2,7 @@ import argparse
 import sys
 import time
 import traceback
+import webbrowser
 from importlib import metadata
 from pathlib import Path
 from typing import NoReturn
@@ -32,6 +33,7 @@ def generate_diagram(
     show_versions: bool,
     theme: str = "minimal",
     quiet: bool = False,
+    open_browser: bool = False,
 ) -> None:
     """Generate the dependency diagram with comprehensive error handling."""
     timestamp = time.strftime("%H:%M:%S")
@@ -117,6 +119,14 @@ def generate_diagram(
 
         if not quiet:
             print(f"[{timestamp}] SUCCESS: Diagram generated and saved to {output_file}")
+
+        # Open in browser if requested and format is HTML
+        if open_browser and output_format == "html" and not quiet:
+            try:
+                webbrowser.open(f"file://{Path(output_file).resolve()}")
+                print(f"[{timestamp}] Opening diagram in your default browser...")
+            except Exception as e:
+                print(f"[{timestamp}] WARNING: Could not open browser: {e}", file=sys.stderr)
 
     except MvnTreeVisualizerError as e:
         # Our custom errors already have helpful messages
@@ -216,6 +226,12 @@ def cli() -> NoReturn:
         help="Suppress all console output except errors. Perfect for CI/CD pipelines and scripted usage.",
     )
 
+    parser.add_argument(
+        "--open",
+        action="store_true",
+        help="Automatically open the generated HTML diagram in your default browser. Only works with HTML output format.",
+    )
+
     args = parser.parse_args()
     directory: str = args.directory
     output_file: str = args.output
@@ -226,6 +242,7 @@ def cli() -> NoReturn:
     watch_mode: bool = args.watch
     theme: str = args.theme
     quiet: bool = args.quiet
+    open_browser: bool = args.open
 
     # Generate initial diagram
     if not quiet:
@@ -233,7 +250,7 @@ def cli() -> NoReturn:
         print(f"[{timestamp}] Generating initial diagram...")
 
     try:
-        generate_diagram(directory, output_file, filename, keep_tree, output_format, show_versions, theme, quiet)
+        generate_diagram(directory, output_file, filename, keep_tree, output_format, show_versions, theme, quiet, open_browser)
     except MvnTreeVisualizerError:
         sys.exit(1)
     except KeyboardInterrupt:
@@ -251,7 +268,7 @@ def cli() -> NoReturn:
     def regenerate_callback():
         """Callback function for file watcher."""
         try:
-            generate_diagram(directory, output_file, filename, keep_tree, output_format, show_versions, theme, quiet)
+            generate_diagram(directory, output_file, filename, keep_tree, output_format, show_versions, theme, quiet, open_browser)
         except Exception:
             # In watch mode, we don't want to exit on errors, just log them
             print("Error during diagram regeneration:", file=sys.stderr)
