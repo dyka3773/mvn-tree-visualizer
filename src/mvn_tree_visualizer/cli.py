@@ -124,7 +124,7 @@ def generate_diagram(
         # Open in browser if requested and format is HTML
         if open_browser and output_format == "html" and not quiet:
             try:
-                webbrowser.open(f"file://{Path(output_file).resolve()}")
+                webbrowser.open(Path(output_file).resolve().as_uri())
                 print(f"[{timestamp}] Opening diagram in your default browser...")
             except Exception as e:
                 print(f"[{timestamp}] WARNING: Could not open browser: {e}", file=sys.stderr)
