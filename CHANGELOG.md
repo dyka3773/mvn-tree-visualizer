@@ -6,6 +6,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 <!-- insertion marker -->
+## [v1.8.0](https://github.com/dyka3773/mvn-tree-visualizer/releases/tag/v1.8.0) - 2025-08-13
+
+<small>[Compare with v1.7.0](https://github.com/dyka3773/mvn-tree-visualizer/compare/v1.7.0...v1.8.0)</small>
+
+### Features
+
+- add --timestamp-output flag to append timestamp to output filenames ([0292ac5](https://github.com/dyka3773/mvn-tree-visualizer/commit/0292ac5209a6b16c281b8146acc32e47264a02a7) by Hercules Konsoulas).
+- add --open flag to automatically open HTML diagrams in browser ([fb5237e](https://github.com/dyka3773/mvn-tree-visualizer/commit/fb5237ee5e3696bd550b08c1d8a4d5b428666b6f) by Hercules Konsoulas).
+
+### Code Refactoring
+
+- encode URL with proper built-in function ([eed841d](https://github.com/dyka3773/mvn-tree-visualizer/commit/eed841d007f1d2a0b0d6632d8a36b93e4524acc2) by Hercules Konsoulas).
+- restructure test suite into modular architecture ([6d25b7b](https://github.com/dyka3773/mvn-tree-visualizer/commit/6d25b7b1948252615d32ff7076428dc520ed60de) by Hercules Konsoulas).
+- moved timestamp creation to a separate util module for clarity ([cf8d188](https://github.com/dyka3773/mvn-tree-visualizer/commit/cf8d1885b0a4056988dba94496a4ac992af2b693) by Hercules Konsoulas).
+
 ## [v1.7.0](https://github.com/dyka3773/mvn-tree-visualizer/releases/tag/v1.7.0) - 2025-08-02
 
 <small>[Compare with v1.6.0](https://github.com/dyka3773/mvn-tree-visualizer/compare/v1.6.0...v1.7.0)</small>
@@ -124,3 +139,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Features
 
 - Add JSON output and decouple output logic ([e6cd138](https://github.com/dyka3773/mvn-tree-visualizer/commit/e6cd13836f93221f2dbd334574ca614d7dbe0e4a) by Hercules Konsoulas).
+
