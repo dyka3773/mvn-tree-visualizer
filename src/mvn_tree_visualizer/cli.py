@@ -2,6 +2,7 @@ import argparse
 import sys
 import time
 import traceback
+import webbrowser
 from importlib import metadata
 from pathlib import Path
 from typing import NoReturn
@@ -12,6 +13,7 @@ from .file_watcher import FileWatcher
 from .get_dependencies_in_one_file import merge_files
 from .outputs.html_output import create_html_diagram
 from .outputs.json_output import create_json_output
+from .utils import add_timestamp_to_filename
 from .validation import find_dependency_files, validate_dependency_files, validate_output_directory
 
 
@@ -32,6 +34,7 @@ def generate_diagram(
     show_versions: bool,
     theme: str = "minimal",
     quiet: bool = False,
+    open_browser: bool = False,
 ) -> None:
     """Generate the dependency diagram with comprehensive error handling."""
     timestamp = time.strftime("%H:%M:%S")
@@ -117,6 +120,14 @@ def generate_diagram(
 
         if not quiet:
             print(f"[{timestamp}] SUCCESS: Diagram generated and saved to {output_file}")
+
+        # Open in browser if requested and format is HTML
+        if open_browser and output_format == "html" and not quiet:
+            try:
+                webbrowser.open(Path(output_file).resolve().as_uri())
+                print(f"[{timestamp}] Opening diagram in your default browser...")
+            except Exception as e:
+                print(f"[{timestamp}] WARNING: Could not open browser: {e}", file=sys.stderr)
 
     except MvnTreeVisualizerError as e:
         # Our custom errors already have helpful messages
@@ -216,6 +227,18 @@ def cli() -> NoReturn:
         help="Suppress all console output except errors. Perfect for CI/CD pipelines and scripted usage.",
     )
 
+    parser.add_argument(
+        "--open",
+        action="store_true",
+        help="Automatically open the generated HTML diagram in your default browser. Only works with HTML output format.",
+    )
+
+    parser.add_argument(
+        "--timestamp-output",
+        action="store_true",
+        help="Append timestamp to output filename (e.g., diagram-2025-08-13-203045.html). Useful for version tracking and CI/CD.",
+    )
+
     args = parser.parse_args()
     directory: str = args.directory
     output_file: str = args.output
@@ -226,6 +249,12 @@ def cli() -> NoReturn:
     watch_mode: bool = args.watch
     theme: str = args.theme
     quiet: bool = args.quiet
+    open_browser: bool = args.open
+    timestamp_output: bool = args.timestamp_output
+
+    # Apply timestamp to output filename if requested
+    if timestamp_output:
+        output_file = add_timestamp_to_filename(output_file)
 
     # Generate initial diagram
     if not quiet:
@@ -233,7 +262,7 @@ def cli() -> NoReturn:
         print(f"[{timestamp}] Generating initial diagram...")
 
     try:
-        generate_diagram(directory, output_file, filename, keep_tree, output_format, show_versions, theme, quiet)
+        generate_diagram(directory, output_file, filename, keep_tree, output_format, show_versions, theme, quiet, open_browser)
     except MvnTreeVisualizerError:
         sys.exit(1)
     except KeyboardInterrupt:
@@ -251,7 +280,7 @@ def cli() -> NoReturn:
     def regenerate_callback():
         """Callback function for file watcher."""
         try:
-            generate_diagram(directory, output_file, filename, keep_tree, output_format, show_versions, theme, quiet)
+            generate_diagram(directory, output_file, filename, keep_tree, output_format, show_versions, theme, quiet, open_browser)
         except Exception:
             # In watch mode, we don't want to exit on errors, just log them
             print("Error during diagram regeneration:", file=sys.stderr)

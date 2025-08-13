@@ -4,6 +4,28 @@ This document outlines the evolution and future direction of the `mvn-tree-visua
 
 ## 🎉 Recently Completed ✅
 
+### v1.8.0 - User Experience & Test Architecture Improvements (In Progress)
+
+**Focus:** Practical CLI enhancements and improved maintainability
+
+**Status:** Ready for Release - August 13, 2025
+
+**Completed Features:**
+*   [x] **`--open` flag:** Automatically open generated HTML diagrams in default browser
+    *   Platform-agnostic implementation using Python's `webbrowser` module
+    *   Intelligent handling: only works with HTML output, graceful error handling
+    *   Combined functionality with quiet mode and other flags
+*   [x] **`--timestamp-output` flag:** Auto-append timestamp to output filenames
+    *   Format: `diagram_20250813_143022.html` for version tracking
+    *   Works with both HTML and JSON output formats
+    *   Perfect for CI/CD and avoiding file overwrites
+*   [x] **Comprehensive Test Architecture Refactoring:**
+    *   Modular test structure: Split monolithic test files into focused modules
+    *   `tests/cli/` - Individual CLI feature testing (version, quiet, open, timestamp)
+    *   `tests/large_diagrams/` - Focused large diagram feature testing
+    *   Single-responsibility principle: Each test file has one clear purpose
+    *   Improved maintainability and parallel test execution support
+
 ### v1.6.0 - Mistake Release (Released)
 
 **Focus:** Enhance automatic documentation generation and prerelease configs
@@ -40,22 +62,11 @@ This document outlines the evolution and future direction of the `mvn-tree-visua
 
 **Philosophy:** Small, practical improvements that provide immediate value to users. Features will be selected based on user feedback, development bandwidth, and priority.
 
-#### Essential CLI Features
-*   [ ] **`--quiet` / `-q` flag:** Suppress all console output except errors
-    *   **Use Case:** Perfect for CI/CD pipelines and scripted usage
-*   [ ] **`--version` / `-v` flag:** Display the current version of the tool
-    *   **Use Case:** Essential for any CLI tool, currently missing
-
 #### User Experience Enhancements
-*   [ ] **Alternative output filename patterns:** `--timestamp-output` flag to auto-append timestamp
-    *   **Use Case:** Useful for version tracking (e.g., `diagram-2025-08-01-143022.html`)
-*   [ ] **`--open` flag:** Automatically open generated diagram in default browser
-    *   **Implementation:** Platform-agnostic using Python's `webbrowser` module
 *   [ ] **Custom title support:** `--title "My Project Dependencies"`
     *   **Use Case:** Personalize diagrams with meaningful project names
 *   [ ] **Progress indicators:** Simple feedback during long operations
     *   **Implementation:** "Parsing dependencies..." → "Generating diagram..." → "Done!"
-
 #### Configuration & Customization
 *   [ ] **Configuration file support:** `.mvnviz.conf` file for default options
     *   **Use Case:** Avoid typing same flags repeatedly, team consistency
@@ -116,4 +127,4 @@ If you're interested in contributing to any of these features, please check out 
 
 ---
 
-*Last updated: August 1, 2025*
+*Last updated: August 13, 2025*

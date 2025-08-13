@@ -20,7 +20,7 @@ keywords = [
     "mermaid",
 ]
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
@@ -44,8 +44,8 @@ mvn-tree-visualizer = "mvn_tree_visualizer.cli:cli"
 [dependency-groups]
 dev = [
     "twine>=6.1.0",
-    "python-semantic-release>=10.2.0",
-    "build>=1.0.0",
+    "python-semantic-release>=10.3.0",
+    "build>=1.3.0",
     "git-changelog>=2.5.3",
     "tox>=4.28.4",
     "pytest>=8.4.1",
@@ -71,7 +71,7 @@ match = "master"
 prerelease = false
 
 [tool.semantic_release.commit_parser_options]
-allowed_tags = ["build", "chore", "ci", "docs", "feat", "fix", "perf", "style", "refactor", "test"]
+allowed_tags = ["build", "chore", "deps", "ci", "docs", "feat", "fix", "perf", "style", "refactor", "test"]
 minor_tags = ["feat"]
 patch_tags = ["fix", "perf"]
 
@@ -89,6 +89,7 @@ sections = [
     {type = "build", section = "Build System", scopes = []},
     {type = "test", section = "Tests", scopes = []},
     {type = "style", section = "Style", scopes = []},
+    {type = "deps", section = "Dependencies", scopes = []},
 ]
 
 [tool.tox]

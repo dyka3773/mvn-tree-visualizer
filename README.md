@@ -101,6 +101,21 @@ mvn-tree-visualizer --filename "maven_dependency_file" --output "diagram.html" -
 mvn-tree-visualizer --filename "maven_dependency_file" --output "diagram.html" -q
 ```
 
+#### Auto-Open in Browser
+```bash
+# Automatically open the generated HTML diagram in your default browser
+mvn-tree-visualizer --filename "maven_dependency_file" --output "diagram.html" --open
+```
+
+#### Timestamped Output Files
+```bash
+# Generate files with timestamps (e.g., diagram_20250813_143022.html)
+mvn-tree-visualizer --filename "maven_dependency_file" --output "diagram.html" --timestamp-output
+
+# Combine with auto-open for immediate viewing
+mvn-tree-visualizer --filename "maven_dependency_file" --output "diagram.html" --timestamp-output --open
+```
+
 > **💡 Tip:** In watch mode, the tool will monitor for changes to your Maven dependency files and automatically regenerate the diagram. Perfect for development workflows! Press `Ctrl+C` to stop watching.
 
 ### Step 3: View the output
@@ -133,6 +148,8 @@ Each example includes:
 | `--directory` | The directory to scan for the Maven dependency file(s) | current directory |
 | `--keep-tree` | Keep the intermediate `dependency_tree.txt` file | `False` |
 | `--quiet`, `-q` | Suppress all console output except errors | `False` |
+| `--open` | Automatically open generated HTML files in default browser | `False` |
+| `--timestamp-output` | Add timestamp to output filename (e.g., `diagram-2025-08-13-203045.html`) | `False` |
 | `--version`, `-v` | Show the current version and exit | - |
 | `--help` | Show the help message and exit | - |
 
