@@ -13,6 +13,7 @@ from .file_watcher import FileWatcher
 from .get_dependencies_in_one_file import merge_files
 from .outputs.html_output import create_html_diagram
 from .outputs.json_output import create_json_output
+from .utils import add_timestamp_to_filename
 from .validation import find_dependency_files, validate_dependency_files, validate_output_directory
 
 
@@ -22,33 +23,6 @@ def get_version() -> str:
         return metadata.version("mvn-tree-visualizer")
     except metadata.PackageNotFoundError:
         return "unknown"
-
-
-def add_timestamp_to_filename(filename: str) -> str:
-    """Add timestamp to filename before the extension.
-
-    Args:
-        filename: Original filename (e.g., 'diagram.html', 'output.json', 'folder/diagram.html')
-
-    Returns:
-        Timestamped filename (e.g., 'diagram-2025-08-13-203045.html')
-    """
-    timestamp = time.strftime("%Y-%m-%d-%H%M%S")
-    path = Path(filename)
-
-    # Handle paths by preserving directory and only modifying the filename
-    if path.parent != Path("."):
-        # Has a directory component
-        directory = path.parent
-        stem = path.stem
-        suffix = path.suffix
-        timestamped_name = f"{stem}-{timestamp}{suffix}"
-        return str(directory / timestamped_name)
-    else:
-        # No directory component
-        stem = path.stem
-        suffix = path.suffix
-        return f"{stem}-{timestamp}{suffix}"
 
 
 def generate_diagram(
