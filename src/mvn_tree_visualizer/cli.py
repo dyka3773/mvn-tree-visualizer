@@ -24,6 +24,33 @@ def get_version() -> str:
         return "unknown"
 
 
+def add_timestamp_to_filename(filename: str) -> str:
+    """Add timestamp to filename before the extension.
+
+    Args:
+        filename: Original filename (e.g., 'diagram.html', 'output.json', 'folder/diagram.html')
+
+    Returns:
+        Timestamped filename (e.g., 'diagram-2025-08-13-203045.html')
+    """
+    timestamp = time.strftime("%Y-%m-%d-%H%M%S")
+    path = Path(filename)
+
+    # Handle paths by preserving directory and only modifying the filename
+    if path.parent != Path("."):
+        # Has a directory component
+        directory = path.parent
+        stem = path.stem
+        suffix = path.suffix
+        timestamped_name = f"{stem}-{timestamp}{suffix}"
+        return str(directory / timestamped_name)
+    else:
+        # No directory component
+        stem = path.stem
+        suffix = path.suffix
+        return f"{stem}-{timestamp}{suffix}"
+
+
 def generate_diagram(
     directory: str,
     output_file: str,
@@ -232,6 +259,12 @@ def cli() -> NoReturn:
         help="Automatically open the generated HTML diagram in your default browser. Only works with HTML output format.",
     )
 
+    parser.add_argument(
+        "--timestamp-output",
+        action="store_true",
+        help="Append timestamp to output filename (e.g., diagram-2025-08-13-203045.html). Useful for version tracking and CI/CD.",
+    )
+
     args = parser.parse_args()
     directory: str = args.directory
     output_file: str = args.output
@@ -243,6 +276,11 @@ def cli() -> NoReturn:
     theme: str = args.theme
     quiet: bool = args.quiet
     open_browser: bool = args.open
+    timestamp_output: bool = args.timestamp_output
+
+    # Apply timestamp to output filename if requested
+    if timestamp_output:
+        output_file = add_timestamp_to_filename(output_file)
 
     # Generate initial diagram
     if not quiet:
