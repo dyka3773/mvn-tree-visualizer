@@ -297,7 +297,7 @@ wheels = [
 
 [[package]]
 name = "git-changelog"
-version = "2.6.3"
+version = "2.7.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "jinja2" },
@@ -307,9 +307,9 @@ dependencies = [
     { name = "tomli", marker = "python_full_version < '3.11'" },
     { name = "typing-extensions", marker = "python_full_version < '3.13'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/6e/88/e38f434e41c520ea14feb58bee94dd14f785de5f72ab3d3a21a7fcc192ff/git_changelog-2.6.3.tar.gz", hash = "sha256:d9a5cd7bd8c7dd3eb903c9de93ea5c24b0099ba6e56937f1d9406f7d09034d96", size = 81476, upload-time = "2025-09-18T12:35:36.618Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/cc/66/918cce4e4946645d212bbe9a50d490761f62c5745118fdb132c35143d4ed/git_changelog-2.7.0.tar.gz", hash = "sha256:bab8ecfe63e3ade284e1281e331240c09c37278a8f9ff54bf7f83d543ad9142f", size = 83835, upload-time = "2025-11-21T11:48:34.99Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a5/35/44a2f7f7cfb321d7efcf49a366d3e58b44c960cc3d0279dfa6ef7b787b54/git_changelog-2.6.3-py3-none-any.whl", hash = "sha256:733d0416e5635902ad30d050b3089cb00e49034399e00fba003a63b1c975bfa3", size = 37283, upload-time = "2025-09-18T12:35:35.192Z" },
+    { url = "https://files.pythonhosted.org/packages/56/d1/a9baeae74278da6fcbb578147c45b602b719c6fa98bb8b6bca66c1601638/git_changelog-2.7.0-py3-none-any.whl", hash = "sha256:739b760149977729a293203aed0a85c35592637eec63b3bc739d3897c15984d7", size = 37600, upload-time = "2025-11-21T11:48:33.733Z" },
 ]
 
 [[package]]
@@ -552,7 +552,7 @@ wheels = [
 
 [[package]]
 name = "mvn-tree-visualizer"
-version = "1.8.0"
+version = "1.8.2"
 source = { editable = "." }
 dependencies = [
     { name = "jinja2" },
@@ -579,8 +579,8 @@ requires-dist = [
 dev = [
     { name = "build", specifier = ">=1.3.0" },
     { name = "git-changelog", specifier = ">=2.6.3" },
-    { name = "pytest", specifier = ">=8.4.2" },
-    { name = "python-semantic-release", specifier = ">=10.4.1" },
+    { name = "pytest", specifier = ">=9.0.0" },
+    { name = "python-semantic-release", specifier = ">=10.5.0" },
     { name = "tox", specifier = ">=4.32.0" },
     { name = "twine", specifier = ">=6.2.0" },
 ]
@@ -787,7 +787,7 @@ wheels = [
 
 [[package]]
 name = "pytest"
-version = "8.4.2"
+version = "9.0.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "colorama", marker = "sys_platform == 'win32'" },
@@ -798,9 +798,9 @@ dependencies = [
     { name = "pygments" },
     { name = "tomli", marker = "python_full_version < '3.11'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/a3/5c/00a0e072241553e1a7496d638deababa67c5058571567b92a7eaa258397c/pytest-8.4.2.tar.gz", hash = "sha256:86c0d0b93306b961d58d62a4db4879f27fe25513d4b969df351abdddb3c30e01", size = 1519618, upload-time = "2025-09-04T14:34:22.711Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/07/56/f013048ac4bc4c1d9be45afd4ab209ea62822fb1598f40687e6bf45dcea4/pytest-9.0.1.tar.gz", hash = "sha256:3e9c069ea73583e255c3b21cf46b8d3c56f6e3a1a8f6da94ccb0fcf57b9d73c8", size = 1564125, upload-time = "2025-11-12T13:05:09.333Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a8/a4/20da314d277121d6534b3a980b29035dcd51e6744bd79075a6ce8fa4eb8d/pytest-8.4.2-py3-none-any.whl", hash = "sha256:872f880de3fc3a5bdc88a11b39c9710c3497a547cfa9320bc3c5e62fbf272e79", size = 365750, upload-time = "2025-09-04T14:34:20.226Z" },
+    { url = "https://files.pythonhosted.org/packages/0b/8b/6300fb80f858cda1c51ffa17075df5d846757081d11ab4aa35cef9e6258b/pytest-9.0.1-py3-none-any.whl", hash = "sha256:67be0030d194df2dfa7b556f2e56fb3c3315bd5c8822c6951162b92b32ce7dad", size = 373668, upload-time = "2025-11-12T13:05:07.379Z" },
 ]
 
 [[package]]
@@ -818,7 +818,7 @@ wheels = [
 
 [[package]]
 name = "python-semantic-release"
-version = "10.4.1"
+version = "10.5.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "click" },
@@ -835,9 +835,9 @@ dependencies = [
     { name = "shellingham" },
     { name = "tomlkit" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/7d/4e/ee80b30d85987414cdb2961797877177f65cb4213e1bf3cdae8143da7729/python_semantic_release-10.4.1.tar.gz", hash = "sha256:4bec21f7d3a419a2a62d16a9ff404481a90f011c762aef605caf48f8c11b3ed6", size = 605074, upload-time = "2025-09-13T03:29:58.966Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/3c/51/b1e5cff965a9e418800c75ab23c4d4ef087c36b23c4bb602adb18feba9b8/python_semantic_release-10.5.2.tar.gz", hash = "sha256:ffe5bbf8390cde5dd9d86768d66f47430ca243d87ea59fb286f5fcb90494d146", size = 616976, upload-time = "2025-11-10T19:21:59.42Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a2/e8/22fcba61fe7cb4cd5e0f0b6d4e0d02de3e68f83193dcb05ad87be11ed8d1/python_semantic_release-10.4.1-py3-none-any.whl", hash = "sha256:18a73619ffc6f1aca8e1106b03e139686bfbbf0120d1a97c948fc9620ab6beb5", size = 149618, upload-time = "2025-09-13T03:29:56.553Z" },
+    { url = "https://files.pythonhosted.org/packages/76/fe/786ce774f5de843bef5c7d505d5f99184a92e9c871877d2febbeb791ae00/python_semantic_release-10.5.2-py3-none-any.whl", hash = "sha256:efd01394cbb1d8d7f78a099023eb9dae4d19d5e36fe586245538b6dc2bbd26b6", size = 152182, upload-time = "2025-11-10T19:21:57.584Z" },
 ]
 
 [[package]]
