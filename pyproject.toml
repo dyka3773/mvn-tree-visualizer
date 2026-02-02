@@ -1,6 +1,6 @@
 [project]
 name = "mvn-tree-visualizer"
-version = "1.8.8"
+version = "1.9.0"
 authors = [
     { name = "Iraklis Konsoulas", email = "dyka3773@gmail.com" },
 ]
