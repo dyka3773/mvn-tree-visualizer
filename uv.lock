@@ -297,7 +297,7 @@ wheels = [
 
 [[package]]
 name = "git-changelog"
-version = "2.7.0"
+version = "2.7.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "jinja2" },
@@ -307,9 +307,9 @@ dependencies = [
     { name = "tomli", marker = "python_full_version < '3.11'" },
     { name = "typing-extensions", marker = "python_full_version < '3.13'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/cc/66/918cce4e4946645d212bbe9a50d490761f62c5745118fdb132c35143d4ed/git_changelog-2.7.0.tar.gz", hash = "sha256:bab8ecfe63e3ade284e1281e331240c09c37278a8f9ff54bf7f83d543ad9142f", size = 83835, upload-time = "2025-11-21T11:48:34.99Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/a7/2b/858bae884992815710074d7fc903215e5cee4915ccae8eee4aeed2ca4785/git_changelog-2.7.1.tar.gz", hash = "sha256:b11aacdeca0c0a9502dfc9fe406d6d93683d1b1ebad622a246ba44940db5cdd6", size = 87807, upload-time = "2026-01-30T16:03:52.387Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/56/d1/a9baeae74278da6fcbb578147c45b602b719c6fa98bb8b6bca66c1601638/git_changelog-2.7.0-py3-none-any.whl", hash = "sha256:739b760149977729a293203aed0a85c35592637eec63b3bc739d3897c15984d7", size = 37600, upload-time = "2025-11-21T11:48:33.733Z" },
+    { url = "https://files.pythonhosted.org/packages/c8/51/fd8b4d475ec4e53d4d9cc0d74da7ae8810033a40d49f9f5dd57357038832/git_changelog-2.7.1-py3-none-any.whl", hash = "sha256:7f99e42fba6cb979926649c8c107a56b87929829ebd5a1d71bda278caebb33a6", size = 39381, upload-time = "2026-01-30T16:03:49.809Z" },
 ]
 
 [[package]]
@@ -577,11 +577,11 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "build", specifier = ">=1.3.0" },
+    { name = "build", specifier = "==1.4.0" },
     { name = "git-changelog", specifier = ">=2.7.0" },
     { name = "pytest", specifier = ">=9.0.2" },
     { name = "python-semantic-release", specifier = "==10.5.3" },
-    { name = "tox", specifier = ">=4.33.0" },
+    { name = "tox", specifier = "==4.34.1" },
     { name = "twine", specifier = ">=6.2.0" },
 ]
 
@@ -618,11 +618,11 @@ wheels = [
 
 [[package]]
 name = "packaging"
-version = "25.0"
+version = "26.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/a1/d4/1fc4078c65507b51b96ca8f8c3ba19e6a61c8253c72794544580a7b6c24d/packaging-25.0.tar.gz", hash = "sha256:d443872c98d677bf60f6a1f2f8c1cb748e8fe762d2bf9d3148b5599295b0fc4f", size = 165727, upload-time = "2025-04-19T11:48:59.673Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/65/ee/299d360cdc32edc7d2cf530f3accf79c4fca01e96ffc950d8a52213bd8e4/packaging-26.0.tar.gz", hash = "sha256:00243ae351a257117b6a241061796684b084ed1c516a08c48a3f7e147a9d80b4", size = 143416, upload-time = "2026-01-21T20:50:39.064Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/20/12/38679034af332785aac8774540895e234f4d07f7545804097de4b666afd8/packaging-25.0-py3-none-any.whl", hash = "sha256:29572ef2b1f17581046b3a2227d5c611fb25ec70ca1ba8554b24b0e69331a484", size = 66469, upload-time = "2025-04-19T11:48:57.875Z" },
+    { url = "https://files.pythonhosted.org/packages/b7/b9/c538f279a4e237a006a2c98387d081e9eb060d203d8ed34467cc0f0b9b53/packaging-26.0-py3-none-any.whl", hash = "sha256:b36f1fef9334a5588b4166f8bcd26a14e521f2b55e6b9de3aaa80d3ff7a37529", size = 74366, upload-time = "2026-01-21T20:50:37.788Z" },
 ]
 
 [[package]]
