@@ -40,8 +40,8 @@ class TestOpenFlag:
             mock_browser_open.assert_called_once()
             call_args = mock_browser_open.call_args[0]
             assert len(call_args) == 1
-            assert call_args[0].startswith("file://")
-            assert str(temp_output.resolve()) in call_args[0]
+            expected_url = temp_output.resolve().as_uri()
+            assert call_args[0] == expected_url
 
     @patch("mvn_tree_visualizer.cli.webbrowser.open")
     def test_open_flag_with_json_output_does_not_open(self, mock_browser_open):
