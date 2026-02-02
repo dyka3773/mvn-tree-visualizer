@@ -49,6 +49,7 @@ dev = [
     "git-changelog==2.7.1",
     "tox==4.34.1",
     "pytest==9.0.2",
+    "pytest-cov==7.0.0",
 ]
 
 [build-system]
@@ -99,8 +100,28 @@ env_list = ["lint", "3.10", "3.11", "3.12", "3.13"]
 description = "Run tests with the current Python version"
 deps = [
     "pytest==9.0.2",
+    "pytest-cov==7.0.0",
 ]
-commands = [[ "pytest", "-v" ]]
+commands = [
+    ["pytest", "--cov=mvn_tree_visualizer", "--cov-report=term-missing", "--cov-report=html", "--cov-report=xml", "-v"]
+]
+
+[tool.coverage.run]
+source = ["src"]
+omit = [
+    "*/tests/*",
+    "*/__pycache__/*",
+    "*/.venv/*",
+    "*/venv/*",
+]
+
+[tool.coverage.report]
+precision = 2
+show_missing = true
+skip_covered = false
+
+[tool.coverage.html]
+directory = "htmlcov"
 
 [tool.tox.env.lint]
 description = "Lint the codebase with ruff"
