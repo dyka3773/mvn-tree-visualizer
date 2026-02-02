@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 <!-- insertion marker -->
+## [v1.9.0](https://github.com/dyka3773/mvn-tree-visualizer/releases/tag/v1.9.0) - 2026-02-02
+
+<small>[Compare with v1.8.8](https://github.com/dyka3773/mvn-tree-visualizer/compare/v1.8.8...v1.9.0)</small>
+
+### Features
+
+- add code coverage reporting with pytest-cov and Codecov ([9d7bd3d](https://github.com/dyka3773/mvn-tree-visualizer/commit/9d7bd3d1cbe0097ed35841b2afea5b7b8e6c5ca9) by Hercules Konsoulas).
+
 ## [v1.8.8](https://github.com/dyka3773/mvn-tree-visualizer/releases/tag/v1.8.8) - 2026-02-02
 
 <small>[Compare with v1.8.7](https://github.com/dyka3773/mvn-tree-visualizer/compare/v1.8.7...v1.8.8)</small>
@@ -171,3 +179,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Features
 
 - Add JSON output and decouple output logic ([e6cd138](https://github.com/dyka3773/mvn-tree-visualizer/commit/e6cd13836f93221f2dbd334574ca614d7dbe0e4a) by Hercules Konsoulas).
+
