@@ -31,8 +31,8 @@ classifiers = [
     "Typing :: Typed",
 ]
 dependencies = [
-    "jinja2>=3.1.6",
-    "watchdog>=6.0.0",
+    "jinja2==3.1.6",
+    "watchdog==6.0.0",
 ]
 
 [project.urls]
@@ -43,12 +43,12 @@ mvn-tree-visualizer = "mvn_tree_visualizer.cli:cli"
 
 [dependency-groups]
 dev = [
-    "twine>=6.2.0",
+    "twine==6.2.0",
     "python-semantic-release==10.5.3",
     "build==1.4.0",
-    "git-changelog>=2.7.0",
+    "git-changelog==2.7.1",
     "tox==4.34.1",
-    "pytest>=9.0.2",
+    "pytest==9.0.2",
 ]
 
 [build-system]
@@ -98,14 +98,14 @@ env_list = ["lint", "3.10", "3.11", "3.12", "3.13"]
 [tool.tox.env_run_base]
 description = "Run tests with the current Python version"
 deps = [
-    "pytest>=9.0.2",
+    "pytest==9.0.2",
 ]
 commands = [[ "pytest", "-v" ]]
 
 [tool.tox.env.lint]
 description = "Lint the codebase with ruff"
 deps = [
-    "ruff>=0.12.3",
+    "ruff==0.12.3",
 ]
 skip_install = true
 commands = [[ "ruff", "check", "src/", "tests/" ]]
