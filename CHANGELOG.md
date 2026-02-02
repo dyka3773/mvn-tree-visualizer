@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 <!-- insertion marker -->
+## [v1.8.8](https://github.com/dyka3773/mvn-tree-visualizer/releases/tag/v1.8.8) - 2026-02-02
+
+<small>[Compare with v1.8.7](https://github.com/dyka3773/mvn-tree-visualizer/compare/v1.8.7...v1.8.8)</small>
+
 ## [v1.8.7](https://github.com/dyka3773/mvn-tree-visualizer/releases/tag/v1.8.7) - 2026-01-12
 
 <small>[Compare with v1.8.6](https://github.com/dyka3773/mvn-tree-visualizer/compare/v1.8.6...v1.8.7)</small>

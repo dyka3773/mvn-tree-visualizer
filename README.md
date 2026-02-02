@@ -5,6 +5,7 @@
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 [![Downloads](https://pepy.tech/badge/mvn-tree-visualizer)](https://pepy.tech/project/mvn-tree-visualizer)
 [![CI](https://github.com/dyka3773/mvn-tree-visualizer/workflows/CI/badge.svg)](https://github.com/dyka3773/mvn-tree-visualizer/actions)
+[![codecov](https://codecov.io/gh/dyka3773/mvn-tree-visualizer/branch/master/graph/badge.svg)](https://codecov.io/gh/dyka3773/mvn-tree-visualizer)
 [![Code style: ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
 
 A simple command-line tool to visualize the dependency tree of a Maven project in a graphical and interactive format.
