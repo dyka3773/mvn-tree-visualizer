@@ -70,3 +70,18 @@ def test_create_diagram_unicode_decode_error(monkeypatch):
 
         with pytest.raises(UnicodeDecodeError):
             create_diagram(keep_tree=False, intermediate_filename=str(file_path))
+
+
+def test_create_diagram_remove_os_error(monkeypatch):
+    with tempfile.TemporaryDirectory() as temp_dir:
+        file_path = Path(temp_dir) / "dependency_tree.txt"
+        file_path.write_text("root -> child")
+
+        def raise_os_error(_path):
+            raise OSError("no remove")
+
+        monkeypatch.setattr("mvn_tree_visualizer.diagram.os.remove", raise_os_error)
+
+        result = create_diagram(keep_tree=False, intermediate_filename=str(file_path))
+
+        assert result == "root -> child"
