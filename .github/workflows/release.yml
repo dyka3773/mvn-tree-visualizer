@@ -40,17 +40,7 @@ jobs:
       uses: python-semantic-release/python-semantic-release@v10.5.3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Generate Changelog
-      if: steps.release.outputs.released == 'true'
-      run: |
-        uv run git-changelog --output CHANGELOG.md --template keepachangelog
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add CHANGELOG.md
-        git commit -m "docs: update changelog for ${{ steps.release.outputs.tag }}" || exit 0
-        git push
-
+        
     - name: Publish to PyPI
       if: steps.release.outputs.released == 'true'
       env:
