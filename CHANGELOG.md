@@ -6,6 +6,44 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 <!-- insertion marker -->
+
+## v1.9.1 (2026-02-04)
+
+### Chores
+
+- Update the Security Policy of the repo
+  ([`0a4411d`](https://github.com/dyka3773/mvn-tree-visualizer/commit/0a4411ddd2f413b8869246f4862e1ed222e65891))
+
+### Continuous Integration
+
+- Use semantic release to generate better changelogs
+  ([`21b5c2b`](https://github.com/dyka3773/mvn-tree-visualizer/commit/21b5c2befb1a51d964e53104a894b3cb40d1f233))
+
+- **deps**: Change dependabot configs to remove pip grouping and only keep uv
+  ([`e02b8d6`](https://github.com/dyka3773/mvn-tree-visualizer/commit/e02b8d657c8f5d1c75e5d03b603f5539d7a0ecbe))
+
+### Deps
+
+- **uv**: Update project's subdependencies
+  ([`d09e270`](https://github.com/dyka3773/mvn-tree-visualizer/commit/d09e270f8d7fb83cab46fd8c3c597787c05a0972))
+
+### Documentation
+
+- Update changelog for v1.9.0
+  ([`d7cd61a`](https://github.com/dyka3773/mvn-tree-visualizer/commit/d7cd61a2ef99ba834b02a163acdabe7cad47e962))
+
+### Testing
+
+- Correct a certain test to also work on windows machines
+  ([`e943c8c`](https://github.com/dyka3773/mvn-tree-visualizer/commit/e943c8cf77b4910ab3c26175d02a0d5808bfb094))
+
+- Create more tests to push coverage above 90%
+  ([`68ce79d`](https://github.com/dyka3773/mvn-tree-visualizer/commit/68ce79d1c2e4be9d1a3c86b802b9a421a1c1bd46))
+
+- Improved code coverage by adding more tests
+  ([`ea6c47b`](https://github.com/dyka3773/mvn-tree-visualizer/commit/ea6c47bf3e1ccf710684fbeb7e5ee4acec0f7444))
+
+
 ## [v1.9.0](https://github.com/dyka3773/mvn-tree-visualizer/releases/tag/v1.9.0) - 2026-02-02
 
 <small>[Compare with v1.8.8](https://github.com/dyka3773/mvn-tree-visualizer/compare/v1.8.8...v1.9.0)</small>
@@ -179,4 +217,3 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Features
 
 - Add JSON output and decouple output logic ([e6cd138](https://github.com/dyka3773/mvn-tree-visualizer/commit/e6cd13836f93221f2dbd334574ca614d7dbe0e4a) by Hercules Konsoulas).
-
