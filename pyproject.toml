@@ -47,7 +47,7 @@ dev = [
     "python-semantic-release==10.5.3",
     "build==1.4.0",
     "git-changelog==2.7.1",
-    "tox==4.34.1",
+    "tox==4.47.3",
     "pytest==9.0.2",
     "pytest-cov==7.0.0",
 ]
