@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 <!-- insertion marker -->
 
+## v1.9.2 (2026-03-04)
+
+### Chores
+
+- **deps**: Bump cryptography in the uv group across 1 directory
+  ([`ac76055`](https://github.com/dyka3773/mvn-tree-visualizer/commit/ac76055ea94b8dc2ada359b01a7c2351561e2b5a))
+
+### Deps
+
+- Bump tox from 4.34.1 to 4.38.0 in the uv-dependencies group
+  ([`b500ee3`](https://github.com/dyka3773/mvn-tree-visualizer/commit/b500ee33596493af955c5b63061eabcf1d956805))
+
+- Bump tox from 4.38.0 to 4.46.0 in the uv-dependencies group
+  ([`fac285c`](https://github.com/dyka3773/mvn-tree-visualizer/commit/fac285c1b062722703aa391279a852db761431f8))
+
+- Bump tox from 4.46.0 to 4.47.3 in the uv-dependencies group
+  ([`35d6b67`](https://github.com/dyka3773/mvn-tree-visualizer/commit/35d6b6745a0984f5a72ce6ccfe56daf69b60a69f))
+
+
 ## v1.9.1 (2026-02-04)
 
 ### Chores
