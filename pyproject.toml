@@ -45,9 +45,9 @@ mvn-tree-visualizer = "mvn_tree_visualizer.cli:cli"
 dev = [
     "twine==6.2.0",
     "python-semantic-release==10.5.3",
-    "build==1.4.1",
-    "git-changelog==2.9.2",
-    "tox==4.50.3",
+    "build==1.4.2",
+    "git-changelog==2.9.3",
+    "tox==4.52.0",
     "pytest==9.0.2",
     "pytest-cov==7.1.0",
 ]
