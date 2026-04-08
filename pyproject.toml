@@ -45,10 +45,10 @@ mvn-tree-visualizer = "mvn_tree_visualizer.cli:cli"
 dev = [
     "twine==6.2.0",
     "python-semantic-release==10.5.3",
-    "build==1.4.1",
-    "git-changelog==2.9.2",
-    "tox==4.50.3",
-    "pytest==9.0.2",
+    "build==1.4.2",
+    "git-changelog==2.9.3",
+    "tox==4.52.0",
+    "pytest==9.0.3",
     "pytest-cov==7.1.0",
 ]
 
@@ -105,7 +105,7 @@ env_list = ["lint", "3.10", "3.11", "3.12", "3.13"]
 [tool.tox.env_run_base]
 description = "Run tests with the current Python version"
 deps = [
-    "pytest==9.0.2",
+    "pytest==9.0.3",
     "pytest-cov==7.1.0",
 ]
 commands = [
