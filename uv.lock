@@ -738,8 +738,8 @@ dev = [
     { name = "git-changelog", specifier = "==2.9.4" },
     { name = "pytest", specifier = "==9.1.1" },
     { name = "pytest-cov", specifier = "==7.1.0" },
-    { name = "python-semantic-release", specifier = "==10.5.3" },
-    { name = "tox", specifier = "==4.56.1" },
+    { name = "python-semantic-release", specifier = "==10.6.1" },
+    { name = "tox", specifier = "==4.56.2" },
     { name = "twine", specifier = "==6.2.0" },
 ]
 
@@ -1036,7 +1036,7 @@ wheels = [
 
 [[package]]
 name = "python-semantic-release"
-version = "10.5.3"
+version = "10.6.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "click" },
@@ -1053,9 +1053,9 @@ dependencies = [
     { name = "shellingham" },
     { name = "tomlkit" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/19/3a/7332b822825ed0e902c6e950e0d1e90e8f666fd12eb27855d1c8b6677eff/python_semantic_release-10.5.3.tar.gz", hash = "sha256:de4da78635fa666e5774caaca2be32063cae72431eb75e2ac23b9f2dfd190785", size = 618034, upload-time = "2025-12-14T22:37:29.782Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/a6/f6/06d5aa54b46bb192b00ef3e74234300ea5932dd310d142a3c8070e770e93/python_semantic_release-10.6.1.tar.gz", hash = "sha256:ee6369238f72e75a009b3724481232c8b813416191be099bc0266e375fd02b2b", size = 626453, upload-time = "2026-07-06T06:14:35.507Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/6b/01/ada29a1215df601bded0a2efd3b6d53864a0a9e0a9ea52aeaebe14fd03fd/python_semantic_release-10.5.3-py3-none-any.whl", hash = "sha256:1be0e07c36fa1f1ec9da4f438c1f6bbd7bc10eb0d6ac0089b0643103708c2823", size = 152716, upload-time = "2025-12-14T22:37:28.089Z" },
+    { url = "https://files.pythonhosted.org/packages/18/97/be812cd1eb350551d2f3cc38426864cce493a03ed31f4749133bcff8d053/python_semantic_release-10.6.1-py3-none-any.whl", hash = "sha256:36f7319515f218719d0972bc9535813a930f04cd19556767599e9863242efcdc", size = 155674, upload-time = "2026-07-06T06:14:33.575Z" },
 ]
 
 [[package]]
@@ -1244,7 +1244,7 @@ wheels = [
 
 [[package]]
 name = "tox"
-version = "4.56.1"
+version = "4.56.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "cachetools" },
@@ -1260,9 +1260,9 @@ dependencies = [
     { name = "typing-extensions", marker = "python_full_version < '3.11'" },
     { name = "virtualenv" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/60/6a/d20d405fc6661902ff803a9fa048d8aae27597c3b5dc750369ded82d08f7/tox-4.56.1.tar.gz", hash = "sha256:db1c2610802553189cf40de251661d066a635ee0ed9bf2a60093b5f1a7f36ef8", size = 283155, upload-time = "2026-06-25T06:18:36.802Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/a4/be/0a4370df64b4610c653482dd55e0a6818fa31c551fce7659c253e3668638/tox-4.56.2.tar.gz", hash = "sha256:346442f3982a5c1b792abcbc476a90f821031154251ea3506401c4c51c62cc2a", size = 286251, upload-time = "2026-07-07T02:11:16.729Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d8/97/560a5dfde154619d9643b1e208119dddc29bbb35a38a4ce4d095c16cf8f0/tox-4.56.1-py3-none-any.whl", hash = "sha256:4d06b925c4dd67872099b39c5a46fba79a2169c5f6e32060f95a8b1181f0ef55", size = 216469, upload-time = "2026-06-25T06:18:35.229Z" },
+    { url = "https://files.pythonhosted.org/packages/03/66/34fdfb42ff381da15404bf8aa92b1b0e6ddad7263e4ec23bee3daf359d50/tox-4.56.2-py3-none-any.whl", hash = "sha256:245b60f2610e126070b289a862d6288401a387147e86a30c9316cb0ab276137b", size = 217329, upload-time = "2026-07-07T02:11:15.04Z" },
 ]
 
 [[package]]
