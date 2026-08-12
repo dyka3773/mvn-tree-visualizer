@@ -408,7 +408,7 @@ name = "exceptiongroup"
 version = "1.3.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "typing-extensions", marker = "python_full_version < '3.13'" },
+    { name = "typing-extensions" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/50/79/66800aadf48771f6b62f7eb014e352e5d06856655206165d775e675a02c9/exceptiongroup-1.3.1.tar.gz", hash = "sha256:8b412432c6055b0b7d14c310000ae93352ed6754f70fa8f7c34141f91c4e3219", size = 30371, upload-time = "2025-11-21T23:01:54.787Z" }
 wheels = [
@@ -426,7 +426,7 @@ wheels = [
 
 [[package]]
 name = "git-changelog"
-version = "2.9.5"
+version = "2.9.6"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "jinja2" },
@@ -436,9 +436,9 @@ dependencies = [
     { name = "tomli", marker = "python_full_version < '3.11'" },
     { name = "typing-extensions", marker = "python_full_version < '3.13'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/55/7f/40e701b517cc0fb2b141320eea1bb484ad10dd982301a8a25c75ea7540ee/git_changelog-2.9.5.tar.gz", hash = "sha256:ab033ad019c9895ac81de32c4a17749519102fc1be1d8327a45737092ebdd1a9", size = 92654, upload-time = "2026-07-28T23:26:20.091Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/1d/ae/f861b27f0db5937052bfe3c6048c7e0d489d5ff3a6dbc1bc814219929174/git_changelog-2.9.6.tar.gz", hash = "sha256:6877c6d9bb50397505f29a55097bde256b07848ff0a9a41f74db61b5b7cd1880", size = 92821, upload-time = "2026-08-07T12:42:52.975Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b1/a6/7f07bc1c8471b153ab19aef1d22d7b9b21e4bc9a8253d1c2a9bbcabf5949/git_changelog-2.9.5-py3-none-any.whl", hash = "sha256:387a72075000278230f2756371fd87d24b4b3799b2a03615869fdf2b71a281e7", size = 40550, upload-time = "2026-07-28T23:26:18.681Z" },
+    { url = "https://files.pythonhosted.org/packages/b4/fd/4deb3cfa26206f6097de6f3105c5a0f94d829a4f497776c53364244f11de/git_changelog-2.9.6-py3-none-any.whl", hash = "sha256:16e5baa4a0c0922d812dbda02814a7bd75ceae995e0a409098606bb59fd2c8ca", size = 40564, upload-time = "2026-08-07T12:42:51.68Z" },
 ]
 
 [[package]]
@@ -735,7 +735,7 @@ requires-dist = [
 [package.metadata.requires-dev]
 dev = [
     { name = "build", specifier = "==1.5.1" },
-    { name = "git-changelog", specifier = "==2.9.5" },
+    { name = "git-changelog", specifier = "==2.9.6" },
     { name = "pytest", specifier = "==9.1.1" },
     { name = "pytest-cov", specifier = "==7.1.0" },
     { name = "python-semantic-release", specifier = "==10.6.1" },
