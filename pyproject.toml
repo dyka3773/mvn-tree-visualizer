@@ -43,13 +43,13 @@ mvn-tree-visualizer = "mvn_tree_visualizer.cli:cli"
 
 [dependency-groups]
 dev = [
-    "twine==6.2.0",
-    "python-semantic-release==10.5.3",
-    "build==1.4.0",
-    "git-changelog==2.7.1",
-    "tox==4.47.3",
+    "twine==7.0.0",
+    "python-semantic-release==10.6.1",
+    "build==1.5.1",
+    "git-changelog==2.9.6",
+    "tox==4.60.0",
     "pytest==9.1.1",
-    "pytest-cov==7.0.0",
+    "pytest-cov==7.1.0",
 ]
 
 [build-system]
@@ -106,7 +106,7 @@ env_list = ["lint", "3.10", "3.11", "3.12", "3.13"]
 description = "Run tests with the current Python version"
 deps = [
     "pytest==9.1.1",
-    "pytest-cov==7.0.0",
+    "pytest-cov==7.1.0",
 ]
 commands = [
     ["pytest", "--cov=mvn_tree_visualizer", "--cov-report=term-missing", "--cov-report=html", "--cov-report=xml", "-v"]
