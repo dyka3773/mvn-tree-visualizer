@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 <!-- insertion marker -->
 
+## v1.9.3 (2026-08-22)
+
+### Chores
+
+- **deps**: Bump the uv group across 1 directory with 2 updates
+  ([`b8d4f4c`](https://github.com/dyka3773/mvn-tree-visualizer/commit/b8d4f4c56c3efb774e79a07fe9a7d11a9a5d4a31))
+
+- **deps**: Bump the uv group across 1 directory with 5 updates
+  ([`676f961`](https://github.com/dyka3773/mvn-tree-visualizer/commit/676f96146ea6451c71286e3697b9cbd2b3fd5dff))
+
+
 ## v1.9.2 (2026-03-04)
 
 ### Chores
