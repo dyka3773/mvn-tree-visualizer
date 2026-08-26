@@ -46,7 +46,7 @@ dev = [
     "twine==7.0.0",
     "python-semantic-release==10.6.1",
     "build==1.5.1",
-    "git-changelog==2.9.6",
+    "git-changelog==2.9.7",
     "tox==4.60.0",
     "pytest==9.1.1",
     "pytest-cov==7.1.0",
