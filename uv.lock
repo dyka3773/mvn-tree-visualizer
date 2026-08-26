@@ -426,7 +426,7 @@ wheels = [
 
 [[package]]
 name = "git-changelog"
-version = "2.9.6"
+version = "2.9.7"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "jinja2" },
@@ -436,9 +436,9 @@ dependencies = [
     { name = "tomli", marker = "python_full_version < '3.11'" },
     { name = "typing-extensions", marker = "python_full_version < '3.13'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/1d/ae/f861b27f0db5937052bfe3c6048c7e0d489d5ff3a6dbc1bc814219929174/git_changelog-2.9.6.tar.gz", hash = "sha256:6877c6d9bb50397505f29a55097bde256b07848ff0a9a41f74db61b5b7cd1880", size = 92821, upload-time = "2026-08-07T12:42:52.975Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/1e/ef/e2e9232f13c44ebcf084901ac267f290f4033a8bf85ff5fc2f5eacfb5414/git_changelog-2.9.7.tar.gz", hash = "sha256:26f7e56a11027a6cc5c544992464f6d449fbee95fb0a05c627e65970bf766e50", size = 93159, upload-time = "2026-08-20T12:00:45.484Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b4/fd/4deb3cfa26206f6097de6f3105c5a0f94d829a4f497776c53364244f11de/git_changelog-2.9.6-py3-none-any.whl", hash = "sha256:16e5baa4a0c0922d812dbda02814a7bd75ceae995e0a409098606bb59fd2c8ca", size = 40564, upload-time = "2026-08-07T12:42:51.68Z" },
+    { url = "https://files.pythonhosted.org/packages/72/76/a5e7fbd174a00eb98f0d245fb17b5bd703ad20d8c1eaa117cda164777708/git_changelog-2.9.7-py3-none-any.whl", hash = "sha256:560813f0aef8d002e60fb1ad36e9756462cd021e35ed15b02c9697c4a849e7fb", size = 40648, upload-time = "2026-08-20T12:00:44.098Z" },
 ]
 
 [[package]]
@@ -735,7 +735,7 @@ requires-dist = [
 [package.metadata.requires-dev]
 dev = [
     { name = "build", specifier = "==1.5.1" },
-    { name = "git-changelog", specifier = "==2.9.6" },
+    { name = "git-changelog", specifier = "==2.9.7" },
     { name = "pytest", specifier = "==9.1.1" },
     { name = "pytest-cov", specifier = "==7.1.0" },
     { name = "python-semantic-release", specifier = "==10.6.1" },
