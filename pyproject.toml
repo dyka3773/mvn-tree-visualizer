@@ -44,10 +44,10 @@ mvn-tree-visualizer = "mvn_tree_visualizer.cli:cli"
 [dependency-groups]
 dev = [
     "twine==7.0.0",
-    "python-semantic-release==10.6.1",
-    "build==1.5.1",
+    "python-semantic-release==10.6.2",
+    "build==1.6.0",
     "git-changelog==2.9.7",
-    "tox==4.60.0",
+    "tox==4.61.1",
     "pytest==9.1.1",
     "pytest-cov==7.1.0",
 ]
